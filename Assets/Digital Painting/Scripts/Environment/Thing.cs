@@ -20,6 +20,8 @@ namespace wizardscode.environment
         public float yOffset = 0;
 
         [Header("Viewing")]
+        [Tooltip("Indicates whether this Thing should be included in the list of Points of Interest in the scene. This list is used for things like deciding if an agent should visit the Thing.")]
+        public bool isPOI = true;
         [Tooltip("Position and rotation the agent should adopt when viewing this thing. If null a location will be automatically created.")]
         public Transform _agentViewingTransform;
         [Tooltip("Distance at which to switch to the viewing camera")]

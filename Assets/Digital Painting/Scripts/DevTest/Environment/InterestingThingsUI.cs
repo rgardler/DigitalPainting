@@ -37,7 +37,10 @@ namespace wizardscode.devtest
             options.Add(new Dropdown.OptionData("Wander"));
             for (int i = 0; i < thingsManager.allTheThings.Count; i++)
             {
-                options.Add(new Dropdown.OptionData(thingsManager.allTheThings[i].name));
+                if (thingsManager.allTheThings[i].isPOI)
+                {
+                    options.Add(new Dropdown.OptionData(thingsManager.allTheThings[i].name));
+                }
             }
             thingOfInterestDropdown.AddOptions(options);
         }

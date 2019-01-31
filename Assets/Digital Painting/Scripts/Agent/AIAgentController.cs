@@ -16,6 +16,8 @@ namespace wizardscode.digitalpainting.agent
         public Thing thingOfInterest;
         [Tooltip("The range the agent will use to detect things in its environment")]
         public float detectionRange = 50;
+        [Tooltip("The range at which the agent considers things to be withing reach - that is able to touch.")]
+        public float reachRange = 2;
 
         [Header("Wander configuration")]
         [Tooltip("Minimum time between random variations in the path.")]
@@ -86,6 +88,28 @@ namespace wizardscode.digitalpainting.agent
         internal void Start()
         {
             ConfigureBarriers();
+        }
+
+        /// <summary>
+        /// Returns an array of objects of a given type that
+        /// are within reach of the agent. Where the range of
+        /// the agents reach is defined in the field `reachRange`.
+        /// </summary>
+        /// <typeparam name="T">The type of object being tested for.</typeparam>
+        /// <returns>An array of objects of the given type that are within reach.</returns>
+        internal List<T> WithinReach<T>()
+        {
+            List<T> objects = new List<T>();
+            Collider[] colliders = Physics.OverlapSphere(transform.position, reachRange);
+            foreach (Collider collider in colliders)
+            {
+                T obj = collider.gameObject.GetComponent<T>();
+                if ( obj != null)
+                {
+                    objects.Add(obj);
+                }
+            }
+            return objects;
         }
 
         /// <summary>
@@ -213,7 +237,7 @@ namespace wizardscode.digitalpainting.agent
                 for (int i = 0; i < things.Length; i++)
                 {
                     Thing thing = things[i].gameObject.GetComponent<Thing>();
-                    if (thing != null)
+                    if (thing != null && thing.isPOI)
                     {
                         if (!visitedThings.Contains(thing))
                         {

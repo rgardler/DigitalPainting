@@ -899,7 +899,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4226743802133684}
-  - component: {fileID: 114582014676739104}
   - component: {fileID: 114732027665005512}
   m_Layer: 0
   m_Name: UI
@@ -936,6 +935,7 @@ GameObject:
   - component: {fileID: 222226120762688402}
   - component: {fileID: 114726749085062912}
   - component: {fileID: 114019494434004682}
+  - component: {fileID: 114844763190477500}
   m_Layer: 5
   m_Name: Interesting Things Panel
   m_TagString: Untagged
@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114582014676739104}
+      - m_Target: {fileID: 0}
         m_MethodName: OnAddThingClicked
         m_Mode: 1
         m_Arguments:
@@ -2889,7 +2889,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114582014676739104}
+      - m_Target: {fileID: 0}
         m_MethodName: OnThingSelectionChanged
         m_Mode: 1
         m_Arguments:
@@ -3022,22 +3022,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Option A
---- !u!114 &114582014676739104
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1568331438834230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b4071a107e79d4e888cb7886f11bdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thingOfInterestDropdown: {fileID: 114495303261267626}
-  distanceToThingOfInterestText: {fileID: 114723639686596340}
-  addableThingDropdown: {fileID: 114762196426372934}
-  addableThings:
-  - {fileID: 114680531203725436, guid: f550f0b7be2ca804c91c1b2f3db7fecd, type: 2}
 --- !u!114 &114583305296459502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3843,6 +3827,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114844763190477500
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1583695369455108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b4071a107e79d4e888cb7886f11bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thingOfInterestDropdown: {fileID: 114495303261267626}
+  distanceToThingOfInterestText: {fileID: 114723639686596340}
+  addableThingDropdown: {fileID: 114762196426372934}
+  addableThings:
+  - {fileID: 114680531203725436, guid: f550f0b7be2ca804c91c1b2f3db7fecd, type: 2}
 --- !u!114 &114854947773989130
 MonoBehaviour:
   m_ObjectHideFlags: 1
