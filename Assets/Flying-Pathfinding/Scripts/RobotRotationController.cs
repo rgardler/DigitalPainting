@@ -24,7 +24,10 @@ public class RobotRotationController : MonoBehaviour
 	{
 		if(!physicsRotation)
 		{
-			rigidbody.MoveRotation(Quaternion.Lerp(rigidbody.rotation, Quaternion.LookRotation(LookAtDir, Vector3.up), Time.deltaTime * rotationEasing));
+            if (LookAtDir != Vector3.zero)
+            {
+                rigidbody.MoveRotation(Quaternion.Lerp(rigidbody.rotation, Quaternion.LookRotation(LookAtDir, Vector3.up), Time.deltaTime * rotationEasing));
+            }
 		}
 	}
 
