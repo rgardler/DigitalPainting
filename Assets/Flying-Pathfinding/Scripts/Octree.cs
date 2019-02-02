@@ -16,7 +16,6 @@ public class Octree : MonoBehaviour
 	[SerializeField] private int cellCount;
 	[SerializeField] private Transform player;
 	[SerializeField] private Transform destination;
-	//[SerializeField] private PathfindingAlgorith algorithm = PathfindingAlgorith.AStar;
 	[SerializeField] private float maxActivePathfinds = 6;
 
 	private BoxCollider boxCollider;
@@ -24,6 +23,7 @@ public class Octree : MonoBehaviour
 	private Queue<OctreeElement> toBeSplit = new Queue<OctreeElement>();
 	private Queue<PathRequest> requests = new Queue<PathRequest>();
 	private List<PathRequest> running = new List<PathRequest>();
+    private List<Vector3> lastPath;
 
 	// Use this for initialization
 	void Start ()
@@ -81,12 +81,12 @@ public class Octree : MonoBehaviour
 	{
 		if (element.Children == null)
 		{
-			element.Neigbors = new OctreeElement[6][];
+			element.Neighbors = new OctreeElement[6][];
 			for (int i = 0; i < 6; i++)
 			{
 				List<OctreeElement> neighbors = new List<OctreeElement>();
 				GetNeighbors(element, (OctreeElement.Dir)i, neighbors);
-				element.Neigbors[i] = neighbors.ToArray();
+				element.Neighbors[i] = neighbors.ToArray();
 			}
 		}
 		else
@@ -117,7 +117,7 @@ public class Octree : MonoBehaviour
 			OctreeElement startNode = GetNode(request.from);
 			OctreeElement endNode = GetNode(request.to);
 			if (startNode == null || endNode == null) return;
-			weights.Add(startNode, startNode.BaseCost);
+			weights.Add(startNode, startNode.WeightedCost(request.controller.preferredFlightHeight, request.controller.minFlightHeight, request.controller.maxFlightHeight));
             fronteer.Enqueue(new OctreeElementQueueElemenet(startNode), startNode.WeightedCost(request.controller.preferredFlightHeight, request.controller.minFlightHeight, request.controller.maxFlightHeight));
 			OctreeElement current;
 			OctreeElement closest = startNode;
@@ -130,13 +130,13 @@ public class Octree : MonoBehaviour
 				current = fronteer.Dequeue().Element;
 				if (current == endNode) break;
 				//still building path
-				if (current.Neigbors != null)
+				if (current.Neighbors != null)
 				{
 					for (int i = 0; i < 6; i++)
 					{
-						for (int n = 0; n < current.Neigbors[i].Length; n++)
+						for (int n = 0; n < current.Neighbors[i].Length; n++)
 						{
-							var next = current.Neigbors[i][n];
+							var next = current.Neighbors[i][n];
 							if (!next.Empty && next != endNode) continue;
 							float sqrDistance = Vector3.SqrMagnitude(next.Bounds.center - request.to);
 							if (sqrDistance < closestDistance )
@@ -185,6 +185,7 @@ public class Octree : MonoBehaviour
 			}
 
 			request.isCalulated = true;
+            lastPath = request.path;
 		}
 		catch (Exception e)
 		{
@@ -301,7 +302,13 @@ public class Octree : MonoBehaviour
             return;
         }
 
-        root.DrawGizmos();
+        if (lastPath != null)
+        {
+            for (int i = 0; i < lastPath.Count; i++)
+            {
+                GetNode(lastPath[i]).DrawGizmos(false, true);
+            }
+        }
     }
 
     public bool IsBuilding { get { return toBeSplit.Count > 0; } }
@@ -331,12 +338,6 @@ public class Octree : MonoBehaviour
 			isCalculating = false;
 			path.Clear();
 		}
-	}
-
-	public enum PathfindingAlgorith
-	{
-		AStar,
-		Greedy
 	}
 
 	public class OctreeElementQueueElemenet : FastPriorityQueueNode
@@ -383,7 +384,7 @@ public class Octree : MonoBehaviour
         public Bounds Bounds;
         public OctreeElement[] Children;
         public OctreeElement Parent;
-        public OctreeElement[][] Neigbors;
+        public OctreeElement[][] Neighbors;
         public int Depth;
         public bool Empty;
 
@@ -447,7 +448,7 @@ public class Octree : MonoBehaviour
 			LBD,LFD,LBU,LFU,RBD,RFD,RBU,RFU
 		}
 
-        internal void DrawGizmos()
+        internal void DrawGizmos(bool drawChildren = false, bool drawNeighbours = true)
         {
             if (Empty)
             {
@@ -459,11 +460,23 @@ public class Octree : MonoBehaviour
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireCube(Bounds.center, Bounds.size);
             }
-            if (Children != null)
+
+            if (drawChildren && Children != null)
             {
                 foreach (OctreeElement child in Children)
                 {
-                    child.DrawGizmos();
+                    child.DrawGizmos(false, false);
+                }
+            }
+            
+            if (drawNeighbours && Neighbors != null)
+            {
+                for (int i = 0; i < Neighbors.Length; i++)
+                {
+                    for (int j = 0; j < Neighbors[i].Length; j++)
+                    {
+                        Neighbors[i][j].DrawGizmos(false, false);
+                    }
                 }
             }
         }

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class RobotMovementController : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    private Transform _target;
     [SerializeField] private float maxDistanceRebuildPath = 1;
     [SerializeField] private float acceleration = 1;
     [Tooltip("The minimum distance an agent must get from an object before it is considered to have reached it.")]
@@ -34,8 +34,14 @@ public class RobotMovementController : MonoBehaviour
 
     public Transform Target
     {
-        get { return target; }
-        set { target = value; }
+        get { return _target; }
+        set {
+            if (!GameObject.ReferenceEquals(_target, value))
+            {
+                _target = value;
+                UpdatePath();
+            }
+        }
     }
 
     // Use this for initialization
@@ -53,16 +59,14 @@ public class RobotMovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (target == null)
+        if (_target == null)
         {
             return;
         }
-        if ((newPath == null || !newPath.isCalculating) && Vector3.SqrMagnitude(target.transform.position - lastDestination) > maxDistanceRebuildPath && (!CanSeePlayer() || Vector3.Distance(target.position, transform.position) > minFollowDistance) && !octree.IsBuilding)
-        {
-            lastDestination = target.transform.position;
 
-            oldPath = newPath;
-            newPath = octree.GetPath(transform.position, lastDestination, this);
+        if ((newPath == null || !newPath.isCalculating) && Vector3.SqrMagnitude(_target.transform.position - lastDestination) > maxDistanceRebuildPath && (!CanSeePlayer() || Vector3.Distance(_target.position, transform.position) > minFollowDistance) && !octree.IsBuilding)
+        {
+            UpdatePath();
         }
 
         /*if (newPath != null && !newPath.isCalculating)
@@ -95,7 +99,7 @@ public class RobotMovementController : MonoBehaviour
 
         if (!curPath.isCalculating && curPath != null && curPath.Path.Count > 0)
         {
-            if (Vector3.Distance(transform.position, target.position) < minFollowDistance && CanSeePlayer())
+            if (Vector3.Distance(transform.position, _target.position) < minFollowDistance && CanSeePlayer())
             {
                 curPath.Reset();
             }
@@ -141,10 +145,24 @@ public class RobotMovementController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update the path if the current target location is a different destination to the lastDestination.
+    /// </summary>
+    private void UpdatePath()
+    {
+        if (Vector3.SqrMagnitude(transform.position - lastDestination) > 0.5)
+        {
+            lastDestination = _target.transform.position;
+
+            oldPath = newPath;
+            newPath = octree.GetPath(transform.position, lastDestination, this);
+        }
+    }
+
     private bool CanSeePlayer()
     {
         RaycastHit hit;
-        if (Physics.Raycast(new Ray(transform.position, transform.position - target.position), out hit, Vector3.Distance(transform.position, target.position) + 1, playerSeeLayerMask))
+        if (Physics.Raycast(new Ray(transform.position, transform.position - _target.position), out hit, Vector3.Distance(transform.position, _target.position) + 1, playerSeeLayerMask))
         {
             return hit.transform.gameObject == playerObject;
         }
@@ -182,7 +200,7 @@ public class RobotMovementController : MonoBehaviour
             }
             else
             {
-                return target.position;
+                return _target.position;
             }
         }
     }
