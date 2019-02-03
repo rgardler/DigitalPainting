@@ -32,7 +32,6 @@ namespace wizardscode.production
                     break;
                 }
             }
-
             if (!hasTrigger)
             {
                 Debug.LogWarning("You have a `CameraTrigger` component attached to '" + gameObject.name + "' but it does not have a trigger collider. One is required and thus the component has been disabled.");
