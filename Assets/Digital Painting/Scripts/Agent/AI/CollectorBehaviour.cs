@@ -8,12 +8,19 @@ namespace wizardscode.agent.ai
 {
     public class CollectorBehaviour : MonoBehaviour
     {
-        AIAgentController agent;
+        [Tooltip("The range in which an object is considered worth diverting for, " +
+            "that is if the agent comes within this range of an object it will change" +
+            "its `ThingOfInterest` and move towards the collectable.")]
+        public float collectableRange = 10;
+
+        AIAgentController controller;
+        float checkFrequency = 2f;
+        float timeUntilNextCheck = 0;
 
         private void Awake()
         {
-            agent = GetComponent<AIAgentController>();
-            if (agent == null)
+            controller = GetComponent<AIAgentController>();
+            if (controller == null)
             {
                 Debug.LogError(gameObject.name + " has a CollectorBehaviour component attached, but it does not have a AIAgentController attached, which is required. Disabling the CollectorBehaviour.");
                 this.enabled = false;
@@ -22,9 +29,24 @@ namespace wizardscode.agent.ai
 
         private void Update()
         {
-            List<Collectable> objects = agent.WithinReach<Collectable>();
-            if ( objects.Count > 0) {
-                Debug.Log(gameObject.name + " is within reach of " + objects.Count + " collectable items.");
+            timeUntilNextCheck -= Time.deltaTime;
+            if (timeUntilNextCheck <= 0)
+            {
+                List<Collectable> objects = controller.WithinRange<Collectable>(collectableRange);
+                if (objects.Count > 0)
+                {
+                    Debug.Log(gameObject.name + " is within range of " + objects.Count + " collectable items.");
+                    Thing home = controller.home.GetComponent<Thing>();
+                    if (controller.nextThings.Count == 0 && controller.ThingOfInterest != home)
+                    {
+                        controller.nextThings.Add(home);
+                    }
+                    else if (controller.nextThings.Count == 0 || controller.nextThings[0] != home)
+                    {
+                        controller.nextThings.Insert(0, home);
+                    }
+                }
+                timeUntilNextCheck = checkFrequency;
             }
         }
     }

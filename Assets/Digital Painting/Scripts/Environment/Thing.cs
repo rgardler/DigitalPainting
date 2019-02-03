@@ -31,6 +31,8 @@ namespace wizardscode.environment
         [Tooltip("Virtual camera to use when viewing this thing. If null an attempt will be made to automatically place one in a sensible position.")]
         public CinemachineVirtualCamera virtualCamera;
 
+        private Octree octree;
+
         [SerializeField]
         private Guid _guid;
         public Guid Guid
@@ -57,7 +59,14 @@ namespace wizardscode.environment
 
                     Bounds bounds = this.GetComponent<Collider>().bounds;
                     Vector3 pos = new Vector3(bounds.center.x + bounds.extents.x * 2, 0,  bounds.center.z + bounds.extents.z * 2);
-                    pos.y = Terrain.activeTerrain.SampleHeight(pos);
+                    pos.y = Terrain.activeTerrain.SampleHeight(pos) + bounds.extents.y;
+                    if (octree != null)
+                    {
+                        while (!octree.GetNode(pos).Empty)
+                        {
+                            pos.y += 0.1f;
+                        }
+                    }
                     obj.transform.position = pos;
                     obj.transform.LookAt(transform.position);
 
@@ -88,6 +97,7 @@ namespace wizardscode.environment
         private void Start()
         {
             ConfigureVirtualCamera();
+            octree = FindObjectOfType<Octree>();
         }
 
         /// <summary>

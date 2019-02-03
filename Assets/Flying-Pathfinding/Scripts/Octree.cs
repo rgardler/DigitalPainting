@@ -266,24 +266,21 @@ public class Octree : MonoBehaviour
 
 		neighborPathPositions[depth] = pos;
 	}
-
-	private static Vector3 tmpGetNodePos;
-
-	private OctreeElement GetNode(Vector3 position)
+    
+	internal OctreeElement GetNode(Vector3 position)
 	{
-		tmpGetNodePos = position;
-		return GetNode(root);
+		return GetNode(root, position);
 	}
 
-	private OctreeElement GetNode(OctreeElement parent)
+	private OctreeElement GetNode(OctreeElement parent, Vector3 position)
 	{
-		if (parent.Bounds.Contains(tmpGetNodePos))
+		if (parent.Bounds.Contains(position))
 		{
 			if (parent.Children != null)
 			{
 				for (int i = 0; i < parent.Children.Length; i++)
 				{
-					OctreeElement child = GetNode(parent.Children[i]);
+					OctreeElement child = GetNode(parent.Children[i], position);
 					if (child != null) return child;
 				}
 			}

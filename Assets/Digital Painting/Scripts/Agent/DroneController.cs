@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.environment;
 
 namespace wizardscode.digitalpainting.agent
 {
@@ -13,6 +14,28 @@ namespace wizardscode.digitalpainting.agent
         private RobotMovementController pathfinding;
         private Transform wanderTarget;
         new private Rigidbody rigidbody;
+        private int wanderTargetUpdateRetries = 1;
+
+        /// <summary>
+        /// Set the thing of interest for this agent. The agent will behave
+        /// appropriately in response to the new thing of interest. The
+        /// Thing is only updated if it has changed since the last time it was set.
+        /// </summary>
+        override public Thing ThingOfInterest
+        {
+            get { return _thingOfInterest; }
+            set {
+                if (value == null)
+                {
+                    _thingOfInterest = null;
+                    return;
+                }
+
+                if (!GameObject.ReferenceEquals(_thingOfInterest, value)) {
+                    _thingOfInterest = value;
+                }
+            }
+        }
 
         override internal void Awake()
         {
@@ -33,32 +56,43 @@ namespace wizardscode.digitalpainting.agent
             }
         }
 
+        internal override void Start()
+        {
+            base.Start();
+        }
+
         internal override void Update()
         {
             if (isFlyByWire)
             {
-                if (thingOfInterest != null)
+                if (ThingOfInterest != null)
                 {
-                    if (Vector3.Distance(transform.position, thingOfInterest.AgentViewingTransform.position) > thingOfInterest.distanceToTriggerViewingCamera)
+                    
+                    if(Vector3.Distance(transform.position, ThingOfInterest.AgentViewingTransform.position) > ThingOfInterest.distanceToTriggerViewingCamera)
                     {
-                        pathfinding.Target = thingOfInterest.AgentViewingTransform;
+                        if (!GameObject.ReferenceEquals(pathfinding.Target, ThingOfInterest.AgentViewingTransform))
+                        {
+                            pathfinding.Target = ThingOfInterest.AgentViewingTransform;
+                        }
                     } else
                     {
                         ViewPOI();
                     }
                 } else
                 {
-                    UpdatePointOfInterest();
-                    if (thingOfInterest == null)
+                    UpdateThingOfInterest();
+                    if (ThingOfInterest == null)
                     {
                         UpdateWanderTarget();
                     }
+
                     if (Vector3.Distance(transform.position, wanderTarget.position) <= pathfinding.minReachDistance)
                     {
                         timeToNextWanderPathChange = 0;
                         UpdateWanderTarget();
                     }
-                    if (!pathfinding.HasTarget)
+
+                    if (!pathfinding.HasPathToTarget)
                     {
                         UpdateWanderTarget(true);
                     }
@@ -100,9 +134,21 @@ namespace wizardscode.digitalpainting.agent
                 float newY = Mathf.Clamp(position.y, terrainHeight + pathfinding.minFlightHeight, terrainHeight + pathfinding.maxFlightHeight);
                 position.y = newY;
 
-                wanderTarget.position = position;
-                pathfinding.Target = wanderTarget.gameObject.transform;
+                wanderTarget.position = position;                
                 timeToNextWanderPathChange = Random.Range(minTimeBetweenRandomPathChanges, maxTimeBetweenRandomPathChanges);
+            }
+            if (pathfinding.IsNodeNavigable(wanderTarget.position))
+            {
+                pathfinding.Target = wanderTarget.gameObject.transform;
+                wanderTargetUpdateRetries = 1;
+            }
+            else
+            {
+                if (wanderTargetUpdateRetries < maxWanderTargetRetries)
+                {
+                    wanderTargetUpdateRetries++;
+                    UpdateWanderTarget(turnAround);
+                }
             }
         }
 

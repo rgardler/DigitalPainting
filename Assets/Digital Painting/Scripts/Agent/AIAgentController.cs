@@ -12,14 +12,14 @@ namespace wizardscode.digitalpainting.agent
         public bool isFlyByWire = true;
 
         [Header("Objects of Interest")]
-        [Tooltip("Current thing of interest. The agent will move to and around the object until it is no longer interested, then it will make this parameter null. When null the agent will move according to other algorithms.")]
-        public Thing thingOfInterest;
         [Tooltip("The range the agent will use to detect things in its environment")]
         public float detectionRange = 50;
         [Tooltip("The range at which the agent considers things to be withing reach - that is able to touch.")]
         public float reachRange = 2;
 
         [Header("Wander configuration")]
+        [Tooltip("Number of positions to try, per frame, when trying to find a valid wander target.")]
+        public int maxWanderTargetRetries = 3;
         [Tooltip("Minimum time between random variations in the path.")]
         [Range(0, 120)]
         public float minTimeBetweenRandomPathChanges = 5;
@@ -47,13 +47,23 @@ namespace wizardscode.digitalpainting.agent
 
         internal Quaternion targetRotation;
         internal float timeToNextWanderPathChange = 3;
+        internal Thing _thingOfInterest;
         private float timeLeftLookingAtObject = float.NegativeInfinity;
         private List<Thing> visitedThings = new List<Thing>();
+        internal List<Thing> nextThings = new List<Thing>();
 
-        override internal void Awake()
+        /// <summary>
+        /// Set the thing of interest for this agent. The agent will behave
+        /// appropriately in response to the new thing of interest.
+        /// </summary>
+        virtual public Thing ThingOfInterest
         {
-            base.Awake();
+            get { return _thingOfInterest; }
+            set { _thingOfInterest = value; }
+        }
 
+        virtual internal void Awake()
+        {
             bool hasCollider = false;
             Collider[] colliders = gameObject.GetComponents<Collider>();
             for (int i = 0; i < colliders.Length; i++)
@@ -85,22 +95,23 @@ namespace wizardscode.digitalpainting.agent
             Random.InitState((int)System.DateTime.Now.Ticks);
         }
 
-        internal void Start()
+        override internal void Start()
         {
+            base.Start();
             ConfigureBarriers();
         }
 
         /// <summary>
         /// Returns an array of objects of a given type that
-        /// are within reach of the agent. Where the range of
-        /// the agents reach is defined in the field `reachRange`.
+        /// are within a given range of the agent.
         /// </summary>
         /// <typeparam name="T">The type of object being tested for.</typeparam>
-        /// <returns>An array of objects of the given type that are within reach.</returns>
-        internal List<T> WithinReach<T>()
+        /// <param name="range">The range we are checking for.</param>
+        /// <returns>An array of objects of the given type that are within range.</returns>
+        internal List<T> WithinRange<T>(float range)
         {
             List<T> objects = new List<T>();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, reachRange);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, range);
             foreach (Collider collider in colliders)
             {
                 T obj = collider.gameObject.GetComponent<T>();
@@ -140,18 +151,28 @@ namespace wizardscode.digitalpainting.agent
                 MakeNextMove();
             }
 
-            UpdatePointOfInterest();
+            if (ThingOfInterest == null)
+            {
+                UpdateThingOfInterest();
+            }
         }
 
-        internal void UpdatePointOfInterest()
+        internal void UpdateThingOfInterest()
         {
-            // Look for points of interest
-            if (thingOfInterest == null && Random.value <= 0.001)
+            if (ThingOfInterest == null && nextThings.Count > 0)
+            {
+                ThingOfInterest = nextThings[0];
+                nextThings.RemoveAt(0);
+                return;
+            }
+
+            // Look for new points of interest
+            if (ThingOfInterest == null && nextThings.Count == 0 && Random.value <= 0.001)
             {
                 Thing poi = FindPointOfInterest();
                 if (poi != null)
                 {
-                    thingOfInterest = poi;
+                    ThingOfInterest = poi;
                 }
             }
         }
@@ -161,9 +182,9 @@ namespace wizardscode.digitalpainting.agent
         /// </summary>
         internal void MakeNextMove()
         {
-            if (thingOfInterest != null)
+            if (ThingOfInterest != null)
             {
-                targetRotation = Quaternion.LookRotation(thingOfInterest.AgentViewingTransform.position - transform.position, Vector3.up);
+                targetRotation = Quaternion.LookRotation(ThingOfInterest.AgentViewingTransform.position - transform.position, Vector3.up);
             }
             else
             {
@@ -180,11 +201,11 @@ namespace wizardscode.digitalpainting.agent
             }
 
             Vector3 position = transform.position;
-            if (thingOfInterest != null && Vector3.Distance(position, thingOfInterest.AgentViewingTransform.position) > thingOfInterest.distanceToTriggerViewingCamera)
+            if (ThingOfInterest != null && Vector3.Distance(position, ThingOfInterest.AgentViewingTransform.position) > ThingOfInterest.distanceToTriggerViewingCamera)
             {
                 position += transform.forward * normalMovementSpeed * Time.deltaTime;
             }
-            else if (thingOfInterest != null)
+            else if (ThingOfInterest != null)
             {
                 ViewPOI();
             }
@@ -207,23 +228,23 @@ namespace wizardscode.digitalpainting.agent
         {
             if (timeLeftLookingAtObject == float.NegativeInfinity)
             {
-                timeLeftLookingAtObject = thingOfInterest.timeToLookAtObject;
+                timeLeftLookingAtObject = ThingOfInterest.timeToLookAtObject;
             }
 
-            CinemachineVirtualCamera virtualCamera = thingOfInterest.virtualCamera;
+            CinemachineVirtualCamera virtualCamera = ThingOfInterest.virtualCamera;
             virtualCamera.enabled = true;
             
             timeLeftLookingAtObject -= Time.deltaTime;
             if (timeLeftLookingAtObject < 0)
             {
                 // Remember we have been here so we don't come again
-                visitedThings.Add(thingOfInterest);
+                visitedThings.Add(ThingOfInterest);
 
                 // when we start moving again move away from the object as we are pretty close by now and might move into it
                 targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
 
                 // we no longer care about this thing so turn the camera off and don't focus on it anymore
-                thingOfInterest = null;
+                ThingOfInterest = null;
                 timeLeftLookingAtObject = float.NegativeInfinity;
                 virtualCamera.enabled = false;
             }

@@ -60,7 +60,7 @@ public class RobotRotationController : MonoBehaviour
 	{
 		get
 		{
-			if (movementController.HasTarget)
+			if (movementController.HasPathToTarget)
 			{
 				return movementController.CurrentTargetPosition - rigidbody.position;
 			}

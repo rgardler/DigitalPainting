@@ -16,6 +16,8 @@ namespace wizardscode.digitalpainting
         [Header("Agent")]
         [Tooltip("The Agent prefab to use as the primary character - that is the one the camera will follow.")]
         public BaseAgentController agentPrefab;
+        [Tooltip("The position in which to spawn the agent.")]
+        public Vector3 agentSpawnPosition;
         [Tooltip("Render agent - if this is set to off (unchecked) then the agent will not be visible.")]
         public bool renderAgent = true;
 
@@ -94,10 +96,7 @@ namespace wizardscode.digitalpainting
                 renderer.enabled = renderAgent;
             }
 
-            float x = Terrain.activeTerrain.terrainData.size.x / 2;
-            float z = Terrain.activeTerrain.terrainData.size.z / 2;
-            Vector3 position = new Vector3(x, 0, z);
-
+            Vector3 position = agentSpawnPosition;
             float y = Terrain.activeTerrain.SampleHeight(position);
             position.y = y + controller.heightOffset;            
             agent.transform.position = position;

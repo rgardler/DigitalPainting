@@ -20,9 +20,12 @@ namespace wizardscode.environment
 
             // Ensure all Things in the world are available in our collection
             Thing[] worldThings = FindObjectsOfType<Thing>();
-            for (int i = 0; i < worldThings.Length; i++)
+            foreach (Thing thing in worldThings) 
             {
-                allTheThings.Add(worldThings[i].GetComponent<Thing>());
+                if (thing.isPOI)
+                {
+                    allTheThings.Add(thing);
+                }
             }            
         }
     }

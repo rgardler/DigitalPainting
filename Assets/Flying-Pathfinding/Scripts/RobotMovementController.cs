@@ -11,14 +11,11 @@ public class RobotMovementController : MonoBehaviour
     [SerializeField] private float acceleration = 1;
     [Tooltip("The minimum distance an agent must get from an object before it is considered to have reached it.")]
     public float minReachDistance = 2f;
-    [Tooltip("The minimum distance to maintain from an object that the agent is following.")]
-    public float minFollowDistance = 4f;
     [SerializeField] private float pathPointRadius = 0.2f;
     [SerializeField] private Octree octree;
     [SerializeField] private LayerMask playerSeeLayerMask = -1;
-    [SerializeField] private GameObject playerObject;
-    private Octree.PathRequest oldPath;
-    private Octree.PathRequest newPath;
+    private Octree.PathRequest currentPath;
+    private Octree.PathRequest nextPath;
     private Rigidbody rigidbody;
     private Vector3 currentDestination;
     private Vector3 lastDestination;
@@ -39,7 +36,7 @@ public class RobotMovementController : MonoBehaviour
             if (!GameObject.ReferenceEquals(_target, value))
             {
                 _target = value;
-                UpdatePath();
+                UpdatePath(true);
             }
         }
     }
@@ -64,10 +61,15 @@ public class RobotMovementController : MonoBehaviour
             return;
         }
 
-        if ((newPath == null || !newPath.isCalculating) && Vector3.SqrMagnitude(_target.transform.position - lastDestination) > maxDistanceRebuildPath && (!CanSeePlayer() || Vector3.Distance(_target.position, transform.position) > minFollowDistance) && !octree.IsBuilding)
+        if (!octree.IsBuilding
+            && (nextPath == null || !nextPath.isCalculating) 
+            && Vector3.SqrMagnitude(_target.position - lastDestination) > (maxDistanceRebuildPath * maxDistanceRebuildPath) 
+            && Vector3.SqrMagnitude(_target.position - transform.position) > (minReachDistance * minReachDistance))
         {
             UpdatePath();
         }
+
+        // if the agent appears not to be moving then perhaps it is stuck. Try updating the path
 
         /*if (newPath != null && !newPath.isCalculating)
 		{
@@ -97,11 +99,12 @@ public class RobotMovementController : MonoBehaviour
 
         var curPath = Path;
 
-        if (!curPath.isCalculating && curPath != null && curPath.Path.Count > 0)
+        if (curPath != null && !curPath.isCalculating && curPath.Path.Count > 0)
         {
-            if (Vector3.Distance(transform.position, _target.position) < minFollowDistance && CanSeePlayer())
+            if (Vector3.SqrMagnitude(transform.position - _target.position) < (minReachDistance * minReachDistance))
             {
                 curPath.Reset();
+                return;
             }
 
             currentDestination = curPath.Path[0] + Vector3.ClampMagnitude(rigidbody.position - curPath.Path[0], pathPointRadius);
@@ -139,7 +142,7 @@ public class RobotMovementController : MonoBehaviour
                 curPath.Path.RemoveRange(0, shortestPathPoint);
             }
         }
-        else
+        else // no path
         {
             rigidbody.velocity -= rigidbody.velocity * Time.deltaTime * acceleration;
         }
@@ -147,46 +150,54 @@ public class RobotMovementController : MonoBehaviour
 
     /// <summary>
     /// Update the path if the current target location is a different destination to the lastDestination.
+    /// <paramref name="force">Force a rebuild even if not outside the normal MaxDistanceREbuildPath</paramref>
     /// </summary>
-    private void UpdatePath()
+    private void UpdatePath(bool force = false)
     {
-        if (Vector3.SqrMagnitude(transform.position - lastDestination) > 0.5)
+        if (force || Vector3.SqrMagnitude(transform.position - lastDestination) > (maxDistanceRebuildPath * maxDistanceRebuildPath))
         {
             lastDestination = _target.transform.position;
 
-            oldPath = newPath;
-            newPath = octree.GetPath(transform.position, lastDestination, this);
+            currentPath = nextPath;
+            nextPath = octree.GetPath(transform.position, lastDestination, this);
         }
     }
 
-    private bool CanSeePlayer()
+    /// <summary>
+    /// Check to see if a node is navigable, that is whether something can navigate through the node.
+    /// To be navigable the node must be empty and it must be within the navigation space.
+    /// </summary>
+    /// <param name="position">The position of the node.</param>
+    /// <returns>True if the node is navigable, otherwise false.</returns>
+    internal bool IsNodeNavigable(Vector3 position)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(new Ray(transform.position, transform.position - _target.position), out hit, Vector3.Distance(transform.position, _target.position) + 1, playerSeeLayerMask))
+        Octree.OctreeElement node = octree.GetNode(position);
+        if (octree.IsBuilding || node == null)
         {
-            return hit.transform.gameObject == playerObject;
+            return false;
+        } else
+        {
+            return node.Empty;
         }
-        return false;
     }
 
     private Octree.PathRequest Path
     {
         get
         {
-            if ((newPath == null || newPath.isCalculating) && oldPath != null)
+            if ((nextPath == null || nextPath.isCalculating) && currentPath != null)
             {
-                return oldPath;
+                return currentPath;
             }
-            return newPath;
+            return nextPath;
         }
     }
 
-    public bool HasTarget
+    public bool HasPathToTarget
     {
         get
         {
             return Path != null && Path.Path.Count > 0;
-
         }
     }
 
@@ -230,10 +241,23 @@ public class RobotMovementController : MonoBehaviour
             {
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(path.Path[i], minReachDistance);
+
                 Gizmos.color = Color.red;
                 Gizmos.DrawRay(path.Path[i], Vector3.ClampMagnitude(rigidbody.position - path.Path[i], pathPointRadius));
                 Gizmos.DrawWireSphere(path.Path[i], pathPointRadius);
+
+                Gizmos.color = Color.green;
                 Gizmos.DrawLine(path.path[i], path.Path[i + 1]);
+            }
+        }
+
+        octree.GetNode(transform.position).DrawGizmos(false, true);
+        if (Target != null)
+        {
+            Octree.OctreeElement node = octree.GetNode(Target.position);
+            if (node != null)
+            {
+                node.DrawGizmos(false, true);
             }
         }
     }

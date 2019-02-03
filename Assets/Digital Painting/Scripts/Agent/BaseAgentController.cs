@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.environment;
 
 namespace wizardscode.digitalpainting.agent
 {
@@ -36,18 +37,21 @@ namespace wizardscode.digitalpainting.agent
 
         [Header("Overrides")]
         [Tooltip("Home location of the agent. If blank this will be the agents starting position.")]
-        public GameObject home;
+        public Thing home;
 
         float rotationX = 0;
         float rotationY = 0;
 
-        virtual internal void Awake()
+        virtual internal void Start()
         {
             if (home == null)
             {
-                home = new GameObject("Home for " + gameObject.name);
-                home.transform.position = transform.position;
-                home.transform.rotation = transform.rotation;
+                GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                obj.name = "Home for " + gameObject.name;
+                obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                obj.transform.position = transform.position;
+                obj.transform.rotation = transform.rotation;
+                home = obj.AddComponent<Thing>();
             }
         }
 
