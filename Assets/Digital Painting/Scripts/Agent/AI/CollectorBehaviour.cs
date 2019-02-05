@@ -61,7 +61,7 @@ namespace wizardscode.agent.ai
                             numberScheduledToCollect++;
 
                             Thing home = controller.home.GetComponent<Thing>();
-                            if (controller.nextThings.Count == 0 && controller.ThingOfInterest != home)
+                            if (controller.nextThings.Count == 0 && controller.PointOfInterest != home)
                             {
                                 controller.nextThings.Add(home);
                             }

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using wizardscode.environment;
+﻿using UnityEngine;
 
 namespace wizardscode.digitalpainting.agent
 {
@@ -15,27 +12,6 @@ namespace wizardscode.digitalpainting.agent
         private Transform wanderTarget;
         new private Rigidbody rigidbody;
         private int wanderTargetUpdateRetries = 1;
-
-        /// <summary>
-        /// Set the thing of interest for this agent. The agent will behave
-        /// appropriately in response to the new thing of interest. The
-        /// Thing is only updated if it has changed since the last time it was set.
-        /// </summary>
-        override public Thing ThingOfInterest
-        {
-            get { return _thingOfInterest; }
-            set {
-                if (value == null)
-                {
-                    _thingOfInterest = null;
-                    return;
-                }
-
-                if (!GameObject.ReferenceEquals(_thingOfInterest, value)) {
-                    _thingOfInterest = value;
-                }
-            }
-        }
 
         override internal void Awake()
         {
@@ -65,14 +41,14 @@ namespace wizardscode.digitalpainting.agent
         {
             if (isFlyByWire)
             {
-                if (ThingOfInterest != null)
+                if (PointOfInterest != null)
                 {
                     
-                    if(Vector3.Distance(transform.position, ThingOfInterest.AgentViewingTransform.position) > ThingOfInterest.distanceToTriggerViewingCamera)
+                    if(Vector3.Distance(transform.position, PointOfInterest.AgentViewingTransform.position) > PointOfInterest.distanceToTriggerViewingCamera)
                     {
-                        if (!GameObject.ReferenceEquals(pathfinding.Target, ThingOfInterest.AgentViewingTransform))
+                        if (!GameObject.ReferenceEquals(pathfinding.Target, PointOfInterest.AgentViewingTransform))
                         {
-                            pathfinding.Target = ThingOfInterest.AgentViewingTransform;
+                            pathfinding.Target = PointOfInterest.AgentViewingTransform;
                         }
                     } else
                     {
@@ -80,8 +56,8 @@ namespace wizardscode.digitalpainting.agent
                     }
                 } else
                 {
-                    UpdateThingOfInterest();
-                    if (ThingOfInterest == null)
+                    UpdatePointOfInterest();
+                    if (PointOfInterest == null)
                     {
                         UpdateWanderTarget();
                     }

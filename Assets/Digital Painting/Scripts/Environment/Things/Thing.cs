@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.interaction;
 using wizardscode.inventory;
 
 namespace wizardscode.environment
@@ -23,7 +24,7 @@ namespace wizardscode.environment
         [Header("Viewing")]
         [Tooltip("Indicates whether this Thing should be included in the list of Points of Interest in the scene. This list is used for things like deciding if an agent should visit the Thing.")]
         public bool isPOI = true;
-        [Tooltip("Position and rotation the agent should adopt when viewing this thing. If null a location will be automatically created.")]
+        [Tooltip("Position and rotation the agent should adopt when viewing this thing. If this field is null a location will be automatically created.")]
         public Transform _agentViewingTransform;
         [Tooltip("Distance at which to switch to the viewing camera")]
         public float distanceToTriggerViewingCamera = 10;
@@ -32,9 +33,22 @@ namespace wizardscode.environment
         [Tooltip("Virtual camera to use when viewing this thing. If null an attempt will be made to automatically place one in a sensible position.")]
         public CinemachineVirtualCamera virtualCamera;
 
-        public InventoryItem test;
-
         private Octree octree;
+        private Interactable _interactable;
+        /// <summary>
+        /// Get the interactable component if one exists, otherwise return null.
+        /// </summary>
+        public Interactable Interactable
+        {
+            get { return Interactable; }
+        }
+        /// <summary>
+        /// If the Thing is interactable then this will be set to true, otherwise false.
+        /// </summary>
+        public bool IsInteractable
+        {
+            get { return Interactable != null; }
+        }
 
         [SerializeField]
         private Guid _guid;
@@ -61,7 +75,7 @@ namespace wizardscode.environment
                     GameObject obj = new GameObject("Agent Viewing Position for " + gameObject.name);
 
                     Bounds bounds = this.GetComponent<Collider>().bounds;
-                    Vector3 pos = new Vector3(bounds.center.x + bounds.extents.x * 2, 0,  bounds.center.z + bounds.extents.z * 2);
+                    Vector3 pos = new Vector3(bounds.center.x + bounds.extents.x * 2, 0, bounds.center.z + bounds.extents.z * 2);
                     pos.y = Terrain.activeTerrain.SampleHeight(pos) + bounds.extents.y;
                     if (octree != null)
                     {
@@ -95,6 +109,8 @@ namespace wizardscode.environment
                 position.y = Terrain.activeTerrain.SampleHeight(position) + yOffset;
                 gameObject.transform.position = position;
             }
+
+            _interactable = gameObject.GetComponentInChildren<Interactable>();
         }
 
         private void Start()
@@ -110,7 +126,6 @@ namespace wizardscode.environment
         /// </summary>
         private void ConfigureVirtualCamera()
         {
-
             if (virtualCamera != null)
             {
                 virtualCamera.enabled = false;

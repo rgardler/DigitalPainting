@@ -48,19 +48,41 @@ namespace wizardscode.digitalpainting.agent
 
         internal Quaternion targetRotation;
         internal float timeToNextWanderPathChange = 3;
-        internal Thing _thingOfInterest;
+        internal Thing _pointOfInterest;
+        internal bool _interactWithPOI;
         private float timeLeftLookingAtObject = float.NegativeInfinity;
         private List<Thing> visitedThings = new List<Thing>();
         internal List<Thing> nextThings = new List<Thing>();
 
         /// <summary>
         /// Set the thing of interest for this agent. The agent will behave
-        /// appropriately in response to the new thing of interest.
+        /// appropriately in response to the new thing of interest. The
+        /// Thing is only updated if it has changed since the last time it was set.
         /// </summary>
-        virtual public Thing ThingOfInterest
+        public Thing PointOfInterest
         {
-            get { return _thingOfInterest; }
-            set { _thingOfInterest = value; }
+            get { return _pointOfInterest; }
+            set
+            {
+                if (value == null)
+                {
+                    _pointOfInterest = null;
+                    _interactWithPOI = false;
+                    return;
+                }
+
+                if (!GameObject.ReferenceEquals(_pointOfInterest, value))
+                {
+                    _pointOfInterest = value;
+
+                    // Decide if we will interact with the POI when we get there
+                    if (PointOfInterest != null)
+                    {
+                        Interactable interactable = PointOfInterest.gameObject.GetComponentInChildren<Interactable>();
+                        _interactWithPOI = interactable != null;
+                    }
+                }
+            }
         }
 
         virtual internal void Awake()
@@ -152,28 +174,28 @@ namespace wizardscode.digitalpainting.agent
                 MakeNextMove();
             }
 
-            if (ThingOfInterest == null)
+            if (PointOfInterest == null)
             {
-                UpdateThingOfInterest();
+                UpdatePointOfInterest();
             }
         }
 
-        internal void UpdateThingOfInterest()
+        internal void UpdatePointOfInterest()
         {
-            if (ThingOfInterest == null && nextThings.Count > 0)
+            if (PointOfInterest == null && nextThings.Count > 0)
             {
-                ThingOfInterest = nextThings[0];
+                PointOfInterest = nextThings[0];
                 nextThings.RemoveAt(0);
                 return;
             }
 
             // Look for new points of interest
-            if (ThingOfInterest == null && nextThings.Count == 0 && Random.value <= 0.001)
+            if (PointOfInterest == null && nextThings.Count == 0 && Random.value <= 0.001)
             {
                 Thing poi = FindPointOfInterest();
                 if (poi != null)
                 {
-                    ThingOfInterest = poi;
+                    PointOfInterest = poi;
                 }
             }
         }
@@ -183,9 +205,9 @@ namespace wizardscode.digitalpainting.agent
         /// </summary>
         internal void MakeNextMove()
         {
-            if (ThingOfInterest != null)
+            if (PointOfInterest != null)
             {
-                targetRotation = Quaternion.LookRotation(ThingOfInterest.AgentViewingTransform.position - transform.position, Vector3.up);
+                targetRotation = Quaternion.LookRotation(PointOfInterest.AgentViewingTransform.position - transform.position, Vector3.up);
             }
             else
             {
@@ -202,11 +224,11 @@ namespace wizardscode.digitalpainting.agent
             }
 
             Vector3 position = transform.position;
-            if (ThingOfInterest != null && Vector3.Distance(position, ThingOfInterest.AgentViewingTransform.position) > ThingOfInterest.distanceToTriggerViewingCamera)
+            if (PointOfInterest != null && Vector3.Distance(position, PointOfInterest.AgentViewingTransform.position) > PointOfInterest.distanceToTriggerViewingCamera)
             {
                 position += transform.forward * normalMovementSpeed * Time.deltaTime;
             }
-            else if (ThingOfInterest != null)
+            else if (PointOfInterest != null)
             {
                 ViewPOI();
             }
@@ -229,30 +251,29 @@ namespace wizardscode.digitalpainting.agent
         {
             if (timeLeftLookingAtObject == float.NegativeInfinity)
             {
-                timeLeftLookingAtObject = ThingOfInterest.timeToLookAtObject;
+                timeLeftLookingAtObject = PointOfInterest.timeToLookAtObject;
             }
 
-            CinemachineVirtualCamera virtualCamera = ThingOfInterest.virtualCamera;
+            CinemachineVirtualCamera virtualCamera = PointOfInterest.virtualCamera;
             virtualCamera.enabled = true;
             
             timeLeftLookingAtObject -= Time.deltaTime;
-            Interactable interactable = ThingOfInterest.gameObject.GetComponentInChildren<Interactable>();
-            if ( interactable != null)
+            if ( _interactWithPOI )
             {
-                interactable.Interact();
-                timeLeftLookingAtObject = 0;
+                PointOfInterest.gameObject.GetComponentInChildren<Interactable>().Interact();
+                _interactWithPOI = false;
             }
 
             if (timeLeftLookingAtObject <= 0)
             {
                 // Remember we have been here so we don't come again
-                visitedThings.Add(ThingOfInterest);
+                visitedThings.Add(PointOfInterest);
 
                 // when we start moving again move away from the object as we are pretty close by now and might move into it
                 targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
 
                 // we no longer care about this thing so turn the camera off and don't focus on it anymore
-                ThingOfInterest = null;
+                PointOfInterest = null;
                 timeLeftLookingAtObject = float.NegativeInfinity;
                 virtualCamera.enabled = false;
             }

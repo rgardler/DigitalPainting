@@ -60,9 +60,9 @@ namespace wizardscode.devtest
         {
             PopulateInterestingThingsDropdown();
 
-            if (agent.ThingOfInterest != null)
+            if (agent.PointOfInterest != null)
             {
-                distanceToThingOfInterestText.text = "Distance: " + Vector3.Distance(agent.transform.position, agent.ThingOfInterest.AgentViewingTransform.position).ToString();
+                distanceToThingOfInterestText.text = "Distance: " + Vector3.Distance(agent.transform.position, agent.PointOfInterest.AgentViewingTransform.position).ToString();
             }
             else
             {
@@ -72,9 +72,9 @@ namespace wizardscode.devtest
 
         private void LateUpdate()
         {
-            if (agent.ThingOfInterest != null)
+            if (agent.PointOfInterest != null)
             {
-                thingOfInterestDropdown.value = thingsManager.allTheThings.FindIndex(x => x == agent.ThingOfInterest) + 1;
+                thingOfInterestDropdown.value = thingsManager.allTheThings.FindIndex(x => x == agent.PointOfInterest) + 1;
             }
             else
             {
@@ -86,11 +86,11 @@ namespace wizardscode.devtest
         {
             if (thingOfInterestDropdown.value == 0)
             {
-                agent.ThingOfInterest = null;
+                agent.PointOfInterest = null;
             }
             else
             {
-                agent.ThingOfInterest = thingsManager.allTheThings[thingOfInterestDropdown.value - 1];
+                agent.PointOfInterest = thingsManager.allTheThings[thingOfInterestDropdown.value - 1];
             }
         }
 
