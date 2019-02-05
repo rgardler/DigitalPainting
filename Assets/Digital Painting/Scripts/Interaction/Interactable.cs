@@ -12,6 +12,11 @@ namespace wizardscode.interaction
 
         public void Interact()
         {
+            if (conditionCollections.Length == 0)
+            {
+                defaultReactionCollection.React();
+            }
+
             for (int i = 0; i < conditionCollections.Length; i++)
             {
                 if (conditionCollections[i].CheckAndReact())

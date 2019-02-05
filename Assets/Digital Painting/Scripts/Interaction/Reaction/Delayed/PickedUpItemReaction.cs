@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.inventory;
 
 namespace wizardscode.interaction
 {
     public class PickedUpItemReaction : DelayedReaction
     {
-        public Item item;
+        public InventoryItem item;
 
         private InventoryManager inventory;
 

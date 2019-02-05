@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.inventory;
 
 namespace wizardscode.environment
 {
@@ -30,6 +31,8 @@ namespace wizardscode.environment
         public float timeToLookAtObject = 15;
         [Tooltip("Virtual camera to use when viewing this thing. If null an attempt will be made to automatically place one in a sensible position.")]
         public CinemachineVirtualCamera virtualCamera;
+
+        public InventoryItem test;
 
         private Octree octree;
 

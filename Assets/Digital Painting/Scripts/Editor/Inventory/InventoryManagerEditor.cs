@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using wizardscode.inventory;
 
 [CustomEditor(typeof(InventoryManager))]
 public class InventoryManagerEditor : Editor {

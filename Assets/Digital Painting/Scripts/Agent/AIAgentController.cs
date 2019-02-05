@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using wizardscode.environment;
+using wizardscode.interaction;
 
 namespace wizardscode.digitalpainting.agent
 {
@@ -222,7 +223,7 @@ namespace wizardscode.digitalpainting.agent
         }
 
         /// <summary>
-        /// View a Thing of Interest that is within range.
+        /// View a Thing of Interest that is within range. If it is interactable then consider interacting with it.
         /// </summary>
         internal void ViewPOI()
         {
@@ -235,7 +236,14 @@ namespace wizardscode.digitalpainting.agent
             virtualCamera.enabled = true;
             
             timeLeftLookingAtObject -= Time.deltaTime;
-            if (timeLeftLookingAtObject < 0)
+            Interactable interactable = ThingOfInterest.gameObject.GetComponentInChildren<Interactable>();
+            if ( interactable != null)
+            {
+                interactable.Interact();
+                timeLeftLookingAtObject = 0;
+            }
+
+            if (timeLeftLookingAtObject <= 0)
             {
                 // Remember we have been here so we don't come again
                 visitedThings.Add(ThingOfInterest);

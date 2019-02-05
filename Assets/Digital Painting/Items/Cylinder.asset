@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8af48761548125948b21ce21d643752b, type: 3}
-  m_Name: AllConditions
+  m_Script: {fileID: 11500000, guid: acb631d5f23ea544795eba3f60255b6f, type: 3}
+  m_Name: Cylinder
   m_EditorClassIdentifier: 
-  conditions: []
+  sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}

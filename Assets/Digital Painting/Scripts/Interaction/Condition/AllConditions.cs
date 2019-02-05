@@ -8,7 +8,6 @@ namespace wizardscode.interaction
     [CreateAssetMenu(fileName = "AllConditions", menuName = "Wizards Code/Interactions/All Conditions", order = 1000)]
     public class AllConditions : ResettableScriptableObject
     {
-
         public Condition[] conditions;
 
         private static AllConditions instance;
@@ -29,7 +28,7 @@ namespace wizardscode.interaction
                 }
                 if (instance == null)
                 {
-                    Debug.LogError("AllConditions has not been created yet. Go to Assets > Create > Wizards Code > Interactions > Conditions");
+                    Debug.LogError("AllConditions has not been created yet. Go to Assets > Create > Wizards Code > Interactions > Conditions. The resulting object must be stored in Resources/AllConditions and you will need to add at least one condition to it in the inspector.");
                 }
                 return instance;
             }

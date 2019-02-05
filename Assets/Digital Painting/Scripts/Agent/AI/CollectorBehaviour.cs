@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using wizardscode.digitalpainting.agent;
 using wizardscode.environment;
+using wizardscode.interaction;
 
 namespace wizardscode.agent.ai
 {
@@ -45,11 +46,16 @@ namespace wizardscode.agent.ai
             timeUntilNextCheck -= Time.deltaTime;
             if (timeUntilNextCheck <= 0)
             {
-                List<Collectable> objects = controller.WithinRange<Collectable>(collectableRange);
+                List<Thing> objects = controller.WithinRange<Thing>(collectableRange);
                 if (objects.Count > 0)
                 {
                     for (int i = 0; i < objects.Count; i++)
                     {
+                        if (objects[i].GetComponentInChildren<Interactable>() == null)
+                        {
+                            break;
+                        }
+
                         if (!controller.nextThings.Contains(objects[i])) {
                             controller.nextThings.Insert(0, objects[i]);
                             numberScheduledToCollect++;

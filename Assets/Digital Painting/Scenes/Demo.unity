@@ -398,13 +398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &77247541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,20 +412,6 @@ MonoBehaviour:
   interactionLocation: {fileID: 0}
   conditionCollections: []
   defaultReactionCollection: {fileID: 0}
---- !u!114 &113713798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f6fa177061c68841898eaffab02d511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: It's a cylinder.... wow!!!!
-  textColor: {r: 1, g: 1, b: 1, a: 1}
-  delay: 0
 --- !u!1 &117103032
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,13 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &117103038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,13 +776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &159589916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,13 +1027,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &244902326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,11 +1126,109 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 258396424}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &277613743 stripped
+--- !u!1001 &307019727
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1387356970}
+    m_Modifications:
+    - target: {fileID: 114148913338218576, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+        type: 2}
+      propertyPath: reactions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114628123148090250, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+        type: 2}
+      propertyPath: conditionCollections.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -10.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -19.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292799625483574, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_Name
+      value: Gold Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 114148913338218576, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+        type: 2}
+      propertyPath: reactions.Array.data[0]
+      value: 
+      objectReference: {fileID: 1221311420}
+    - target: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.793
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.693
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 6.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 65129907540983040, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 65129907540983040, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114877489347472434, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+        type: 2}
+      propertyPath: _agentViewingTransform
+      value: 
+      objectReference: {fileID: 307019729}
+    - target: {fileID: 114628123148090250, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+        type: 2}
+      propertyPath: conditionCollections.Array.data[0]
+      value: 
+      objectReference: {fileID: 1408514652}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!4 &307019728 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23,
+  m_CorrespondingSourceObject: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
     type: 2}
-  m_PrefabInternal: {fileID: 802632008}
+  m_PrefabInternal: {fileID: 307019727}
+--- !u!4 &307019729 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+    type: 2}
+  m_PrefabInternal: {fileID: 307019727}
 --- !u!1 &390893496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,13 +1328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &390893502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,13 +1748,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &541992064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1819,13 +1861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &582749980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,13 +2041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &590470271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2193,13 +2221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &596939429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2441,13 +2462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &732973725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,110 +2797,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 779678351}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &802632008
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1949648689}
-    m_Modifications:
-    - target: {fileID: 114518084589827320, guid: d25d050bf8b755c4c879ec4344238e23,
-        type: 2}
-      propertyPath: reactions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4734348198112726, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.20412335
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9789452
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 4014082959707402, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 23.556002
-      objectReference: {fileID: 0}
-    - target: {fileID: 114518084589827320, guid: d25d050bf8b755c4c879ec4344238e23,
-        type: 2}
-      propertyPath: reactions.Array.data[0]
-      value: 
-      objectReference: {fileID: 113713798}
-    - target: {fileID: 65141169006492328, guid: d25d050bf8b755c4c879ec4344238e23,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65141169006492328, guid: d25d050bf8b755c4c879ec4344238e23,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 3.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 65141169006492328, guid: d25d050bf8b755c4c879ec4344238e23,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 2.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 65141169006492328, guid: d25d050bf8b755c4c879ec4344238e23,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 2.42
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d25d050bf8b755c4c879ec4344238e23, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &816030442
 GameObject:
   m_ObjectHideFlags: 3
@@ -3004,6 +2914,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+  test: {fileID: 0}
 --- !u!135 &860275544
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3157,13 +3068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &867672947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3417,6 +3321,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+  test: {fileID: 0}
 --- !u!135 &934807355
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3551,6 +3456,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 3
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+  test: {fileID: 0}
 --- !u!65 &940597283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3704,13 +3610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &963507791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4062,13 +3961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1094630603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4193,11 +4085,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4980822680671696, guid: 1a97a61a83f662b4489e298cb2027fc5, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.19414414
+      value: 0.19414411
       objectReference: {fileID: 0}
     - target: {fileID: 4980822680671696, guid: 1a97a61a83f662b4489e298cb2027fc5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.037764125
+      value: 0.037764117
       objectReference: {fileID: 0}
     - target: {fileID: 4980822680671696, guid: 1a97a61a83f662b4489e298cb2027fc5, type: 2}
       propertyPath: m_LocalRotation.w
@@ -4309,13 +4201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1119473538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4569,13 +4454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1209774460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4590,6 +4468,20 @@ MonoBehaviour:
   interactionLocation: {fileID: 0}
   conditionCollections: []
   defaultReactionCollection: {fileID: 0}
+--- !u!114 &1221311420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6fa177061c68841898eaffab02d511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Hey look! A gold coin!
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  delay: 0
 --- !u!1 &1252064260
 GameObject:
   m_ObjectHideFlags: 3
@@ -4930,13 +4822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1327288966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5050,13 +4935,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1358149782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5156,9 +5034,25 @@ Transform:
   - {fileID: 1949648689}
   - {fileID: 2106890847}
   - {fileID: 1677281322}
+  - {fileID: 307019728}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1408514652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: New condition collection
+  requiredConditions:
+  - {fileID: 1823012404}
+  reactionCollection: {fileID: 0}
 --- !u!1 &1450750419
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,7 +5188,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1468070949}
-  m_LocalRotation: {x: -0.18716544, y: 0.19414414, z: 0.037764125, w: 0.96221155}
+  m_LocalRotation: {x: -0.18716544, y: 0.19414411, z: 0.037764117, w: 0.96221155}
   m_LocalPosition: {x: -0.72155285, y: -0.14, z: -1.7152786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5608,6 +5502,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+  test: {fileID: 0}
 --- !u!1001 &1701752665
 Prefab:
   m_ObjectHideFlags: 0
@@ -5870,13 +5765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1765157918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5941,6 +5829,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 3
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+  test: {fileID: 0}
 --- !u!65 &1771391782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6032,6 +5921,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 3
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+  test: {fileID: 0}
 --- !u!65 &1788803318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6184,6 +6074,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1812062134}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1823012404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Test condition
+  satisfied: 0
+  hash: -177358524
 --- !u!1 &1834471044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6505,13 +6409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1875252463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6710,13 +6607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1915225434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6830,13 +6720,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1918578690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7120,13 +7003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &1947099738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7172,7 +7048,6 @@ Transform:
   m_Children:
   - {fileID: 1468070950}
   - {fileID: 1450750420}
-  - {fileID: 277613743}
   m_Father: {fileID: 1387356970}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7194,6 +7069,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 5
   timeToLookAtObject: 15
   virtualCamera: {fileID: 1468070951}
+  test: {fileID: 0}
 --- !u!136 &1949648691
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7433,13 +7309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &2017493388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7625,13 +7494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84aaddd291115642837b7b38b9c5079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
-  yOffset: 0
-  isPOI: 0
-  _agentViewingTransform: {fileID: 0}
-  distanceToTriggerViewingCamera: 10
-  timeToLookAtObject: 15
-  virtualCamera: {fileID: 0}
 --- !u!114 &2049645000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7698,6 +7560,7 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+  test: {fileID: 0}
 --- !u!65 &2106890849
 BoxCollider:
   m_ObjectHideFlags: 0
