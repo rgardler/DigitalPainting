@@ -13,13 +13,12 @@ public class RobotMovementController : MonoBehaviour
     public float minReachDistance = 2f;
     [SerializeField] private float pathPointRadius = 0.2f;
     [SerializeField] private Octree octree;
-    [SerializeField] private LayerMask playerSeeLayerMask = -1;
     private Octree.PathRequest currentPath;
     private Octree.PathRequest nextPath;
-    private Rigidbody rigidbody;
+    private Rigidbody myRigidbody;
     private Vector3 currentDestination;
     private Vector3 lastDestination;
-    private Collider collider;
+    private Collider myCollider;
     
     [Header("Height")]
     [Tooltip("preferred height to fly at.")]
@@ -44,8 +43,8 @@ public class RobotMovementController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        collider = GetComponent<Collider>();
-        rigidbody = GetComponent<Rigidbody>();
+        myCollider = GetComponent<Collider>();
+        myRigidbody = GetComponent<Rigidbody>();
         octree = FindObjectOfType<Octree>();
         if (octree == null)
         {
@@ -107,18 +106,18 @@ public class RobotMovementController : MonoBehaviour
                 return;
             }
 
-            currentDestination = curPath.Path[0] + Vector3.ClampMagnitude(rigidbody.position - curPath.Path[0], pathPointRadius);
+            currentDestination = curPath.Path[0] + Vector3.ClampMagnitude(myRigidbody.position - curPath.Path[0], pathPointRadius);
 
-            rigidbody.velocity += Vector3.ClampMagnitude(currentDestination - transform.position, 1) * Time.deltaTime * acceleration;
+            myRigidbody.velocity += Vector3.ClampMagnitude(currentDestination - transform.position, 1) * Time.deltaTime * acceleration;
             float sqrMinReachDistance = minReachDistance * minReachDistance;
 
-            Vector3 predictedPosition = rigidbody.position + rigidbody.velocity * Time.deltaTime;
+            Vector3 predictedPosition = myRigidbody.position + myRigidbody.velocity * Time.deltaTime;
             float shortestPathDistance = Vector3.SqrMagnitude(predictedPosition - currentDestination);
             int shortestPathPoint = 0;
 
             for (int i = 0; i < curPath.Path.Count; i++)
             {
-                float sqrDistance = Vector3.SqrMagnitude(rigidbody.position - curPath.Path[i]);
+                float sqrDistance = Vector3.SqrMagnitude(myRigidbody.position - curPath.Path[i]);
                 if (sqrDistance <= sqrMinReachDistance)
                 {
                     if (i < curPath.Path.Count)
@@ -144,7 +143,7 @@ public class RobotMovementController : MonoBehaviour
         }
         else // no path
         {
-            rigidbody.velocity -= rigidbody.velocity * Time.deltaTime * acceleration;
+            myRigidbody.velocity -= myRigidbody.velocity * Time.deltaTime * acceleration;
         }
     }
 
@@ -218,19 +217,19 @@ public class RobotMovementController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (rigidbody != null)
+        if (myRigidbody != null)
         {
             Gizmos.color = Color.blue;
-            Vector3 predictedPosition = rigidbody.position + rigidbody.velocity * Time.deltaTime;
-            if (collider.GetType() == typeof(SphereCollider))
+            Vector3 predictedPosition = myRigidbody.position + myRigidbody.velocity * Time.deltaTime;
+            if (myCollider.GetType() == typeof(SphereCollider))
             {
-                Gizmos.DrawWireSphere(predictedPosition, ((SphereCollider)collider).radius);
-            } else if (collider.GetType() == typeof(CapsuleCollider))
+                Gizmos.DrawWireSphere(predictedPosition, ((SphereCollider)myCollider).radius);
+            } else if (myCollider.GetType() == typeof(CapsuleCollider))
             {
-                Gizmos.DrawWireSphere(predictedPosition, ((CapsuleCollider)collider).radius);
+                Gizmos.DrawWireSphere(predictedPosition, ((CapsuleCollider)myCollider).radius);
             } else
             {
-                Gizmos.DrawWireCube(predictedPosition, collider.bounds.size);
+                Gizmos.DrawWireCube(predictedPosition, myCollider.bounds.size);
             }
         }
 
@@ -243,7 +242,7 @@ public class RobotMovementController : MonoBehaviour
                 Gizmos.DrawWireSphere(path.Path[i], minReachDistance);
 
                 Gizmos.color = Color.red;
-                Gizmos.DrawRay(path.Path[i], Vector3.ClampMagnitude(rigidbody.position - path.Path[i], pathPointRadius));
+                Gizmos.DrawRay(path.Path[i], Vector3.ClampMagnitude(myRigidbody.position - path.Path[i], pathPointRadius));
                 Gizmos.DrawWireSphere(path.Path[i], pathPointRadius);
 
                 Gizmos.color = Color.green;

@@ -35,8 +35,6 @@ namespace wizardscode.environment
 
         string apiRequestURL;
         string apiRequestTemplate = "https://api.darksky.net/forecast/{0}/{1},{2}?exclude=alerts,flags";
-        private float timeToNextUpdate = 0;
-        private object lastWeather;
 
         public enum TimeOffsetType { Current, Minutes, Hours, Days }
 
@@ -46,7 +44,6 @@ namespace wizardscode.environment
         /// </summary>
         public void UpdateNow()
         {
-            timeToNextUpdate = 0;
         }
 
         internal void UpdateWeather(WeatherDataPoint weather)
@@ -125,7 +122,6 @@ namespace wizardscode.environment
             // TODO: Use the precipitation error to vary the intensity of the rainfall
             newProfile.cloudIntensity = weather.cloudCover * 100;
 
-            lastWeather = CurrentProfile;
             CurrentProfile = newProfile;
 
             if (delegateWeatherSystem != null)
@@ -137,8 +133,6 @@ namespace wizardscode.environment
 
         internal override void Initialize()
         {
-            timeToNextUpdate = 0;
-
             if (delegateWeatherSystem != null)
             {
                 delegateWeatherSystem.Initialize();
@@ -159,7 +153,6 @@ namespace wizardscode.environment
         {
             Weather weather = JsonUtility.FromJson<Weather>(Get(apiRequestURL));
             SetWeather(weather);
-            timeToNextUpdate = forecastUpdateFrequency;
 
             if (delegateWeatherSystem != null)
             {

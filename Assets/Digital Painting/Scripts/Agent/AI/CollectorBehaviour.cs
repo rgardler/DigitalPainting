@@ -21,7 +21,6 @@ namespace wizardscode.agent.ai
         AIAgentController controller;
         float checkFrequency = 2f;
         float timeUntilNextCheck = 0;
-        int numberLeftToCollect;
         int numberScheduledToCollect = 0;
 
         private void Awake()
@@ -32,8 +31,6 @@ namespace wizardscode.agent.ai
                 Debug.LogError(gameObject.name + " has a CollectorBehaviour component attached, but it does not have a AIAgentController attached, which is required. Disabling the CollectorBehaviour.");
                 this.enabled = false;
             }
-
-            numberLeftToCollect = optimalNumberToCollect;
         }
 
         private void Update()

@@ -117,7 +117,6 @@ namespace wizardscode.digitalpainting
 
             Vector3 size = Terrain.activeTerrain.terrainData.size;
             float x = size.x;
-            float y = size.y;
             float z = size.z;
 
             size.x = 2;

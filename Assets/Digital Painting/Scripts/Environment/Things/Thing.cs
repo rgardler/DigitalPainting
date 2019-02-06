@@ -34,7 +34,7 @@ namespace wizardscode.environment
         public CinemachineVirtualCamera virtualCamera;
 
         private Octree octree;
-        private Interactable _interactable;
+
         /// <summary>
         /// Get the interactable component if one exists, otherwise return null.
         /// </summary>
@@ -51,15 +51,11 @@ namespace wizardscode.environment
         }
 
         [SerializeField]
-        private Guid _guid;
+        private Guid _guid = new Guid();
         public Guid Guid
         {
             get
             {
-                if (_guid == null)
-                {
-                    _guid = new Guid();
-                }
                 return _guid;
             }
         }
@@ -109,8 +105,6 @@ namespace wizardscode.environment
                 position.y = Terrain.activeTerrain.SampleHeight(position) + yOffset;
                 gameObject.transform.position = position;
             }
-
-            _interactable = gameObject.GetComponentInChildren<Interactable>();
         }
 
         private void Start()

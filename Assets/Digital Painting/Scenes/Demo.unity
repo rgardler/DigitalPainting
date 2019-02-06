@@ -1174,21 +1174,6 @@ Prefab:
       propertyPath: m_Name
       value: Gold Coin
       objectReference: {fileID: 0}
-    - target: {fileID: 114694080059149780, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: m_FollowOffset.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114694080059149780, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: m_FollowOffset.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114694080059149780, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: m_FollowOffset.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
   m_IsPrefabAsset: 0
