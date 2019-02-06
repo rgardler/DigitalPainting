@@ -19,7 +19,7 @@ namespace wizardscode.digitalpainting.agent
             get {
                 if (_interactWithPOI)
                 {
-                    return PointOfInterest.gameObject.GetComponentInChildren<Interactable>().interactionLocation;
+                    return Interactable.interactionLocation;
                 }
                 else
                 {

@@ -400,6 +400,20 @@ MonoBehaviour:
   interactionLocation: {fileID: 0}
   conditionCollections: []
   defaultReactionCollection: {fileID: 0}
+--- !u!114 &103277248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c220d8e530a7394daa19d38547d7379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 3
+  gameObject: {fileID: 1926497819}
+  activeState: 0
 --- !u!1 &117103032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,72 +1092,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 258396424}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &307019727
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1387356970}
-    m_Modifications:
-    - target: {fileID: 114148913338218576, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: reactions.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -10.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -19.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114148913338218576, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: reactions.Array.data[0]
-      value: 
-      objectReference: {fileID: 1221311420}
-    - target: {fileID: 1292799625483574, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_Name
-      value: Gold Coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 114148913338218576, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: reactions.Array.data[1]
-      value: 
-      objectReference: {fileID: 867931072}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-  m_IsPrefabAsset: 0
---- !u!4 &307019728 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-    type: 2}
-  m_PrefabInternal: {fileID: 307019727}
 --- !u!1 &390893496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1415,63 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 439031204}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &515047369
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1387356970}
+    m_Modifications:
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -29.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114302332093961538, guid: f93c7239101031e4eb67e72b727fcc68,
+        type: 2}
+      propertyPath: reactions.Array.data[0]
+      value: 
+      objectReference: {fileID: 1000450509}
+    - target: {fileID: 114302332093961538, guid: f93c7239101031e4eb67e72b727fcc68,
+        type: 2}
+      propertyPath: reactions.Array.data[1]
+      value: 
+      objectReference: {fileID: 103277248}
+    - target: {fileID: 114302332093961538, guid: f93c7239101031e4eb67e72b727fcc68,
+        type: 2}
+      propertyPath: reactions.Array.data[2]
+      value: 
+      objectReference: {fileID: 1107021320}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f93c7239101031e4eb67e72b727fcc68, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &518406163
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,19 +2946,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &867931072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bbf0e4b55b01fa478c69d9dc880ca58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 0
-  item: {fileID: 11400000, guid: 69f7d9ea5b97c674a8b3f020d14cb2c3, type: 2}
 --- !u!1 &870420280
 GameObject:
   m_ObjectHideFlags: 3
@@ -3604,6 +3596,20 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 583703357}
+--- !u!114 &1000450509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6fa177061c68841898eaffab02d511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Oh look! A Coin!
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  delay: 0
 --- !u!1 &1060085210
 GameObject:
   m_ObjectHideFlags: 0
@@ -3877,6 +3883,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1099864950}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1107021320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbf0e4b55b01fa478c69d9dc880ca58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
+  item: {fileID: 11400000, guid: 69f7d9ea5b97c674a8b3f020d14cb2c3, type: 2}
 --- !u!1001 &1110189906
 Prefab:
   m_ObjectHideFlags: 0
@@ -4261,20 +4280,6 @@ MonoBehaviour:
   interactionLocation: {fileID: 0}
   conditionCollections: []
   defaultReactionCollection: {fileID: 0}
---- !u!114 &1221311420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f6fa177061c68841898eaffab02d511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: Hey look! A gold coin!
-  textColor: {r: 1, g: 1, b: 1, a: 1}
-  delay: 0
 --- !u!1 &1252064260
 GameObject:
   m_ObjectHideFlags: 3
@@ -4803,7 +4808,7 @@ Transform:
   - {fileID: 1949648689}
   - {fileID: 2106890847}
   - {fileID: 1677281322}
-  - {fileID: 307019728}
+  - {fileID: 1499649194}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5119,6 +5124,11 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1252064261}
+--- !u!4 &1499649194 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4968704276308542, guid: f93c7239101031e4eb67e72b727fcc68,
+    type: 2}
+  m_PrefabInternal: {fileID: 515047369}
 --- !u!1 &1554019882
 GameObject:
   m_ObjectHideFlags: 0
@@ -6508,6 +6518,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1919290274}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1926497819 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1752820552969366, guid: f93c7239101031e4eb67e72b727fcc68,
+    type: 2}
+  m_PrefabInternal: {fileID: 515047369}
 --- !u!1 &1927465012
 GameObject:
   m_ObjectHideFlags: 0

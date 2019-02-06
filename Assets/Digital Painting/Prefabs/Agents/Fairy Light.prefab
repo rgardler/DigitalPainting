@@ -59,7 +59,6 @@ GameObject:
   - component: {fileID: 54869636479982310}
   - component: {fileID: 114236293622097422}
   - component: {fileID: 135805775664490126}
-  - component: {fileID: 114359810156159740}
   m_Layer: 0
   m_Name: Fairy Light
   m_TagString: Untagged
@@ -241,18 +240,6 @@ MonoBehaviour:
   minDistanceOfRandomPathChange: 15
   maxDistanceOfRandomPathChange: 40
   barriers: {fileID: 0}
---- !u!114 &114359810156159740
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1544121714815300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f94ef6e9292c854798e667e7c52e23b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectableRange: 10
 --- !u!114 &114665674840848990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,9 +256,6 @@ MonoBehaviour:
   minReachDistance: 2
   pathPointRadius: 1
   octree: {fileID: 0}
-  playerSeeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
   preferredFlightHeight: 1.5
   minFlightHeight: 1
   maxFlightHeight: 7

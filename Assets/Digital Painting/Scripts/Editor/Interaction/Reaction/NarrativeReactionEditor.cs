@@ -39,7 +39,7 @@ namespace wizardscode.interaction
 
         protected override string GetFoldoutLabel()
         {
-            return "Text Reaction";
+            return "Narrative Reaction";
         }
     }
 }

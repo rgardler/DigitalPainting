@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using wizardscode.inventory;
+﻿using wizardscode.inventory;
 
 namespace wizardscode.interaction
 {

@@ -49,6 +49,7 @@ namespace wizardscode.digitalpainting.agent
         internal Quaternion targetRotation;
         internal float timeToNextWanderPathChange = 3;
         internal Thing _pointOfInterest;
+        private Interactable _interactable;
         internal bool _interactWithPOI;
         internal bool _interacting = false;
         private float timeLeftLookingAtObject = float.NegativeInfinity;
@@ -75,9 +76,19 @@ namespace wizardscode.digitalpainting.agent
                 if (!GameObject.ReferenceEquals(_pointOfInterest, value))
                 {
                     _pointOfInterest = value;
-                    _interactWithPOI = PointOfInterest.gameObject.GetComponentInChildren<Interactable>() != null;
+                    _interactable = PointOfInterest.gameObject.GetComponentInParent<Interactable>();
+                    _interactWithPOI = _interactable != null;
                 }
             }
+        }
+
+        /// <summary>
+        /// Get the interactable component of the current POI, if one exists. Return null if none exists.
+        /// The interactable component can be in the POI or any parent.
+        /// </summary>
+        public Interactable Interactable
+        {
+            get { return _interactable; }
         }
 
         public Transform MoveTarget
@@ -86,7 +97,7 @@ namespace wizardscode.digitalpainting.agent
             {
                 if (_interactWithPOI)
                 {
-                    return PointOfInterest.gameObject.GetComponentInChildren<Interactable>().transform;
+                    return _interactable.transform;
                 }
                 else
                 {
@@ -264,14 +275,13 @@ namespace wizardscode.digitalpainting.agent
                 timeLeftLookingAtObject = PointOfInterest.timeToLookAtObject;
             }
 
-            CinemachineVirtualCamera virtualCamera = PointOfInterest.virtualCamera;
-            virtualCamera.enabled = true;
+            PointOfInterest.virtualCamera.enabled = true;
             
             timeLeftLookingAtObject -= Time.deltaTime;
             if ( _interactWithPOI && !_interacting)
             {
                 // Start interaction
-                PointOfInterest.gameObject.GetComponentInChildren<Interactable>().Interact();
+                _interactable.Interact();
                 PointOfInterest.virtualCamera.m_Follow = gameObject.transform;
                 _interactWithPOI = false;
                 _interacting = true;
@@ -285,17 +295,17 @@ namespace wizardscode.digitalpainting.agent
                 // when we start moving again move away from the object as we are pretty close by now and might move into it
                 targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
 
-                // we no longer care about this thing so turn the camera off and don't focus on it anymore
-                PointOfInterest = null;
-                timeLeftLookingAtObject = float.NegativeInfinity;
-                virtualCamera.enabled = false;
-
                 if (_interacting)
                 {
                     // End Interaction
                     _interacting = false;
                     PointOfInterest.virtualCamera.m_Follow = PointOfInterest.transform;
                 }
+
+                // we no longer care about this POI so turn the camera off and don't focus on it anymore
+                PointOfInterest.virtualCamera.enabled = false;
+                PointOfInterest = null;
+                timeLeftLookingAtObject = float.NegativeInfinity;
             }
         }
 

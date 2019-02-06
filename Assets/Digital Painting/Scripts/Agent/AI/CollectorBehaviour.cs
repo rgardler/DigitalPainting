@@ -48,7 +48,7 @@ namespace wizardscode.agent.ai
                 {
                     for (int i = 0; i < objects.Count; i++)
                     {
-                        if (objects[i].GetComponentInChildren<Interactable>() == null)
+                        if (objects[i].GetComponentInParent<Interactable>() == null)
                         {
                             break;
                         }
