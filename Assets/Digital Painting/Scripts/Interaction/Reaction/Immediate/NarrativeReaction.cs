@@ -2,7 +2,7 @@
 
 namespace wizardscode.interaction
 {
-    public class TextReaction : Reaction
+    public class NarrativeReaction : Reaction
     {
         public string message;
         public Color textColor = Color.white;

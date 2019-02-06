@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace wizardscode.interaction
 {
-    [CustomEditor(typeof(TextReaction))]
-    public class TextReactionEditor : ReactionEditor
+    [CustomEditor(typeof(NarrativeReaction))]
+    public class NarrativeReactionEditor : ReactionEditor
     {
         private SerializedProperty messageProperty;
         private SerializedProperty textColorProperty;
@@ -24,7 +24,6 @@ namespace wizardscode.interaction
             delayProperty = serializedObject.FindProperty(textReactionPropDelayName);
         }
 
-
         protected override void DrawReaction()
         {
             EditorGUILayout.BeginHorizontal();
@@ -37,7 +36,6 @@ namespace wizardscode.interaction
             EditorGUILayout.PropertyField(textColorProperty);
             EditorGUILayout.PropertyField(delayProperty);
         }
-
 
         protected override string GetFoldoutLabel()
         {
