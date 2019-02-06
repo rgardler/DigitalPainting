@@ -1133,16 +1133,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1387356970}
     m_Modifications:
-    - target: {fileID: 114148913338218576, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: reactions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114628123148090250, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: conditionCollections.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
       propertyPath: m_LocalPosition.x
       value: -10.3
@@ -1175,58 +1165,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1292799625483574, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_Name
-      value: Gold Coin
-      objectReference: {fileID: 0}
     - target: {fileID: 114148913338218576, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
         type: 2}
       propertyPath: reactions.Array.data[0]
       value: 
       objectReference: {fileID: 1221311420}
-    - target: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.793
+    - target: {fileID: 1292799625483574, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
+      propertyPath: m_Name
+      value: Gold Coin
       objectReference: {fileID: 0}
-    - target: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.693
-      objectReference: {fileID: 0}
-    - target: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 6.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 65129907540983040, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+    - target: {fileID: 114694080059149780, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
         type: 2}
-      propertyPath: m_Size.y
-      value: 10
+      propertyPath: m_FollowOffset.x
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 65129907540983040, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+    - target: {fileID: 114694080059149780, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
         type: 2}
-      propertyPath: m_Center.y
-      value: 5
+      propertyPath: m_FollowOffset.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114877489347472434, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
+    - target: {fileID: 114694080059149780, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
         type: 2}
-      propertyPath: _agentViewingTransform
-      value: 
-      objectReference: {fileID: 307019729}
-    - target: {fileID: 114628123148090250, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-        type: 2}
-      propertyPath: conditionCollections.Array.data[0]
-      value: 
-      objectReference: {fileID: 1408514652}
+      propertyPath: m_FollowOffset.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb8e2c43f8521bc44b6ccb59e85c463b, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &307019728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4573218075978748, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
-    type: 2}
-  m_PrefabInternal: {fileID: 307019727}
---- !u!4 &307019729 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4789029233533832, guid: bb8e2c43f8521bc44b6ccb59e85c463b,
     type: 2}
   m_PrefabInternal: {fileID: 307019727}
 --- !u!1 &390893496
@@ -2914,7 +2882,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
-  test: {fileID: 0}
 --- !u!135 &860275544
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3321,7 +3288,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
-  test: {fileID: 0}
 --- !u!135 &934807355
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3456,7 +3422,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 3
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
-  test: {fileID: 0}
 --- !u!65 &940597283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5038,21 +5003,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1408514652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: New condition collection
-  requiredConditions:
-  - {fileID: 1823012404}
-  reactionCollection: {fileID: 0}
 --- !u!1 &1450750419
 GameObject:
   m_ObjectHideFlags: 0
@@ -5502,7 +5452,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
-  test: {fileID: 0}
 --- !u!1001 &1701752665
 Prefab:
   m_ObjectHideFlags: 0
@@ -5829,7 +5778,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 3
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
-  test: {fileID: 0}
 --- !u!65 &1771391782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5921,7 +5869,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 3
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
-  test: {fileID: 0}
 --- !u!65 &1788803318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6074,20 +6021,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1812062134}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1823012404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: Test condition
-  satisfied: 0
-  hash: -177358524
 --- !u!1 &1834471044
 GameObject:
   m_ObjectHideFlags: 0
@@ -7069,7 +7002,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 5
   timeToLookAtObject: 15
   virtualCamera: {fileID: 1468070951}
-  test: {fileID: 0}
 --- !u!136 &1949648691
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7560,7 +7492,6 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
-  test: {fileID: 0}
 --- !u!65 &2106890849
 BoxCollider:
   m_ObjectHideFlags: 0

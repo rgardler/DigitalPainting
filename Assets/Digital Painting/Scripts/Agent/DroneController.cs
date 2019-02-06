@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using wizardscode.interaction;
 
 namespace wizardscode.digitalpainting.agent
 {
@@ -12,6 +13,20 @@ namespace wizardscode.digitalpainting.agent
         private Transform wanderTarget;
         new private Rigidbody rigidbody;
         private int wanderTargetUpdateRetries = 1;
+
+        internal Transform CurrentMoveTarget
+        {
+            get {
+                if (_interactWithPOI)
+                {
+                    return PointOfInterest.gameObject.GetComponentInChildren<Interactable>().interactionLocation;
+                }
+                else
+                {
+                    return PointOfInterest.AgentViewingTransform;
+                }
+            }
+        }
 
         override internal void Awake()
         {
@@ -44,11 +59,11 @@ namespace wizardscode.digitalpainting.agent
                 if (PointOfInterest != null)
                 {
                     
-                    if(Vector3.Distance(transform.position, PointOfInterest.AgentViewingTransform.position) > PointOfInterest.distanceToTriggerViewingCamera)
+                    if(Vector3.Distance(transform.position, CurrentMoveTarget.position) > PointOfInterest.distanceToTriggerViewingCamera)
                     {
-                        if (!GameObject.ReferenceEquals(pathfinding.Target, PointOfInterest.AgentViewingTransform))
+                        if (!GameObject.ReferenceEquals(pathfinding.Target, CurrentMoveTarget))
                         {
-                            pathfinding.Target = PointOfInterest.AgentViewingTransform;
+                            pathfinding.Target = CurrentMoveTarget;
                         }
                     } else
                     {

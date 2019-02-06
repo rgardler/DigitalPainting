@@ -50,6 +50,7 @@ namespace wizardscode.digitalpainting.agent
         internal float timeToNextWanderPathChange = 3;
         internal Thing _pointOfInterest;
         internal bool _interactWithPOI;
+        internal bool _interacting = false;
         private float timeLeftLookingAtObject = float.NegativeInfinity;
         private List<Thing> visitedThings = new List<Thing>();
         internal List<Thing> nextThings = new List<Thing>();
@@ -74,13 +75,22 @@ namespace wizardscode.digitalpainting.agent
                 if (!GameObject.ReferenceEquals(_pointOfInterest, value))
                 {
                     _pointOfInterest = value;
+                    _interactWithPOI = PointOfInterest.gameObject.GetComponentInChildren<Interactable>() != null;
+                }
+            }
+        }
 
-                    // Decide if we will interact with the POI when we get there
-                    if (PointOfInterest != null)
-                    {
-                        Interactable interactable = PointOfInterest.gameObject.GetComponentInChildren<Interactable>();
-                        _interactWithPOI = interactable != null;
-                    }
+        public Transform MoveTarget
+        {
+            get
+            {
+                if (_interactWithPOI)
+                {
+                    return PointOfInterest.gameObject.GetComponentInChildren<Interactable>().transform;
+                }
+                else
+                {
+                    return PointOfInterest.AgentViewingTransform;
                 }
             }
         }
@@ -207,7 +217,7 @@ namespace wizardscode.digitalpainting.agent
         {
             if (PointOfInterest != null)
             {
-                targetRotation = Quaternion.LookRotation(PointOfInterest.AgentViewingTransform.position - transform.position, Vector3.up);
+                targetRotation = Quaternion.LookRotation(MoveTarget.position - transform.position, Vector3.up);
             }
             else
             {
@@ -224,7 +234,7 @@ namespace wizardscode.digitalpainting.agent
             }
 
             Vector3 position = transform.position;
-            if (PointOfInterest != null && Vector3.Distance(position, PointOfInterest.AgentViewingTransform.position) > PointOfInterest.distanceToTriggerViewingCamera)
+            if (PointOfInterest != null && Vector3.Distance(position, MoveTarget.position) > PointOfInterest.distanceToTriggerViewingCamera)
             {
                 position += transform.forward * normalMovementSpeed * Time.deltaTime;
             }
@@ -258,10 +268,13 @@ namespace wizardscode.digitalpainting.agent
             virtualCamera.enabled = true;
             
             timeLeftLookingAtObject -= Time.deltaTime;
-            if ( _interactWithPOI )
+            if ( _interactWithPOI && !_interacting)
             {
+                // Start interaction
                 PointOfInterest.gameObject.GetComponentInChildren<Interactable>().Interact();
+                PointOfInterest.virtualCamera.m_Follow = gameObject.transform;
                 _interactWithPOI = false;
+                _interacting = true;
             }
 
             if (timeLeftLookingAtObject <= 0)
@@ -276,6 +289,13 @@ namespace wizardscode.digitalpainting.agent
                 PointOfInterest = null;
                 timeLeftLookingAtObject = float.NegativeInfinity;
                 virtualCamera.enabled = false;
+
+                if (_interacting)
+                {
+                    // End Interaction
+                    _interacting = false;
+                    PointOfInterest.virtualCamera.m_Follow = PointOfInterest.transform;
+                }
             }
         }
 
