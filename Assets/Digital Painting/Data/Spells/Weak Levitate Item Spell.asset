@@ -15,6 +15,6 @@ MonoBehaviour:
   sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   sound: {fileID: 0}
   baseCoolDown: 1
-  isActive: 0
+  isActive: 1
   maximumRange: 5
-  maximumSpeed: 0.5
+  maximumSpeed: 0.7

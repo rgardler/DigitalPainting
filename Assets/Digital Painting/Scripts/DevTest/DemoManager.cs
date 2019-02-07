@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using wizardscode.digitalpainting;
+using wizardscode.digitalpainting.agent;
+using wizardscode.environment;
 
 namespace wizardscode.devtest
 {
@@ -10,7 +12,15 @@ namespace wizardscode.devtest
     {
         [Tooltip("Prefab for Demo UI")]
         public GameObject demoUI;
+        [Tooltip("First POI to head to.")]
+        public Thing firstPOI;
 
+        DigitalPaintingManager manager;
+
+        private void Awake()
+        {
+            manager = FindObjectOfType<DigitalPaintingManager>();
+        }
 
         void Start()
         {
@@ -23,6 +33,8 @@ namespace wizardscode.devtest
                 go.AddComponent<EventSystem>();
                 go.AddComponent<StandaloneInputModule>();
             }
+
+            ((AIAgentController)manager.AgentWithFocus.GetComponent<BaseAgentController>()).PointOfInterest = firstPOI;
         }
     }
 }

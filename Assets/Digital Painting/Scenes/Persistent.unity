@@ -590,7 +590,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1529163012}
   - component: {fileID: 1529163011}
-  - component: {fileID: 1529163010}
   - component: {fileID: 1529163009}
   m_Layer: 0
   m_Name: Persistent Managers
@@ -611,18 +610,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allTheThings: []
---- !u!114 &1529163010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1529163008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb0800dd61401504c86bb738a9a6ee78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  demoUI: {fileID: 1808907733917478, guid: 9c495122d1430c347ab9945831679e2b, type: 2}
 --- !u!114 &1529163011
 MonoBehaviour:
   m_ObjectHideFlags: 0
