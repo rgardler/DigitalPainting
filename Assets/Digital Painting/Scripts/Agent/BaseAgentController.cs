@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.ability;
 using wizardscode.environment;
 
 namespace wizardscode.digitalpainting.agent
@@ -42,6 +43,8 @@ namespace wizardscode.digitalpainting.agent
         float rotationX = 0;
         float rotationY = 0;
 
+        internal AbilityCollection abilities;
+
         virtual internal void Start()
         {
             if (home == null)
@@ -52,6 +55,13 @@ namespace wizardscode.digitalpainting.agent
                 obj.transform.position = transform.position;
                 obj.transform.rotation = transform.rotation;
                 home = obj.AddComponent<Thing>();
+            }
+
+            abilities = GetComponent<AbilityCollection>();
+            if (abilities == null)
+            {
+                Debug.LogWarning(gameObject.name + " is an agent but it does not have an abilities collection component. Adding one, with no abilities to prevent null pointer errors. You should add one to the GameObject to remove this warning.");
+                abilities = gameObject.AddComponent<AbilityCollection>();
             }
         }
 

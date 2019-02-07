@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4004592835009960}
+  - component: {fileID: 114771353074745140}
   - component: {fileID: 114301072202632092}
   - component: {fileID: 114743800790520494}
   - component: {fileID: 114665674840848990}
@@ -274,6 +275,19 @@ MonoBehaviour:
   lights:
   - {fileID: 108403865705279864}
   maxIntensity: []
+--- !u!114 &114771353074745140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544121714815300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b2674e22be7f64aa734088d3fe607b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilities:
+  - {fileID: 11400000, guid: f57c8b3e11f4e3747bf951c6ef80f7a1, type: 2}
 --- !u!135 &135805775664490126
 SphereCollider:
   m_ObjectHideFlags: 1

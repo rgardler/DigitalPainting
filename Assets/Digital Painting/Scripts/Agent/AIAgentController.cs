@@ -281,10 +281,10 @@ namespace wizardscode.digitalpainting.agent
             if ( _interactWithPOI && !_interacting)
             {
                 // Start interaction
-                _interactable.Interact();
                 PointOfInterest.virtualCamera.m_Follow = gameObject.transform;
                 _interactWithPOI = false;
                 _interacting = true;
+                _interactable.Interact(gameObject, abilities.abilities[0]);
             }
 
             if (timeLeftLookingAtObject <= 0)

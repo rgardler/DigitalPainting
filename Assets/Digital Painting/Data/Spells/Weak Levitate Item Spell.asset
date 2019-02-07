@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e20120d92c438f45b79a8b00c1c224f, type: 3}
+  m_Name: Weak Levitate Item Spell
+  m_EditorClassIdentifier: 
+  name: Weak Levitate Item
+  sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  sound: {fileID: 0}
+  baseCoolDown: 1
+  isActive: 0
+  maximumRange: 5
+  maximumSpeed: 0.5

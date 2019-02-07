@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using wizardscode.ability;
 
 namespace wizardscode.interaction
 {

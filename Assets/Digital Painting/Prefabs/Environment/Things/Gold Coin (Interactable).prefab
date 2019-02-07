@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4968704276308542}
   - component: {fileID: 114823788512389692}
   m_Layer: 0
-  m_Name: Gold Coin (Interactable) Prefab
+  m_Name: Gold Coin (Interactable)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
