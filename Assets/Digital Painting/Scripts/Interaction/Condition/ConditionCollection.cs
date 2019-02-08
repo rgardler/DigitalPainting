@@ -22,9 +22,20 @@ namespace wizardscode.interaction
             }
 
             if(reactionCollection != null) {
-                if (interactor.abilities.Contains(reactionCollection.ability))
+                bool canReact = true;
+                for (int i = 0; i < reactionCollection.reactions.Length; i++)
+                {
+                    AbilityTrigger abilityTrigger = reactionCollection.reactions[i] as AbilityTrigger;
+                    if (abilityTrigger != null && !interactor.abilities.Contains(abilityTrigger.ability))
+                    {
+                        canReact = false;
+                    }
+                }
+
+                if (canReact)
                 {
                     reactionCollection.React(interactor, interactable);
+                    return true;
                 } else
                 {
                     return false;

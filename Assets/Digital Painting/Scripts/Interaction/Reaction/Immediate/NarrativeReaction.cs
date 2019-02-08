@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
 {
@@ -19,7 +20,7 @@ namespace wizardscode.interaction
             }
         }
 
-        protected override void ImmediateReaction()
+        protected override void ImmediateReaction(MonoBehaviour monoBehaviour, BaseAgentController interactor, Interactable interactable)
         {
             textManager.DisplayMessage(message, textColor, delay);
         }

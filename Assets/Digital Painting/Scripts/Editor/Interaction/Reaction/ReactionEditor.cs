@@ -9,6 +9,7 @@ namespace wizardscode.interaction
     {
         public bool showReaction;
         public SerializedProperty reactionsProperty;
+        public SerializedProperty abilityProperty;
 
         private Reaction reaction;
         private const float buttonWidth = 30f;

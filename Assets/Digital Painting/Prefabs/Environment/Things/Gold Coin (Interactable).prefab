@@ -87,8 +87,8 @@ GameObject:
   - component: {fileID: 4306946741021148}
   - component: {fileID: 33977195182807964}
   - component: {fileID: 23179724322748632}
-  - component: {fileID: 136281394489678922}
   - component: {fileID: 114964106146709354}
+  - component: {fileID: 65094267024879294}
   m_Layer: 0
   m_Name: Gold Coin (Model)
   m_TagString: Untagged
@@ -236,6 +236,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1752820552969366}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65094267024879294
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1752820552969366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0.000011444092, z: -0.00000008940697}
 --- !u!114 &114181439572683978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,7 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5e4e3230b47fa4381604e04d44e0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: f57c8b3e11f4e3747bf951c6ef80f7a1, type: 2}
   reactions:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -377,16 +391,3 @@ MonoBehaviour:
   distanceToTriggerViewingCamera: 3
   timeToLookAtObject: 10
   virtualCamera: {fileID: 114360288398027096}
---- !u!136 &136281394489678922
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752820552969366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

@@ -30,7 +30,7 @@ namespace wizardscode.ability
 
         public override IEnumerator TriggerAbility(Dictionary<string, object> options = null)
         {
-            Debug.LogWarning(name + " ability was triggered but this ability requires a target");
+            Debug.LogError(name + " ability was triggered but this ability requires a target");
             return null;
         }
 

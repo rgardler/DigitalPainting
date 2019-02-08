@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
 {
@@ -15,15 +16,15 @@ namespace wizardscode.interaction
             SpecificInit();
         }
 
-        public new void React(MonoBehaviour monoBehaviour)
+        public new void React(MonoBehaviour monoBehaviour, BaseAgentController interactor, Interactable interactable)
         {
-            monoBehaviour.StartCoroutine(ReactCoroutine());
+            monoBehaviour.StartCoroutine(ReactCoroutine(monoBehaviour, interactor, interactable));
         }
 
-        protected IEnumerator ReactCoroutine()
+        protected IEnumerator ReactCoroutine(MonoBehaviour monoBehaviour, BaseAgentController interactor, Interactable interactable)
         {
             yield return wait;
-            ImmediateReaction();
+            ImmediateReaction(monoBehaviour, interactor, interactable);
         }
     }
 }

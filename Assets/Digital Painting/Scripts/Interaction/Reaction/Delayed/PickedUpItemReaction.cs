@@ -1,4 +1,6 @@
-﻿using wizardscode.inventory;
+﻿using UnityEngine;
+using wizardscode.digitalpainting.agent;
+using wizardscode.inventory;
 
 namespace wizardscode.interaction
 {
@@ -13,7 +15,7 @@ namespace wizardscode.interaction
             inventory = FindObjectOfType<InventoryManager>();
         }
 
-        protected override void ImmediateReaction()
+        protected override void ImmediateReaction(MonoBehaviour monoBehaviour, BaseAgentController interactor, Interactable interactable)
         {
             inventory.AddItem(item);
         }
