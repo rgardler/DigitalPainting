@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 using wizardscode.extension;
+using wizardscode.ability;
 
 namespace wizardscode.interaction
 {
@@ -11,6 +12,7 @@ namespace wizardscode.interaction
     {
         private ReactionCollection reactionCollection;
         private SerializedProperty reactionsProperty;
+        private SerializedProperty abilityProperty;
 
         private Type[] reactionTypes;
         private string[] reactionTypeNames;
@@ -19,6 +21,7 @@ namespace wizardscode.interaction
         private const float dropAreaHeight = 50f;
         private const float controlSpacing = 5f;
         private const string reactionsPropName = "reactions";
+        private const string abilityPropName = "ability";
 
         private readonly float verticalSpacing = EditorGUIUtility.standardVerticalSpacing;
 
@@ -27,6 +30,7 @@ namespace wizardscode.interaction
             reactionCollection = (ReactionCollection)target;
 
             reactionsProperty = serializedObject.FindProperty(reactionsPropName);
+            abilityProperty = serializedObject.FindProperty(abilityPropName);
 
             CheckAndCreateSubEditors(reactionCollection.reactions);
 
@@ -49,6 +53,8 @@ namespace wizardscode.interaction
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+
+            EditorGUILayout.ObjectField(abilityProperty, typeof(Ability), new GUIContent("Ability"));
 
             CheckAndCreateSubEditors(reactionCollection.reactions);
 

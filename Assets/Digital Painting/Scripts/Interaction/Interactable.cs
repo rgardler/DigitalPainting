@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using wizardscode.ability;
+using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
 {
@@ -20,28 +21,20 @@ namespace wizardscode.interaction
         /// </summary>
         /// <param name="interactor">The GameObject using the ability to interact.</param>
         /// <param name="ability">The ability to perform at the indicated spot within the ReactionsCollection.</param>
-        public void Interact(GameObject interactor = null, Ability ability = null)
+        public void Interact(BaseAgentController interactor = null)
         {
-            if (ability != null && interactor != null)
-            {
-                Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("endTransform", interactor.transform);
-                StartCoroutine(ability.TriggerAbility(this.gameObject, options));
-            }
-
             if (conditionCollections.Length == 0)
             {
-                defaultReactionCollection.React();
+                defaultReactionCollection.React(interactor, this);
             }
-
             for (int i = 0; i < conditionCollections.Length; i++)
             {
-                if (conditionCollections[i].CheckAndReact())
+                if (conditionCollections[i].CheckAndReact(interactor, this))
                 {
                     return;
                 }
 
-                defaultReactionCollection.React();
+                defaultReactionCollection.React(interactor, this);
             }
         }
     }

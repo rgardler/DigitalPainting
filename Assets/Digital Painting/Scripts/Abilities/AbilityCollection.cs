@@ -1,17 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace wizardscode.ability
 {
     public class AbilityCollection : MonoBehaviour
     {
-        public Ability[] abilities = new Ability[0];
+        public List<Ability> abilities = new List<Ability>();
 
         private void Start()
         {
-            for (int i = 0; i < abilities.Length; i++)
+            for (int i = 0; i < abilities.Count; i++)
             {
                 abilities[i].Initialize();
             }
+        }
+
+        internal bool Contains(Ability ability)
+        {
+            return abilities.Contains(ability);
         }
     }
 }

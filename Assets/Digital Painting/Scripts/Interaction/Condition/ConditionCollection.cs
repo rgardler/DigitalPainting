@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
 {
@@ -10,7 +11,7 @@ namespace wizardscode.interaction
         public Condition[] requiredConditions = new Condition[0];
         public ReactionCollection reactionCollection;
 
-        public bool CheckAndReact()
+        public bool CheckAndReact(BaseAgentController interactor, Interactable interactable)
         {
             for(int i = 0; i < requiredConditions.Length; i++)
             {
@@ -21,7 +22,13 @@ namespace wizardscode.interaction
             }
 
             if(reactionCollection != null) {
-                reactionCollection.React();
+                if (interactor.abilities.Contains(reactionCollection.ability))
+                {
+                    reactionCollection.React(interactor, interactable);
+                } else
+                {
+                    return false;
+                }
             }
 
             return true;

@@ -44,7 +44,7 @@ namespace wizardscode.interaction
 
             for (int i = 0; i < conditions.Length; i++)
             {
-                conditions[i].Satisfied = false;
+                conditions[i].satisfied = false;
             }
         }
 
@@ -70,7 +70,7 @@ namespace wizardscode.interaction
                 return false;
             }
 
-            return globalCondition.Satisfied == required.Satisfied;
+            return globalCondition.satisfied == required.satisfied;
         }
     }
 }

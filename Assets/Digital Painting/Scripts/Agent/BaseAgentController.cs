@@ -8,6 +8,9 @@ namespace wizardscode.digitalpainting.agent
 {
     /// <summary>
     /// BaseAgentController provides the core parameters and a very basic manual controller for agents.
+    /// Agents are defined as GameObjects that are capable of knowingly engaging with the environment,
+    /// that is, they don't simply respond to physics. For example, they can decide their own movement
+    /// path/speed and/or have abilities they can use to interact with the environment.
     /// 
     /// WASD provide forward/backward and strafe left/right
     /// QE provide up and down

@@ -284,7 +284,7 @@ namespace wizardscode.digitalpainting.agent
                 PointOfInterest.virtualCamera.m_Follow = gameObject.transform;
                 _interactWithPOI = false;
                 _interacting = true;
-                _interactable.Interact(gameObject, abilities.abilities[0]);
+                _interactable.Interact(gameObject.GetComponent<BaseAgentController>());
             }
 
             if (timeLeftLookingAtObject <= 0)
