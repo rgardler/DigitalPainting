@@ -48,56 +48,21 @@ namespace wizardscode.digitalpainting.agent
 
         internal Quaternion targetRotation;
         internal float timeToNextWanderPathChange = 3;
-        internal Thing _pointOfInterest;
-        private Interactable _interactable;
-        internal bool _interactWithPOI;
         internal bool _interacting = false;
         private float timeLeftLookingAtObject = float.NegativeInfinity;
         private List<Thing> visitedThings = new List<Thing>();
         internal List<Thing> nextThings = new List<Thing>();
 
         /// <summary>
-        /// Set the thing of interest for this agent. The agent will behave
-        /// appropriately in response to the new thing of interest. The
-        /// Thing is only updated if it has changed since the last time it was set.
+        /// A transform that is the location the agent is trying to move to.
         /// </summary>
-        public Thing PointOfInterest
-        {
-            get { return _pointOfInterest; }
-            set
-            {
-                if (value == null)
-                {
-                    _pointOfInterest = null;
-                    _interactWithPOI = false;
-                    return;
-                }
-
-                if (!GameObject.ReferenceEquals(_pointOfInterest, value))
-                {
-                    _pointOfInterest = value;
-                    _interactable = PointOfInterest.gameObject.GetComponentInParent<Interactable>();
-                    _interactWithPOI = _interactable != null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get the interactable component of the current POI, if one exists. Return null if none exists.
-        /// The interactable component can be in the POI or any parent.
-        /// </summary>
-        public Interactable Interactable
-        {
-            get { return _interactable; }
-        }
-
-        public Transform MoveTarget
+        public Transform TargetToMoveTo
         {
             get
             {
                 if (_interactWithPOI)
                 {
-                    return _interactable.transform;
+                    return Interactable.transform;
                 }
                 else
                 {
@@ -228,7 +193,7 @@ namespace wizardscode.digitalpainting.agent
         {
             if (PointOfInterest != null)
             {
-                targetRotation = Quaternion.LookRotation(MoveTarget.position - transform.position, Vector3.up);
+                targetRotation = Quaternion.LookRotation(TargetToMoveTo.position - transform.position, Vector3.up);
             }
             else
             {
@@ -245,7 +210,7 @@ namespace wizardscode.digitalpainting.agent
             }
 
             Vector3 position = transform.position;
-            if (PointOfInterest != null && Vector3.Distance(position, MoveTarget.position) > PointOfInterest.distanceToTriggerViewingCamera)
+            if (PointOfInterest != null && Vector3.Distance(position, TargetToMoveTo.position) > PointOfInterest.distanceToTriggerViewingCamera)
             {
                 position += transform.forward * normalMovementSpeed * Time.deltaTime;
             }
@@ -284,7 +249,7 @@ namespace wizardscode.digitalpainting.agent
                 PointOfInterest.virtualCamera.m_Follow = gameObject.transform;
                 _interactWithPOI = false;
                 _interacting = true;
-                _interactable.Interact(gameObject.GetComponent<BaseAgentController>());
+                Interactable.Interact(gameObject.GetComponent<BaseAgentController>());
             }
 
             if (timeLeftLookingAtObject <= 0)
