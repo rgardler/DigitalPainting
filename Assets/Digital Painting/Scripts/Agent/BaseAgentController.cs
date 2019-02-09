@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using wizardscode.ability;
 using wizardscode.environment;
+using wizardscode.interaction;
 
 namespace wizardscode.digitalpainting.agent
 {
@@ -47,6 +48,46 @@ namespace wizardscode.digitalpainting.agent
         float rotationY = 0;
 
         internal AbilityCollection abilities;
+
+
+        internal Thing _pointOfInterest;
+        internal bool _interactWithPOI;
+        private Interactable _interactable;
+
+        /// <summary>
+        /// Set the thing of interest for this agent. The agent will behave
+        /// appropriately in response to the new thing of interest. The
+        /// Thing is only updated if it has changed since the last time it was set.
+        /// </summary>
+        public Thing PointOfInterest
+        {
+            get { return _pointOfInterest; }
+            set
+            {
+                if (value == null)
+                {
+                    _pointOfInterest = null;
+                    _interactWithPOI = false;
+                    return;
+                }
+
+                if (!GameObject.ReferenceEquals(_pointOfInterest, value))
+                {
+                    _pointOfInterest = value;
+                    _interactable = PointOfInterest.gameObject.GetComponentInParent<Interactable>();
+                    _interactWithPOI = _interactable != null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get the interactable component of the current POI, if one exists. Return null if none exists.
+        /// The interactable component can be in the POI or any parent.
+        /// </summary>
+        public Interactable Interactable
+        {
+            get { return _interactable; }
+        }
 
         virtual internal void Start()
         {
