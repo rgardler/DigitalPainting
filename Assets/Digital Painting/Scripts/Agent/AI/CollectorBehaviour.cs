@@ -50,7 +50,7 @@ namespace wizardscode.agent.ai
                     {
                         if (objects[i].GetComponentInParent<Interactable>() == null)
                         {
-                            break;
+                            continue;
                         }
 
                         if (!controller.nextThings.Contains(objects[i])) {

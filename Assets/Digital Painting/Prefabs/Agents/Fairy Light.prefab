@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 114236293622097422}
   - component: {fileID: 135805775664490126}
   - component: {fileID: 114488342280544256}
+  - component: {fileID: 114880809074974344}
   m_Layer: 0
   m_Name: Fairy Light
   m_TagString: Untagged
@@ -253,11 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a762b119d9835044086f0c570317007e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   items:
   - {fileID: 0}
   - {fileID: 0}
@@ -310,6 +306,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 11400000, guid: f57c8b3e11f4e3747bf951c6ef80f7a1, type: 2}
+--- !u!114 &114880809074974344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544121714815300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f94ef6e9292c854798e667e7c52e23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectableRange: 10
+  optimalNumberToCollect: 2
 --- !u!135 &135805775664490126
 SphereCollider:
   m_ObjectHideFlags: 1
