@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.ability
 {
@@ -15,16 +16,27 @@ namespace wizardscode.ability
 
         public GameObject Target { get; internal set; }
 
+        /// <summary>
+        /// Called to initialize the Ability during the Start phase of the application.
+        /// You can put expensive configuration in here.
+        /// </summary>
         public abstract void Initialize();
 
         /// <summary>
         /// Trigger the ability to take action.
         /// </summary>
-        public abstract IEnumerator TriggerAbility(Dictionary<string, object> options = null);
+        /// [Obsolete("TriggerAbility is deprecated. All functionality using this method should be transfered to timeline behaviours.")]
+        public abstract IEnumerator TriggerAbility();
 
         /// <summary>
         /// Trigger the ability to affect a specific target.
         /// </summary>
-        public abstract IEnumerator TriggerAbility(GameObject target, Dictionary<string, object> options = null);
+        /// [Obsolete("TriggerAbility is deprecated. All functionality using this method should be transfered to timeline behaviours.")]
+        public abstract IEnumerator TriggerAbility(BaseAgentController agent, GameObject target);
+
+        /// <summary>
+        /// Called each frame by the PlayerBehaviour that controls this spel at runtime.
+        /// </summary>
+        public virtual void Update() { }
     }
 }

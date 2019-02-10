@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-using wizardscode.ability;
+using UnityEngine.Playables;
 using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
@@ -9,9 +8,22 @@ namespace wizardscode.interaction
     public class Interactable : MonoBehaviour
     {
         public Transform interactionLocation;
+        public Sprite sprite;
+
         public ConditionCollection[] conditionCollections = new ConditionCollection[0];
-        public ReactionCollection defaultReactionCollection;
-        
+
+        private  PlayableDirector playableDirector;
+
+
+        private void Start()
+        {
+            playableDirector = GetComponent<PlayableDirector>();
+            if (playableDirector == null)
+            {
+                Debug.LogError(gameObject.name + " has an Interactable component, but it does not have a PlayableDirector, which is required.");
+            }
+        }
+
         /// <summary>
         /// Interact with the interactable using an ability.
         /// 
@@ -22,10 +34,10 @@ namespace wizardscode.interaction
         /// <param name="interactor">The GameObject using the ability to interact.</param>
         /// <param name="ability">The ability to perform at the indicated spot within the ReactionsCollection.</param>
         public void Interact(BaseAgentController interactor = null)
-        {
+        {    
             if (conditionCollections.Length == 0)
             {
-                defaultReactionCollection.React(interactor, this);
+                playableDirector. Play();
             }
             for (int i = 0; i < conditionCollections.Length; i++)
             {
@@ -34,7 +46,7 @@ namespace wizardscode.interaction
                     return;
                 }
 
-                defaultReactionCollection.React(interactor, this);
+                playableDirector.Play();
             }
         }
     }

@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 54869636479982310}
   - component: {fileID: 114236293622097422}
   - component: {fileID: 135805775664490126}
+  - component: {fileID: 114488342280544256}
   m_Layer: 0
   m_Name: Fairy Light
   m_TagString: Untagged
@@ -241,6 +242,27 @@ MonoBehaviour:
   minDistanceOfRandomPathChange: 15
   maxDistanceOfRandomPathChange: 40
   barriers: {fileID: 0}
+--- !u!114 &114488342280544256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544121714815300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a762b119d9835044086f0c570317007e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114665674840848990
 MonoBehaviour:
   m_ObjectHideFlags: 1

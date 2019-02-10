@@ -53,11 +53,13 @@ Assets/Digital Painting/Plugins/*
 PRIVATE_**
 
 # 3rd Party Assets
-Assets/Standard Assets.meta
+Assets/DefaultPlayables
+Assets/DefaultPlayables.meta
 Assets/Standard Assets/
-Assets/WeatherMaker.meta
-Assets/WeatherMaker/
-Assets/TextMesh Pro.meta
-Assets/TextMesh Pro/
+Assets/Standard Assets.meta
 Assets/NatureManufacture Assets.meta
 Assets/NatureManufacture Assets
+Assets/TextMesh Pro.meta
+Assets/TextMesh Pro/
+Assets/WeatherMaker.meta
+Assets/WeatherMaker/

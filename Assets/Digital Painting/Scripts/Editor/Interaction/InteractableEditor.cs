@@ -9,11 +9,13 @@ namespace wizardscode.interaction
     {
         private Interactable interactable;
         private SerializedProperty interactionLocationProperty;
+        private SerializedProperty spriteProperty;
         private SerializedProperty collectionsProperty;
         private SerializedProperty defaultReactionCollectionProperty;
 
         private const float collectionButtonWidth = 125f;
         private const string interactablePropInteractionLocationName = "interactionLocation";
+        private const string interactablePropertySpritePropName = "sprite";
         private const string interactablePropConditionCollectionsName = "conditionCollections";
         private const string interactablePropDefaultReactionCollectionName = "defaultReactionCollection";
 
@@ -23,6 +25,7 @@ namespace wizardscode.interaction
 
             collectionsProperty = serializedObject.FindProperty(interactablePropConditionCollectionsName);
             interactionLocationProperty = serializedObject.FindProperty(interactablePropInteractionLocationName);
+            spriteProperty = serializedObject.FindProperty(interactablePropertySpritePropName);
             defaultReactionCollectionProperty = serializedObject.FindProperty(interactablePropDefaultReactionCollectionName);
 
             CheckAndCreateSubEditors(interactable.conditionCollections);
@@ -44,6 +47,7 @@ namespace wizardscode.interaction
             CheckAndCreateSubEditors(interactable.conditionCollections);
 
             EditorGUILayout.PropertyField(interactionLocationProperty);
+            EditorGUILayout.ObjectField(spriteProperty);
 
             for (int i = 0; i < subEditors.Length; i++)
             {
@@ -62,7 +66,7 @@ namespace wizardscode.interaction
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(defaultReactionCollectionProperty);
+            //EditorGUILayout.PropertyField(defaultReactionCollectionProperty);
 
             serializedObject.ApplyModifiedProperties();
         }
