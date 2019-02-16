@@ -9,41 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 337831424, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
-  m_Name: Pick Up Item Timeline
+  m_Name: Drop Item Timeline
   m_EditorClassIdentifier: 
   m_NextId: 0
   m_Tracks:
-  - {fileID: 114428387619752264}
-  - {fileID: 114468637980168392}
+  - {fileID: 114452914268913032}
+  - {fileID: 114647683298285818}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
   m_DurationMode: 0
   m_Version: 0
---- !u!114 &114014682981657118
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d360dc06ddc6c48968dea9ef842c9d, type: 3}
-  m_Name: InventoryAddItemControlAsset
-  m_EditorClassIdentifier: 
---- !u!114 &114045651616949974
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd218c380d86334d86cab648ca8f324, type: 3}
-  m_Name: PickupItemControlAsset
-  m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: f57c8b3e11f4e3747bf951c6ef80f7a1, type: 2}
---- !u!114 &114354012229018080
+--- !u!114 &114206048440034886
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,11 +29,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69db69bcdf0685142a0a2e51c670aecd, type: 3}
-  m_Name: NarrationAsset
+  m_Name: NarrationControlAsset
   m_EditorClassIdentifier: 
-  message: Oh Look, a Gold Coin!!!
+  message: Got to keep my stuff stored neatly away.
   textColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &114428387619752264
+--- !u!114 &114421986511904304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa63f108083d574aa818423c4b9cdc8, type: 3}
+  m_Name: DropItemControlAsset
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: f57c8b3e11f4e3747bf951c6ef80f7a1, type: 2}
+--- !u!114 &114452914268913032
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,12 +63,12 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Start: 0.15
     m_ClipIn: 0
-    m_Asset: {fileID: 114354012229018080}
-    m_Duration: 2.45
+    m_Asset: {fileID: 114206048440034886}
+    m_Duration: 2.95
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 114428387619752264}
+    m_ParentTrack: {fileID: 114452914268913032}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
@@ -105,39 +94,6 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: NarrationAsset
-    m_Version: 1
-  - m_Start: 4.55
-    m_ClipIn: 0
-    m_Asset: {fileID: 114474971480170498}
-    m_Duration: 2.45
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114428387619752264}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -174,10 +130,10 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: NarrationAsset
+    m_DisplayName: NarrationControlAsset
     m_Version: 1
   m_Version: 1
---- !u!114 &114468637980168392
+--- !u!114 &114647683298285818
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,12 +151,12 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0.18333333333333332
+  - m_Start: 0.3
     m_ClipIn: 0
-    m_Asset: {fileID: 114045651616949974}
-    m_Duration: 5
+    m_Asset: {fileID: 114421986511904304}
+    m_Duration: 3.0166666666666666
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 114468637980168392}
+    m_ParentTrack: {fileID: 114647683298285818}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
@@ -213,7 +169,25 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -226,52 +200,6 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: PickupItemControlAsset
-    m_Version: 1
-  - m_Start: 5.183333333333334
-    m_ClipIn: 0
-    m_Asset: {fileID: 114014682981657118}
-    m_Duration: 3.9499999999999993
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: 114468637980168392}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: InventoryAddItemControlAsset
+    m_DisplayName: DropItemControlAsset
     m_Version: 1
   m_Version: 1
---- !u!114 &114474971480170498
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69db69bcdf0685142a0a2e51c670aecd, type: 3}
-  m_Name: NarrationAsset
-  m_EditorClassIdentifier: 
-  message: Nice.
-  textColor: {r: 1, g: 1, b: 1, a: 1}

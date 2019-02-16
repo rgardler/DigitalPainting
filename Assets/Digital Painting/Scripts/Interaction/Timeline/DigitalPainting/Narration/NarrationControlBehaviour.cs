@@ -12,7 +12,11 @@ namespace wizardscode.interaction
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
             TextManager textManager = playerData as TextManager;
-            textManager.DisplayMessage(message, textColor, delay);
+            if (textManager != null)
+            {
+                textManager.DisplayMessage(message, textColor, delay);
+            }
+            Debug.Log("Narrator: " + message);
         }
     }
 }

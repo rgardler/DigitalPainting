@@ -19,10 +19,8 @@ namespace wizardscode.interaction
                 DigitalPaintingManager manager = playerData as DigitalPaintingManager;
 
                 BaseAgentController agent = manager.AgentWithFocus;
-                Interactable item = agent.PointOfInterest.gameObject.GetComponent<Interactable>();
-                InventoryManager inventory = agent.GetComponent<InventoryManager>();
-                inventory.AddItem(item);
-                item.gameObject.SetActive(false);
+                agent.Unequip();
+                isStored = true;
             }
         }
     }

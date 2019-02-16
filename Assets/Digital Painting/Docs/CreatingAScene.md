@@ -38,9 +38,11 @@ defaults this is pretty easy to do.
   * [Export the Digital Painting asset](ReleasingTheDigitalPaintingAsset.md) from Unity (we should make releases so this is not necessary)
   * Import the Digital Painting asset into your project
   * If there are any compile errors import the required packages (see [README.md](../../../README.md) for details)
-  * Add the `Assets/Digital Painting/Prefabs/DigitalPaintingManager`
-    * Ensure that each of the features you want are enabled and configured properly (see docs folder)
-    * Turn off the `Demo Manager` script if you don't wan the UI to overlay your scene
+  * Create an Empty object and call it "Managers"
+  * Add the `DigitalPaintingManager` component to this `Managers` object
+  * Setup the camera prefab parameters (there are prefabs you can use in `DigitalPainting/Prefabs/Camera/`)
+  * Setup the agent prefab parameter (there are example agents in the prefabs folder)
+
 
 That's all you need to get started. Hit play and see what happens.
 

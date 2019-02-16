@@ -158,16 +158,17 @@ namespace wizardscode.digitalpainting.agent
             else
             {
                 MakeNextMove();
-            }
 
-            if (PointOfInterest == null)
-            {
-                UpdatePointOfInterest();
+                if (PointOfInterest == null)
+                {
+                    UpdatePointOfInterest();
+                }
             }
         }
 
         internal void UpdatePointOfInterest()
         {
+            // If there is a POI in the next things list use that
             if (PointOfInterest == null && nextThings.Count > 0)
             {
                 PointOfInterest = nextThings[0];
@@ -175,14 +176,20 @@ namespace wizardscode.digitalpainting.agent
                 return;
             }
 
-            // Look for new points of interest
-            if (PointOfInterest == null && nextThings.Count == 0 && Random.value <= 0.001)
+            // If we don't have a POI then maybe we should find one...
+            if (PointOfInterest == null && Random.value <= 0.001)
             {
                 Thing poi = FindPointOfInterest();
                 if (poi != null)
                 {
                     PointOfInterest = poi;
                 }
+            }
+
+            // if we still don't have a POI then update the wander target
+            if (PointOfInterest == null)
+            {
+                timeToNextWanderPathChange = 0;
             }
         }
 

@@ -223,6 +223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6c6c092b84ff8468c3f99ef2097313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  home: {fileID: 0}
+  homePrefab: {fileID: 114127892731240028, guid: 6383c118b990feb42984171c38f0c21d,
+    type: 2}
+  isGrounded: 0
   normalMovementSpeed: 1
   fastMovementFactor: 4
   slowMovementFactor: 0.2
@@ -231,7 +235,6 @@ MonoBehaviour:
   rotationSpeed: 0.2
   mouseLookMode: 2
   mouseLookSensitivity: 100
-  home: {fileID: 0}
   isFlyByWire: 1
   detectionRange: 50
   reachRange: 2
@@ -277,7 +280,7 @@ MonoBehaviour:
   octree: {fileID: 0}
   preferredFlightHeight: 1.5
   minFlightHeight: 1
-  maxFlightHeight: 7
+  maxFlightHeight: 10
 --- !u!114 &114743800790520494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectableRange: 10
+  optimalNumberToCarry: 1
   optimalNumberToCollect: 2
 --- !u!135 &135805775664490126
 SphereCollider:

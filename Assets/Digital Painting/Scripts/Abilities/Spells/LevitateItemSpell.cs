@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using wizardscode.digitalpainting;
 using wizardscode.digitalpainting.agent;
+using wizardscode.interaction;
 
 namespace wizardscode.ability
 {
@@ -21,12 +22,16 @@ namespace wizardscode.ability
     [CreateAssetMenu (menuName = "Wizards Code/Ability/Spell/Levitate Item")]
     public class LevitateItemSpell : Ability
     {
-        [Tooltip("The end transform for the levitation, that is where the object will be moved to using levitation.")]
+        [Tooltip("The end transform for the levitation, that is where the object will be moved to using levitation. If this is null in the inspector it must be set before the spell is cast.")]
         public Transform endTransform;
+        [Tooltip("The item being levitated. If this is set to null in the inspector it must be set to a value before the spell is cast.")]
+        public Interactable item;
         [Tooltip("Maximum range over which this spell will operate.")]
         public float maximumRange = 5f;
         [Tooltip("Maximum speed at which an item can be moved.")]
         public float maximumSpeed = 1f;
+        [Tooltip("Maximum speed the spell will rotate an object")]
+        public float maximumRotationSpeed = 180;
 
         private DigitalPaintingManager manager; 
 
@@ -35,43 +40,22 @@ namespace wizardscode.ability
             manager = FindObjectOfType<DigitalPaintingManager>();
         }
 
-        public override IEnumerator TriggerAbility()
-        {
-            Debug.LogError(name + " ability was triggered but this ability requires a target");
-            return null;
-        }
-
-        public override IEnumerator TriggerAbility(BaseAgentController agent, GameObject target)
-        {
-            if (endTransform == null)
-            {
-                throw new MisconfiguredAbilityException("LevitateItemSpell requires that you set the value of " +
-                    " 'endTransform' that identifies the final position and rotation of the item being levitated. " +
-                    "This must be set before calling TriggerAbility(...).");
-            }
-
-            isActive = true;
-            while (Vector3.SqrMagnitude(target.transform.position - endTransform.position) > 0.2)
-            {
-                float step = maximumSpeed * Time.deltaTime; // calculate distance to move
-                target.transform.position = Vector3.MoveTowards(target.transform.position, endTransform.position, step);
-                yield return new WaitForSeconds(0.03f);
-            }
-            isActive = false;
-        }
-
         /// <summary>
-        /// Called each frame by the PlayerBehaviour that controls this spel at runtime.
+        /// Called each frame by the PlayerBehaviour that controls this spell at runtime.
         /// </summary>
         public override void Update()
         {
-            BaseAgentController agent = manager.AgentWithFocus;
-            GameObject target = manager.AgentWithFocus.PointOfInterest.gameObject;
-            endTransform = agent.transform;
-            if (Vector3.SqrMagnitude(target.transform.position - endTransform.position) > 0.2)
+            if (Vector3.SqrMagnitude(item.transform.position - endTransform.position) > 0.005)
             {
-                float step = maximumSpeed * Time.deltaTime; // calculate distance to move
-                target.transform.position = Vector3.MoveTowards(target.transform.position, endTransform.position, step);
+                isActive = true;
+                float moveStep = maximumSpeed * Time.deltaTime;
+                float rotateStep = maximumRotationSpeed * Time.deltaTime;
+                item.transform.position = Vector3.MoveTowards(item.transform.position, endTransform.position, moveStep);
+                item.transform.rotation = Quaternion.RotateTowards(item.transform.rotation, endTransform.rotation, rotateStep);
+            }
+            else
+            {
+                isActive = false;
             }
         }
     }

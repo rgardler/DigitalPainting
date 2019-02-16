@@ -11,13 +11,13 @@ namespace wizardscode.interaction
         private SerializedProperty interactionLocationProperty;
         private SerializedProperty spriteProperty;
         private SerializedProperty collectionsProperty;
-        private SerializedProperty defaultReactionCollectionProperty;
+        private SerializedProperty defaultPlayableAssetProperty;
 
         private const float collectionButtonWidth = 125f;
         private const string interactablePropInteractionLocationName = "interactionLocation";
         private const string interactablePropertySpritePropName = "sprite";
         private const string interactablePropConditionCollectionsName = "conditionCollections";
-        private const string interactablePropDefaultReactionCollectionName = "defaultReactionCollection";
+        private const string interactablePropDefaultPlayableAssetName = "defaultPlayableAsset";
 
         private void OnEnable()
         {
@@ -26,7 +26,7 @@ namespace wizardscode.interaction
             collectionsProperty = serializedObject.FindProperty(interactablePropConditionCollectionsName);
             interactionLocationProperty = serializedObject.FindProperty(interactablePropInteractionLocationName);
             spriteProperty = serializedObject.FindProperty(interactablePropertySpritePropName);
-            defaultReactionCollectionProperty = serializedObject.FindProperty(interactablePropDefaultReactionCollectionName);
+            defaultPlayableAssetProperty = serializedObject.FindProperty(interactablePropDefaultPlayableAssetName);
 
             CheckAndCreateSubEditors(interactable.conditionCollections);
         }
@@ -48,6 +48,7 @@ namespace wizardscode.interaction
 
             EditorGUILayout.PropertyField(interactionLocationProperty);
             EditorGUILayout.ObjectField(spriteProperty);
+            EditorGUILayout.PropertyField(defaultPlayableAssetProperty);
 
             for (int i = 0; i < subEditors.Length; i++)
             {
@@ -65,8 +66,6 @@ namespace wizardscode.interaction
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space();
-
-            //EditorGUILayout.PropertyField(defaultReactionCollectionProperty);
 
             serializedObject.ApplyModifiedProperties();
         }

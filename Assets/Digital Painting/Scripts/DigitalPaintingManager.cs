@@ -2,13 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using wizardscode.digitalpainting.agent;
+using wizardscode.interaction;
 
 namespace wizardscode.digitalpainting
 {
     public class DigitalPaintingManager : MonoBehaviour
     {
-        [Tooltip("The clear shot camera rig prefab to use. If this is null a Clearshot camera will be lookd for in the scene.")]
+        [Tooltip("The clear shot camera rig prefab to use. If this is null a Clearshot camera will be looked for in the scene.")]
         public Cinemachine.CinemachineClearShot cameraRigPrefab;
         [Tooltip("The Camera prefab to use if no main camera exists in the scene.")]
         public Camera cameraPrefab;
@@ -157,6 +159,34 @@ namespace wizardscode.digitalpainting
             barrier.transform.rotation = Quaternion.Euler(0, 270, 0);
             barrier.transform.position = new Vector3(x / 2, 0, z * 0.9f);
             barrier.GetComponent<Renderer>().enabled = false;
+        }
+
+        /// <summary>
+        /// Iterates over all the tracks in a PlayableAsset and sets the bindings appropriately based
+        /// on defaults in the scene. This is then set as the playable for the given PlayableDirector.
+        /// 
+        /// After calling this method the bindings can be overwritten if necessary.
+        /// 
+        /// </summary>
+        /// <param name="director">The PlayableDirector that will control the PlayableAsset.</param>
+        /// <param name="playable">The PlayableAsset to configure for the scene.</param>
+        public void SetPlayableAsset(PlayableDirector director, PlayableAsset playable)
+        {
+            foreach (PlayableBinding binding in playable.outputs)
+            {
+                if (binding.sourceObject.GetType() == typeof(NarrationControlTrack))
+                {
+                    director.SetGenericBinding(binding.sourceObject, GetComponentInChildren<TextManager>());
+                    continue;
+                }
+
+                if (binding.sourceObject.GetType() == typeof(DigitalPaintingControlTrack))
+                {
+                    director.SetGenericBinding(binding.sourceObject, this);
+                    continue;
+                }
+            }
+            director.playableAsset = playable;
         }
     }
 }

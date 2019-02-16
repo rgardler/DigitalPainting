@@ -57,8 +57,7 @@ namespace wizardscode.digitalpainting.agent
             if (isFlyByWire)
             {
                 if (PointOfInterest != null)
-                {
-                    
+                {                    
                     if(Vector3.Distance(transform.position, CurrentMoveTarget.position) > PointOfInterest.distanceToTriggerViewingCamera)
                     {
                         if (!GameObject.ReferenceEquals(pathfinding.Target, CurrentMoveTarget))
@@ -74,18 +73,16 @@ namespace wizardscode.digitalpainting.agent
                     UpdatePointOfInterest();
                     if (PointOfInterest == null)
                     {
-                        UpdateWanderTarget();
-                    }
+                        if (Vector3.Distance(transform.position, wanderTarget.position) <= pathfinding.minReachDistance)
+                        {
+                            timeToNextWanderPathChange = 0;
+                            UpdateWanderTarget();
+                        }
 
-                    if (Vector3.Distance(transform.position, wanderTarget.position) <= pathfinding.minReachDistance)
-                    {
-                        timeToNextWanderPathChange = 0;
-                        UpdateWanderTarget();
-                    }
-
-                    if (!pathfinding.HasPathToTarget)
-                    {
-                        UpdateWanderTarget(true);
+                        if (!pathfinding.HasPathToTarget)
+                        {
+                            UpdateWanderTarget(true);
+                        }
                     }
                 }
             }

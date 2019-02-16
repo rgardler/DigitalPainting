@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using UnityEngine.Playables;
+using wizardscode.digitalpainting;
 using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
@@ -9,19 +10,44 @@ namespace wizardscode.interaction
     {
         public Transform interactionLocation;
         public Sprite sprite;
+        public PlayableAsset defaultPlayableAsset;
+        [Tooltip("Automatically trigger when entering the trigger zone.")]
+        public bool isTrigger = false;
 
         public ConditionCollection[] conditionCollections = new ConditionCollection[0];
 
         private  PlayableDirector playableDirector;
+        private DigitalPaintingManager manager;
 
+        private void Awake()
+        {
+        }
 
         private void Start()
         {
+            manager = FindObjectOfType<DigitalPaintingManager>();
+            if (manager == null)
+            {
+                Debug.LogError("Can't find a DigitalPaintingManager in the scene, this is required.");
+            }
+
             playableDirector = GetComponent<PlayableDirector>();
             if (playableDirector == null)
             {
-                Debug.LogError(gameObject.name + " has an Interactable component, but it does not have a PlayableDirector, which is required.");
+                playableDirector = gameObject.AddComponent<PlayableDirector>();
             }
+
+            if (defaultPlayableAsset == null)
+            {
+                Debug.LogError(gameObject.name + " has an `Interactable` component but no `defaultPlayableAsset` has been set. This is required.");
+            }
+
+            if (interactionLocation == null)
+            {
+                Debug.LogError(gameObject.name + " has an `Interactable` component but the `InteractionLocation` property is not set.");
+            }
+
+            manager.SetPlayableAsset(playableDirector, defaultPlayableAsset);
         }
 
         /// <summary>
@@ -48,6 +74,16 @@ namespace wizardscode.interaction
 
                 playableDirector.Play();
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            BaseAgentController agent = other.gameObject.GetComponentInParent<BaseAgentController>();
+            if (agent != null)
+            {
+                agent.Interactable = this;
+                Interact(agent);
+            }            
         }
     }
 }
