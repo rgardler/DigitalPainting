@@ -1480,7 +1480,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0800dd61401504c86bb738a9a6ee78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demoUI: {fileID: 1808907733917478, guid: 9c495122d1430c347ab9945831679e2b, type: 2}
+  UIPrefab: {fileID: 1808907733917478, guid: 9c495122d1430c347ab9945831679e2b, type: 2}
+  showWeatherUI: 1
+  showDayNightUI: 1
+  showInterestingThingsUI: 1
+  showDroneControlUI: 1
   firstPOI: {fileID: 1926497821}
 --- !u!1 &723289208
 GameObject:
@@ -2931,6 +2935,7 @@ MonoBehaviour:
   sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   defaultPlayableAsset: {fileID: 11400000, guid: 18d0d567a0c21b44486a5e374d66536f,
     type: 2}
+  isTrigger: 0
   conditionCollections: []
 --- !u!114 &1094630604
 MonoBehaviour:
@@ -3060,11 +3065,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4980822680671696, guid: 1a97a61a83f662b4489e298cb2027fc5, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.19414414
+      value: 0.19414411
       objectReference: {fileID: 0}
     - target: {fileID: 4980822680671696, guid: 1a97a61a83f662b4489e298cb2027fc5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.03776412
+      value: 0.037764113
       objectReference: {fileID: 0}
     - target: {fileID: 4980822680671696, guid: 1a97a61a83f662b4489e298cb2027fc5, type: 2}
       propertyPath: m_LocalRotation.w
@@ -3682,7 +3687,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1468070949}
-  m_LocalRotation: {x: -0.18716544, y: 0.19414414, z: 0.03776412, w: 0.96221155}
+  m_LocalRotation: {x: -0.18716544, y: 0.19414411, z: 0.037764113, w: 0.96221155}
   m_LocalPosition: {x: -0.72155285, y: -0.14, z: -1.7152786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
