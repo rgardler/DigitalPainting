@@ -45,7 +45,8 @@ namespace wizardscode.ability
         /// </summary>
         public override void Update()
         {
-            if (Vector3.SqrMagnitude(item.transform.position - endTransform.position) > 0.005)
+            if (
+               Vector3.SqrMagnitude(item.transform.position - endTransform.position) > 0.01)
             {
                 isActive = true;
                 float moveStep = maximumSpeed * Time.deltaTime;

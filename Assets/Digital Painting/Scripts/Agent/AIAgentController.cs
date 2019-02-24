@@ -48,7 +48,6 @@ namespace wizardscode.digitalpainting.agent
 
         internal Quaternion targetRotation;
         internal float timeToNextWanderPathChange = 3;
-        internal bool _interacting = false;
         private float timeLeftLookingAtObject = float.NegativeInfinity;
         private List<Thing> visitedThings = new List<Thing>();
         internal List<Thing> nextThings = new List<Thing>();
@@ -217,21 +216,18 @@ namespace wizardscode.digitalpainting.agent
             }
 
             Vector3 position = transform.position;
-            if (PointOfInterest != null && Vector3.Distance(position, TargetToMoveTo.position) > PointOfInterest.distanceToTriggerViewingCamera)
+            position += transform.forward * normalMovementSpeed * Time.deltaTime;
+
+            
+            if (PointOfInterest != null && Vector3.Distance(position, TargetToMoveTo.position) <= PointOfInterest.distanceToTriggerViewingCamera)
             {
-                position += transform.forward * normalMovementSpeed * Time.deltaTime;
+                ViewPOI(); 
             }
-            else if (PointOfInterest != null)
-            {
-                ViewPOI();
-            }
-            else
-            {
-                // calculate the new position and height
-                position += transform.forward * normalMovementSpeed * Time.deltaTime;
-                float desiredHeight = Terrain.activeTerrain.SampleHeight(position) + heightOffset;
-                position.y += (desiredHeight - position.y) * Time.deltaTime;
-            }
+
+            // calculate the new position and height
+            position += transform.forward * normalMovementSpeed * Time.deltaTime;
+            float desiredHeight = Terrain.activeTerrain.SampleHeight(position) + heightOffset;
+            position.y += (desiredHeight - position.y) * Time.deltaTime;
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             transform.position = position;
@@ -250,14 +246,6 @@ namespace wizardscode.digitalpainting.agent
             PointOfInterest.virtualCamera.enabled = true;
             
             timeLeftLookingAtObject -= Time.deltaTime;
-            if ( _interactWithPOI && !_interacting)
-            {
-                // Start interaction
-                PointOfInterest.virtualCamera.m_Follow = gameObject.transform;
-                _interactWithPOI = false;
-                _interacting = true;
-                Interactable.Interact(gameObject.GetComponent<BaseAgentController>());
-            }
 
             if (timeLeftLookingAtObject <= 0)
             {
@@ -266,13 +254,6 @@ namespace wizardscode.digitalpainting.agent
 
                 // when we start moving again move away from the object as we are pretty close by now and might move into it
                 targetRotation = Quaternion.LookRotation(-transform.forward, Vector3.up);
-
-                if (_interacting)
-                {
-                    // End Interaction
-                    _interacting = false;
-                    PointOfInterest.virtualCamera.m_Follow = PointOfInterest.transform;
-                }
 
                 // we no longer care about this POI so turn the camera off and don't focus on it anymore
                 PointOfInterest.virtualCamera.enabled = false;

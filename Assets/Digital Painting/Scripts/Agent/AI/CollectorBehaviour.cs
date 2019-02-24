@@ -53,7 +53,7 @@ namespace wizardscode.agent.ai
             // If we are carrying more than we need, return some to base
             if (personalInventory.Count > optimalNumberToCarry)
             {
-                if (agent.PointOfInterest != agent.home)
+                if (!GameObject.ReferenceEquals(agent.PointOfInterest, agent.home))
                 {
                     if (agent.nextThings.Count == 0)
                     {
@@ -81,6 +81,13 @@ namespace wizardscode.agent.ai
                 {
                     for (int i = 0; i < objects.Count; i++)
                     {
+                        // if the object is our current POI we are already on the way so don't add to next things
+                        if (GameObject.ReferenceEquals(agent.PointOfInterest, objects[i]))
+                        {
+                            continue;
+                        }
+
+                        // if it's not interactable then we are not interested in going to inspect
                         if (objects[i].GetComponentInParent<Interactable>() == null)
                         {
                             continue;

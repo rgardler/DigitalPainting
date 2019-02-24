@@ -30,14 +30,30 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1440480140647388
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4061879836904144}
+  - component: {fileID: 135105312247357896}
   m_Layer: 0
   m_Name: Equipped Mount Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1450462876394086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4755249935869382}
+  m_Layer: 0
+  m_Name: Primary Interaction Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,14 +124,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1544121714815300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4559917765176736}
   - {fileID: 4170183540501784}
   - {fileID: 4424049076273888}
-  - {fileID: 4061879836904144}
+  - {fileID: 4755249935869382}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -125,12 +141,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1440480140647388}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.088, y: 0, z: 0.092}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.125, y: -0.0126, z: 0.092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4004592835009960}
-  m_RootOrder: 3
+  m_Father: {fileID: 4755249935869382}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4170183540501784
 Transform:
@@ -170,6 +186,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4004592835009960}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4755249935869382
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450462876394086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4061879836904144}
+  m_Father: {fileID: 4004592835009960}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &54869636479982310
 Rigidbody:
@@ -252,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6c6c092b84ff8468c3f99ef2097313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionPoint: {fileID: 4755249935869382}
   equippedMountPoint: {fileID: 4061879836904144}
   home: {fileID: 0}
   homePrefab: {fileID: 114127892731240028, guid: 6383c118b990feb42984171c38f0c21d,
@@ -305,8 +336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistanceRebuildPath: 1
   acceleration: 1
-  minReachDistance: 2
-  pathPointRadius: 1
+  minReachDistance: 0.75
+  pathPointRadius: 0.5
   octree: {fileID: 0}
   preferredFlightHeight: 1.5
   minFlightHeight: 1
@@ -353,6 +384,18 @@ MonoBehaviour:
   collectableRange: 10
   optimalNumberToCarry: 1
   optimalNumberToCollect: 2
+--- !u!135 &135105312247357896
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440480140647388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135805775664490126
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -363,7 +406,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198454006445575648
 ParticleSystem:

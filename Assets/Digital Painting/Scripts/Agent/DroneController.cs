@@ -17,14 +17,20 @@ namespace wizardscode.digitalpainting.agent
         internal Transform CurrentMoveTarget
         {
             get {
+                Transform target;
                 if (_interactWithPOI)
                 {
-                    return Interactable.interactionLocation;
+                    target = Interactable.interactionLocation;
+                }
+                else if (PointOfInterest != null)
+                {
+                    target = PointOfInterest.AgentViewingTransform;
                 }
                 else
                 {
-                    return PointOfInterest.AgentViewingTransform;
+                    target = wanderTarget;
                 }
+                return target;
             }
         }
 
@@ -56,17 +62,23 @@ namespace wizardscode.digitalpainting.agent
         {
             if (isFlyByWire)
             {
+                if (!GameObject.ReferenceEquals(pathfinding.Target, CurrentMoveTarget))
+                {
+                    pathfinding.Target = CurrentMoveTarget;
+                }
+
                 if (PointOfInterest != null)
                 {                    
-                    if(Vector3.Distance(transform.position, CurrentMoveTarget.position) > PointOfInterest.distanceToTriggerViewingCamera)
+                    if(Vector3.Distance(transform.position, PointOfInterest.transform.position) <= PointOfInterest.distanceToTriggerViewingCamera)
                     {
-                        if (!GameObject.ReferenceEquals(pathfinding.Target, CurrentMoveTarget))
+                        if (_interactWithPOI)
                         {
-                            pathfinding.Target = CurrentMoveTarget;
+                            PrepareToInteract();
                         }
-                    } else
-                    {
-                        ViewPOI();
+                        else
+                        { 
+                            ViewPOI();
+                        }
                     }
                 } else
                 {

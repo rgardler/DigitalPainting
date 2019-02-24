@@ -48,7 +48,8 @@ namespace wizardscode.interaction
             {
                 manager.AgentWithFocus.Using = manager.AgentWithFocus.Interactable;
                 isComplete = true;
+                manager.AgentWithFocus.PointOfInterest = null;
             }
-        }
+        }        
     }
 }

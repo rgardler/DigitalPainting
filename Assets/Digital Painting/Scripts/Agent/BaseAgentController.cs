@@ -20,6 +20,10 @@ namespace wizardscode.digitalpainting.agent
     /// </summary>
     public class BaseAgentController : MonoBehaviour
     {
+        [Header("Interaction")]
+        [Tooltip("Primary interaction point that the agent will use when interacting with a THing in the world.")]
+        public Transform interactionPoint;
+
         [Header("Equipment")]
         [Tooltip("The mount point for an equipped item.")]
         public Transform equippedMountPoint;
@@ -52,7 +56,7 @@ namespace wizardscode.digitalpainting.agent
         public MouseLookModeType mouseLookMode = MouseLookModeType.WithRightMouseButton;
         [Tooltip("Mouse look sensitivity.")]
         public float mouseLookSensitivity = 100;
-        
+
         float rotationX = 0;
         float rotationY = 0;
 
@@ -266,6 +270,19 @@ namespace wizardscode.digitalpainting.agent
                     heightOffset -= climbSpeed * Time.deltaTime;
                 }
             }
+        }
+
+        /// <summary>
+        /// PrepareToInteract ensures the agent is ready to perform an interaction
+        /// on an object that it has approached and is close to.
+        /// 
+        /// Agent controllers may override this method, by default it moves the agents
+        /// interaction point nearer to the Thing with which to interact.
+        /// 
+        /// </summary>
+        internal void PrepareToInteract()
+        {
+            Debug.LogWarning("TODO: implement prepare interaction");
         }
 
         private void MouseLook()
