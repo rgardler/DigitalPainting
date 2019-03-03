@@ -3,7 +3,7 @@ using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using System.Collections.Generic;
 using wizardscode.digitalpainting;
-
+using wizardscode.interaction.agent;
 
 namespace wizardscode.interaction
 {
@@ -12,6 +12,7 @@ namespace wizardscode.interaction
     [TrackClipType(typeof(InteractableControlAsset))]
     [TrackClipType(typeof(InventoryAddItemControlAsset))]
     [TrackClipType(typeof(PickupItemControlAsset))]
+    [TrackClipType(typeof(SelectFromInventoryControlAsset))]
     [TrackBindingType(typeof(DigitalPaintingManager))]
     public class DigitalPaintingControlTrack : TrackAsset
     {

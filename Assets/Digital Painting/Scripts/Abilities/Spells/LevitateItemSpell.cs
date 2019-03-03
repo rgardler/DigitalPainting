@@ -45,10 +45,14 @@ namespace wizardscode.ability
         /// </summary>
         public override void Update()
         {
-            if (
+            if (item == null)
+            {
+                isActive = false;
+            }
+
+            if (isActive && 
                Vector3.SqrMagnitude(item.transform.position - endTransform.position) > 0.01)
             {
-                isActive = true;
                 float moveStep = maximumSpeed * Time.deltaTime;
                 float rotateStep = maximumRotationSpeed * Time.deltaTime;
                 item.transform.position = Vector3.MoveTowards(item.transform.position, endTransform.position, moveStep);

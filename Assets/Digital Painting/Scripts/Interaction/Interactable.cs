@@ -67,13 +67,13 @@ namespace wizardscode.interaction
             }
             for (int i = 0; i < conditionCollections.Length; i++)
             {
-                if (conditionCollections[i].CheckAndReact(interactor, this))
+                if (conditionCollections[i].CheckValidInteraction(interactor, this))
                 {
+                    playableDirector.Play();
                     return;
                 }
-
-                playableDirector.Play();
             }
+            return;
         }
 
         private void OnTriggerEnter(Collider other)

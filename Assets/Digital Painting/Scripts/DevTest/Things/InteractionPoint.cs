@@ -20,6 +20,21 @@ namespace wizardscode.interaction
             {
                 Debug.LogError("Interactable component cannot find the Interactable Thing it is for.");
             }
+
+            bool hasTrigger = false;
+            Collider[] colliders = GetComponentsInParent<Collider>();
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].isTrigger)
+                {
+                    hasTrigger = true;
+                    break;
+                }
+            }
+            if (!hasTrigger)
+            {
+                Debug.LogError(gameObject.name + " has the InteractionPoint component but elect `Createit does not have a collider that is set to trigger so it will not work correctly.");
+            }
         }
 
         private void OnTriggerEnter(Collider other)

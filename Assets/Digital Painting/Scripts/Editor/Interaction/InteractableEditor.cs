@@ -58,7 +58,7 @@ namespace wizardscode.interaction
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Add Collection", GUILayout.Width(collectionButtonWidth)))
+            if (GUILayout.Button("Add Conditions", GUILayout.Width(collectionButtonWidth)))
             {
                 ConditionCollection newCollection = ConditionCollectionEditor.CreateConditionCollection();
                 collectionsProperty.AddToObjectArray(newCollection);

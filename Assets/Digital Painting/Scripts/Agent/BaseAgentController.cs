@@ -68,7 +68,11 @@ namespace wizardscode.digitalpainting.agent
         private Interactable _equipped; // the currently equipped item
 
         private DigitalPaintingManager manager;
-        private InventoryManager inventory;
+        private InventoryManager _inventory;
+        public InventoryManager Inventory
+        {
+            get { return _inventory; }
+        }
 
         /// <summary>
         /// Set the thing of interest for this agent. The agent will behave
@@ -149,9 +153,9 @@ namespace wizardscode.digitalpainting.agent
                 return;
             }
 
-            if (storeInInventory && inventory != null)
+            if (storeInInventory && _inventory != null)
             {
-                if (inventory.AddItem(_equipped))
+                if (_inventory.AddItem(_equipped))
                 {
                     _equipped.gameObject.SetActive(false);
                     _equipped = null;
@@ -181,12 +185,12 @@ namespace wizardscode.digitalpainting.agent
         /// <param name="index">The index of the item in the inventory to equip</param>
         public void EquipItemFromInventory(int index)
         {
-            if (inventory == null)
+            if (_inventory == null)
             {
                 Debug.LogError("Trying to equip an item from the inventory, but the agent does not have an inventory.");
                 return;
             }
-            Using = inventory.GetItem(index);
+            Using = _inventory.GetItem(index);
         }
 
         virtual internal void Start()
@@ -212,7 +216,7 @@ namespace wizardscode.digitalpainting.agent
                 abilities = gameObject.AddComponent<AbilityCollection>();
             }
 
-            inventory = GetComponent<InventoryManager>();
+            _inventory = GetComponent<InventoryManager>();
         }
 
         internal virtual void Update()
@@ -299,6 +303,11 @@ namespace wizardscode.digitalpainting.agent
 
             rotationX += Input.GetAxis("Mouse X") * mouseLookSensitivity * Time.deltaTime;
             transform.localRotation = Quaternion.AngleAxis(rotationX, Vector3.up);
+        }
+
+        internal bool HasAbility(Ability desiredAbility)
+        {
+            return abilities.Contains(desiredAbility);
         }
     }
 }

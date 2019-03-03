@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using wizardscode.digitalpainting.agent;
 using wizardscode.interaction;
 
 namespace wizardscode.interaction
@@ -44,33 +45,27 @@ namespace wizardscode.interaction
 
             for (int i = 0; i < conditions.Length; i++)
             {
-                conditions[i].satisfied = false;
+                conditions[i].Reset();
             }
         }
 
-        public static bool CheckCondition (Condition required)
+        public static bool CheckCondition (Condition required, BaseAgentController interactor, Interactable interactable)
         {
+            bool satisfied = true;
             Condition[] allConditions = Instance.conditions;
-            Condition globalCondition = null;
 
             if (allConditions != null && allConditions[0] != null)
             {
                 for (int i = 0; i < allConditions.Length; i++)
                 {
-                    if (allConditions[i].hash == required.hash)
+                    if (allConditions[i].Hash == required.Hash)
                     {
-                        globalCondition = allConditions[i];
-                        break;
+                        satisfied = satisfied && allConditions[i].Satisfied(interactor, interactable);
                     }
                 }
             }
 
-            if (globalCondition != null)
-            {
-                return false;
-            }
-
-            return globalCondition.satisfied == required.satisfied;
+            return satisfied;
         }
     }
 }

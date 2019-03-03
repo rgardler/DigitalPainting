@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4586817610576660}
+  - component: {fileID: 114339397923626030}
+  - component: {fileID: 65375986949085366}
   m_Layer: 0
   m_Name: InteractionLocation
   m_TagString: Untagged
@@ -53,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393915166768426}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.21, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4878905295660642}
@@ -127,6 +129,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65375986949085366
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393915166768426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114060375996757588
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,6 +172,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionLocation: {fileID: 4586817610576660}
   sprite: {fileID: 0}
-  defaultPlayableAsset: {fileID: 11400000, guid: 18d0d567a0c21b44486a5e374d66536f,
+  defaultPlayableAsset: {fileID: 11400000, guid: dd6e58c65c781b84788dc1cfc6cd67f1,
     type: 2}
+  isTrigger: 0
   conditionCollections: []
+--- !u!114 &114339397923626030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393915166768426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bca8f4f34f9a1a409806385ebfe0839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

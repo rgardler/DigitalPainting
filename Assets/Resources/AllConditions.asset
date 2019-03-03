@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: AllConditions
   m_EditorClassIdentifier: 
   conditions:
-  - {fileID: 114023329712902614}
---- !u!114 &114023329712902614
+  - {fileID: 114375557012729266}
+--- !u!114 &114375557012729266
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21,9 +21,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: Test condition
+  m_Script: {fileID: 11500000, guid: dba3621cf9d3dba4692b1e14827f5b28, type: 3}
+  m_Name: Ability to pick up item
   m_EditorClassIdentifier: 
-  description: Test condition
-  satisfied: 0
-  hash: -177358524
+  _description: Ability to pick up item
+  _hash: 2099377876
+  _satisfied: 0
+  ability: {fileID: 11400000, guid: f57c8b3e11f4e3747bf951c6ef80f7a1, type: 2}

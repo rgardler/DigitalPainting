@@ -29,6 +29,9 @@ namespace wizardscode.interaction
         private const string creationPath = "Assets/Resources/AllConditions.asset";
         private const float buttonWidth = 30f;
 
+        int typeIndex = 0;
+        string[] typeNames;
+
         private void OnEnable()
         {
             allConditions = (AllConditions)target;
@@ -40,6 +43,8 @@ namespace wizardscode.interaction
             {
                 CreateEditors();
             }
+
+            typeNames = new string[] { "Boolean", "Ability" };
         }
 
 
@@ -60,10 +65,9 @@ namespace wizardscode.interaction
 
             for (int i = 0; i < AllConditionDescriptions.Length; i++)
             {
-                AllConditionDescriptions[i] = TryGetConditionAt(i).description;
+                AllConditionDescriptions[i] = TryGetConditionAt(i).Description;
             }
         }
-
 
         public override void OnInspectorGUI()
         {
@@ -90,6 +94,8 @@ namespace wizardscode.interaction
 
             EditorGUILayout.BeginHorizontal();
 
+            typeIndex = EditorGUILayout.Popup(typeIndex, typeNames);
+            
             newConditionDescription = EditorGUILayout.TextField(GUIContent.none, newConditionDescription);
 
             if (GUILayout.Button("+", GUILayout.Width(buttonWidth)))
@@ -136,7 +142,20 @@ namespace wizardscode.interaction
                 return;
             }
 
-            Condition newCondition = ConditionEditor.CreateCondition(description);
+            Condition newCondition = null;
+            switch (typeIndex)
+            {
+                case 0:
+                    newCondition = ConditionEditor.CreateCondition<Condition>(description);
+                    break;
+                case 1:
+                    newCondition = ConditionEditor.CreateCondition<AbilityCondition>(description);
+                    break;
+                default:
+                    Debug.LogError("Attempt to create a condition of unknown type");
+                    break;
+            }
+
             newCondition.name = description;
 
             Undo.RecordObject(newCondition, "Created new Condition");
@@ -170,7 +189,7 @@ namespace wizardscode.interaction
         {
             for (int i = 0; i < TryGetConditionsLength(); i++)
             {
-                if (TryGetConditionAt(i).hash == condition.hash)
+                if (TryGetConditionAt(i).Hash == condition.Hash)
                     return i;
             }
 
