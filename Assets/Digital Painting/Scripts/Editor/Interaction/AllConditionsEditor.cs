@@ -106,7 +106,6 @@ namespace wizardscode.interaction
             EditorGUILayout.EndHorizontal();
         }
 
-
         private void CreateEditors()
         {
             conditionEditors = new ConditionEditor[allConditions.conditions.Length];
@@ -114,23 +113,8 @@ namespace wizardscode.interaction
             for (int i = 0; i < conditionEditors.Length; i++)
             {
                 conditionEditors[i] = CreateEditor(TryGetConditionAt(i)) as ConditionEditor;
-                conditionEditors[i].editorType = ConditionEditor.EditorType.AllConditionAsset;
+                conditionEditors[i].editorType = ConditionEditor.EditorType.AllConditionsAsset;
             }
-        }
-
-
-        [MenuItem("Assets/Create/AllConditions")]
-        private static void CreateAllConditionsAsset()
-        {
-            if (AllConditions.Instance)
-                return;
-
-            AllConditions instance = CreateInstance<AllConditions>();
-            AssetDatabase.CreateAsset(instance, creationPath);
-
-            AllConditions.Instance = instance;
-
-            instance.conditions = new Condition[0];
         }
 
 

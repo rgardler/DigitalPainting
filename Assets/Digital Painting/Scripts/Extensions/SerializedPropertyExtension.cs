@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using wizardscode.interaction;
 
 namespace wizardscode.extension
 {
@@ -42,7 +43,6 @@ namespace wizardscode.extension
 
             arrayProperty.serializedObject.ApplyModifiedProperties();
         }
-
 
         public static void RemoveFromObjectArray<T>(this SerializedProperty arrayProperty, T elementToRemove)
             where T : Object

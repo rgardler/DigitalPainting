@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
@@ -40,7 +41,7 @@ namespace wizardscode.interaction
         private void OnTriggerEnter(Collider other)
         {
             BaseAgentController agent = other.gameObject.GetComponentInParent<BaseAgentController>();
-            if (agent != null)
+            if (agent != null && interactable.playableDirector.state != PlayState.Playing)
             {
                 agent.Interactable = interactable;
                 interactable.Interact(agent);

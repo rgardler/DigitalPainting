@@ -172,10 +172,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionLocation: {fileID: 4586817610576660}
   sprite: {fileID: 0}
-  defaultPlayableAsset: {fileID: 11400000, guid: dd6e58c65c781b84788dc1cfc6cd67f1,
-    type: 2}
   isTrigger: 0
-  conditionCollections: []
+  interactionCollection:
+  - {fileID: 0}
 --- !u!114 &114339397923626030
 MonoBehaviour:
   m_ObjectHideFlags: 1

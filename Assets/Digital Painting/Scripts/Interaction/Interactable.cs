@@ -10,13 +10,12 @@ namespace wizardscode.interaction
     {
         public Transform interactionLocation;
         public Sprite sprite;
-        public PlayableAsset defaultPlayableAsset;
         [Tooltip("Automatically trigger when entering the trigger zone.")]
         public bool isTrigger = false;
 
-        public ConditionCollection[] conditionCollections = new ConditionCollection[0];
+        public Interaction[] interactionCollection;
 
-        private  PlayableDirector playableDirector;
+        internal PlayableDirector playableDirector;
         private DigitalPaintingManager manager;
 
         private void Awake()
@@ -37,17 +36,10 @@ namespace wizardscode.interaction
                 playableDirector = gameObject.AddComponent<PlayableDirector>();
             }
 
-            if (defaultPlayableAsset == null)
-            {
-                Debug.LogError(gameObject.name + " has an `Interactable` component but no `defaultPlayableAsset` has been set. This is required.");
-            }
-
             if (interactionLocation == null)
             {
                 Debug.LogError(gameObject.name + " has an `Interactable` component but the `InteractionLocation` property is not set.");
             }
-
-            manager.SetPlayableAsset(playableDirector, defaultPlayableAsset);
         }
 
         /// <summary>
@@ -61,14 +53,11 @@ namespace wizardscode.interaction
         /// <param name="ability">The ability to perform at the indicated spot within the ReactionsCollection.</param>
         public void Interact(BaseAgentController interactor = null)
         {    
-            if (conditionCollections.Length == 0)
+            for (int i = 0; i < interactionCollection.Length; i++)
             {
-                playableDirector. Play();
-            }
-            for (int i = 0; i < conditionCollections.Length; i++)
-            {
-                if (conditionCollections[i].CheckValidInteraction(interactor, this))
+                if (interactionCollection[i].CheckValidInteraction(interactor, this))
                 {
+                    manager.SetPlayableAsset(playableDirector, interactionCollection[i].playableAsset);
                     playableDirector.Play();
                     return;
                 }

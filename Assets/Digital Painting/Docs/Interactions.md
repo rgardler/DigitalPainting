@@ -22,11 +22,12 @@ In order to be interactable you need a GameObject in the scene. This should have
 
 `Sprite` is an optional field (at time of writing) that provides an icon that will be used when displaying this thing in the UI.
 
-`Default Playable Asset` is the timeline that will be played whenever an agent interacts with this `Thing`. In the next section we'll look at how to create this timeline.
+Each interactable can have one or more interactions attached to it. Each interaction can have one more conditions that must be satisfied for the interaction to be 
+possible. 
 
-### Conditional Interactions
+### Conditions
 
-An interaction can be conditional on certain conditions existing. In order to add conditions it is necessary to first create an asset to hole all the conditions that are defined in your Digital Painting. Select `Assets -> Create -> Wizards Code -> Interactions -> All Conditions` (note this must be created in your `Resources` directory) This will create a new Scriptable Object Asset.
+In order to add an interaction to an interactable it is necessary to first create an asset to hold all the conditions that are defined in your Digital Painting. Select `Assets -> Create -> Wizards Code -> Interactions -> All Conditions` (note this must be created in your `Resources` directory) This will create a new Scriptable Object Asset.
 
 To add a new condition to the Digital Painting select the `All Conditions` object, type a name for the condition and click the `+`. To add this condition to a specific Interactable click you need a collection of conditions assigned to the Interactable. If there isn't one already, click `Add Conditions`. Now you can  add the condition. 
 
@@ -45,6 +46,15 @@ public override bool Satisfied(BaseAgentController interactor, Interactable inte
 }
 ```
 
+### Interactions
+
+Once you have at least one condition in the application you can add interactions to your interactable. Click the `Add Interaction` button on the `Interactable` component of your `Thing`. This will add an interaction with the following fields:
+
+`Description` a short description of the interaction. 
+
+`Playable Asset` is the timeline that will be played whenever an agent interacts with this `Thing` using this interaction. In the next section we'll look at how to create this timeline.
+
+Zero or more conditions that must be satisfied for this interaction to be possible. To add a condition click the `+` symbol and select the condition from the available list (see above for adding conditions).
 
 ## Creating an Interaction Timeline
 

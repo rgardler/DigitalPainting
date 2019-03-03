@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56772aaf66e74be4fba6b23fb3ad208e, type: 3}
+  m_Name: AllInteractions
+  m_EditorClassIdentifier: 
+  interactions:
+  - {fileID: 114305629133847534}
+  - {fileID: 114549022530198774}
+--- !u!114 &114305629133847534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
+  m_Name: Pickup Item
+  m_EditorClassIdentifier: 
+  Description: Pickup Item
+  playableAsset: {fileID: 11400000, guid: 18d0d567a0c21b44486a5e374d66536f, type: 2}
+  requiredConditions:
+  - {fileID: 0}
+  _hash: 1014680203
+--- !u!114 &114549022530198774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
+  m_Name: Store All Uneeded Items
+  m_EditorClassIdentifier: 
+  Description: Store All Uneeded Items
+  playableAsset: {fileID: 0}
+  requiredConditions:
+  - {fileID: 0}
+  _hash: -545192005

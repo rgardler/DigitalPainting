@@ -13,13 +13,7 @@ namespace wizardscode.interaction
 
         public override bool Satisfied(BaseAgentController interactor, Interactable interactable)
         {
-            if (interactor.HasAbility(ability))
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
+            return interactor.HasAbility(ability);
         }
     }
 }

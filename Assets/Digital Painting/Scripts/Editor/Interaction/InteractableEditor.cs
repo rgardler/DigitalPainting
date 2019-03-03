@@ -5,30 +5,27 @@ using wizardscode.extension;
 namespace wizardscode.interaction
 {
     [CustomEditor(typeof(Interactable))]
-    public class InteractableEditor : EditorWithSubEditors<ConditionCollectionEditor, ConditionCollection>
+    public class InteractableEditor : EditorWithSubEditors<InteractionEditor, Interaction>
     {
         private Interactable interactable;
         private SerializedProperty interactionLocationProperty;
         private SerializedProperty spriteProperty;
-        private SerializedProperty collectionsProperty;
-        private SerializedProperty defaultPlayableAssetProperty;
+        private SerializedProperty interactionCollectionProperty;
 
-        private const float collectionButtonWidth = 125f;
+        private const float collectionButtonWidth = 30f;
         private const string interactablePropInteractionLocationName = "interactionLocation";
         private const string interactablePropertySpritePropName = "sprite";
-        private const string interactablePropConditionCollectionsName = "conditionCollections";
-        private const string interactablePropDefaultPlayableAssetName = "defaultPlayableAsset";
+        private const string interactablePropInteractionCollectionName = "interactionCollection";
 
         private void OnEnable()
         {
             interactable = (Interactable)target;
 
-            collectionsProperty = serializedObject.FindProperty(interactablePropConditionCollectionsName);
+            interactionCollectionProperty = serializedObject.FindProperty(interactablePropInteractionCollectionName);
             interactionLocationProperty = serializedObject.FindProperty(interactablePropInteractionLocationName);
             spriteProperty = serializedObject.FindProperty(interactablePropertySpritePropName);
-            defaultPlayableAssetProperty = serializedObject.FindProperty(interactablePropDefaultPlayableAssetName);
 
-            CheckAndCreateSubEditors(interactable.conditionCollections);
+            CheckAndCreateSubEditors(interactable.interactionCollection);
         }
 
         private void OnDisable()
@@ -36,34 +33,44 @@ namespace wizardscode.interaction
             CleanupEditors();
         }
 
-        protected override void SubEditorSetup(ConditionCollectionEditor editor)
+        protected override void SubEditorSetup(InteractionEditor editor)
         {
-            editor.collectionsProperty = collectionsProperty;
+            editor.collectionsProperty = interactionCollectionProperty;
+            editor.editorType = InteractionEditor.EditorType.InteractionCollection;
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            CheckAndCreateSubEditors(interactable.conditionCollections);
+            CheckAndCreateSubEditors(interactable.interactionCollection);
 
             EditorGUILayout.PropertyField(interactionLocationProperty);
             EditorGUILayout.ObjectField(spriteProperty);
-            EditorGUILayout.PropertyField(defaultPlayableAssetProperty);
 
+            EditorGUILayout.BeginVertical(GUI.skin.box);
+            EditorGUILayout.LabelField("Interactions");
             for (int i = 0; i < subEditors.Length; i++)
             {
+                EditorGUILayout.BeginHorizontal();
                 subEditors[i].OnInspectorGUI();
-                EditorGUILayout.Space();
+
+                if (GUILayout.Button("-", GUILayout.Width(collectionButtonWidth)))
+                {
+                    interactionCollectionProperty.RemoveFromObjectArrayAt(i);
+                }
+                EditorGUILayout.EndHorizontal();
             }
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Add Conditions", GUILayout.Width(collectionButtonWidth)))
+            if (GUILayout.Button("+", GUILayout.Width(collectionButtonWidth)))
             {
-                ConditionCollection newCollection = ConditionCollectionEditor.CreateConditionCollection();
-                collectionsProperty.AddToObjectArray(newCollection);
+                Interaction newInteraction = InteractionEditor.CreateInteraction("New Interaction");
+                interactionCollectionProperty.AddToObjectArray(newInteraction);
             }
             EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.EndVertical();
 
             EditorGUILayout.Space();
 

@@ -10,7 +10,7 @@ namespace wizardscode.interaction
     {
         public enum EditorType
         {
-            ConditionAsset, AllConditionAsset, ConditionCollection
+            ConditionAsset, AllConditionsAsset, ConditionCollection
         }
 
         public EditorType editorType;                       // The type of this Editor.
@@ -54,7 +54,7 @@ namespace wizardscode.interaction
         
             switch (editorType)
             {
-                case EditorType.AllConditionAsset:
+                case EditorType.AllConditionsAsset:
                     AllConditionsAssetGUI();
                     break;
                 case EditorType.ConditionAsset:

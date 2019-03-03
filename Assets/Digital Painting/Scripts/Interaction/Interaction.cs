@@ -1,14 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction
 {
-    public class ConditionCollection : ScriptableObject
+    public class Interaction : ScriptableObject
     {
-        public string description;
+        public string Description;
+        public PlayableAsset playableAsset;
         public Condition[] requiredConditions = new Condition[0];
+        public int _hash = int.MinValue;
+        public int Hash
+        {
+            get
+            {
+                if (_hash == int.MinValue)
+                {
+                    _hash = Animator.StringToHash(Description);
+                }
+                return _hash;
+            }
+        }
 
         /// <summary>
         /// Check to see if conditions for interaction are passed.
@@ -18,7 +32,7 @@ namespace wizardscode.interaction
         /// <returns>Tue if all required conditions pass.</returns>
         public bool CheckValidInteraction(BaseAgentController interactor, Interactable interactable)
         {
-            for(int i = 0; i < requiredConditions.Length; i++)
+            for (int i = 0; i < requiredConditions.Length; i++)
             {
                 if (!AllConditions.CheckCondition(requiredConditions[i], interactor, interactable))
                 {
@@ -27,6 +41,13 @@ namespace wizardscode.interaction
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Reset the condition to its default values.
+        /// </summary>
+        public void Reset()
+        {
         }
     }
 }
