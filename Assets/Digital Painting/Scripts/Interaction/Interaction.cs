@@ -10,7 +10,7 @@ namespace wizardscode.interaction
     {
         public string Description;
         public PlayableAsset playableAsset;
-        public Condition[] requiredConditions = new Condition[0];
+        public ConditionCollection requiredConditions;
         public int _hash = int.MinValue;
         public int Hash
         {
@@ -32,9 +32,9 @@ namespace wizardscode.interaction
         /// <returns>Tue if all required conditions pass.</returns>
         public bool CheckValidInteraction(BaseAgentController interactor, Interactable interactable)
         {
-            for (int i = 0; i < requiredConditions.Length; i++)
+            for (int i = 0; i < requiredConditions.conditions.Length; i++)
             {
-                if (!AllConditions.CheckCondition(requiredConditions[i], interactor, interactable))
+                if (!requiredConditions.CheckCondition(requiredConditions.conditions[i], interactor, interactable))
                 {
                     return false;
                 }

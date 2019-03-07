@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8af48761548125948b21ce21d643752b, type: 3}
-  m_Name: AllConditions
+  m_Name: Pickup Item Conditions
   m_EditorClassIdentifier: 
   conditions:
-  - {fileID: 114375557012729266}
---- !u!114 &114375557012729266
+  - {fileID: 114763195797096520}
+--- !u!114 &114763195797096520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22,9 +22,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dba3621cf9d3dba4692b1e14827f5b28, type: 3}
-  m_Name: Ability to pick up item
+  m_Name: Agent has Levitate Item Spell
   m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: 2099377876
+  _description: Agent has Levitate Item Spell
+  _hash: -2147483648
   _satisfied: 0
   ability: {fileID: 11400000, guid: f57c8b3e11f4e3747bf951c6ef80f7a1, type: 2}

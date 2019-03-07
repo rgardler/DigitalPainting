@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using wizardscode.interaction;
 
 public abstract class EditorWithSubEditors<TEditor, TTarget> : Editor
     where TEditor : Editor
     where TTarget : Object
 {
     protected TEditor[] subEditors;
-    
+
+    internal Editor parentEditor;
+
     // This should be called in OnEnable and at the start of OnInspectorGUI.
     protected void CheckAndCreateSubEditors(TTarget[] subEditorTargets)
     {

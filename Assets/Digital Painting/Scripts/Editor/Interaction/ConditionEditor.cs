@@ -2,12 +2,15 @@
 using UnityEditor;
 using wizardscode.extension;
 using wizardscode.ability;
+using System;
 
 namespace wizardscode.interaction
 {
     [CustomEditor(typeof(Condition), true)]
     public class ConditionEditor : Editor
     {
+        internal Editor parentEditor;
+
         public enum EditorType
         {
             ConditionAsset, AllConditionsAsset, ConditionCollection
@@ -55,13 +58,13 @@ namespace wizardscode.interaction
             switch (editorType)
             {
                 case EditorType.AllConditionsAsset:
-                    AllConditionsAssetGUI();
+                    List();
                     break;
                 case EditorType.ConditionAsset:
-                    ConditionAssetGUI();
+                    ConditionAssetGUI(); 
                     break;
                 case EditorType.ConditionCollection:
-                    InteractableGUI();
+                    List();
                     break;
                 default:
                     throw new UnityException("Unknown ConditionEditor.EditorType.");
@@ -70,28 +73,23 @@ namespace wizardscode.interaction
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void AllConditionsAssetGUI()
+        private void List()
         {
             EditorGUILayout.BeginVertical(GUI.skin.box);
 
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(condition.Description);
-            if (GUILayout.Button("-", GUILayout.Width(conditionButtonWidth)))
-                AllConditionsEditor.RemoveCondition(condition);
-            EditorGUILayout.EndHorizontal();
+            ConditionAssetGUI();
 
             EditorGUILayout.EndVertical();
         }
 
         private void ConditionAssetGUI()
         {
-            EditorGUILayout.BeginVertical(GUI.skin.box);
+            EditorGUILayout.BeginVertical();
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(condition.Description);
             EditorGUILayout.EndHorizontal();
-
-
+            
             EditorGUI.indentLevel++;
             if (condition is AbilityCondition)
             {
@@ -103,57 +101,6 @@ namespace wizardscode.interaction
             EditorGUI.indentLevel--;
 
             EditorGUILayout.EndVertical();
-        }
-
-
-        private void InteractableGUI()
-        {
-            serializedObject.Update();
-
-            EditorGUI.indentLevel++;
-            EditorGUILayout.BeginHorizontal();
-
-            int conditionIndex = AllConditionsEditor.TryGetConditionIndex(condition);
-
-            if (conditionIndex == -1)
-            {
-                conditionIndex = 0;
-            }
-
-            conditionIndex = EditorGUILayout.Popup(conditionIndex, AllConditionsEditor.AllConditionDescriptions);
-            Condition globalCondition = AllConditionsEditor.TryGetConditionAt(conditionIndex);
-            descriptionProperty.stringValue = globalCondition != null ? globalCondition.Description : blankDescription;
-            hashProperty.intValue = Animator.StringToHash(descriptionProperty.stringValue);
-
-            GUI.enabled = false;
-            EditorGUILayout.PropertyField(satisfiedProperty, GUIContent.none);
-            GUI.enabled = true;
-
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUI.indentLevel--;
-
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        public static Condition CreateCondition<T>() where T : Condition
-        {
-
-            Condition newCondition = CreateInstance<T>();
-            string blankDescription = "No conditions set.";
-
-            Condition globalCondition = AllConditionsEditor.TryGetConditionAt(0);
-            newCondition.Description = globalCondition != null ? globalCondition.Description : blankDescription;
-
-            return newCondition;
-        }
-
-        public static Condition CreateCondition<T>(string description) where T : Condition
-        {
-            Condition newCondition = CreateInstance<T>();
-
-            newCondition.Description = description;
-            return newCondition;
         }
     }
 }

@@ -11,12 +11,12 @@ namespace wizardscode.interaction
         private SerializedProperty interactionLocationProperty;
         private SerializedProperty spriteProperty;
         private SerializedProperty interactionCollectionProperty;
-
+       
         private const float collectionButtonWidth = 30f;
         private const string interactablePropInteractionLocationName = "interactionLocation";
         private const string interactablePropertySpritePropName = "sprite";
-        private const string interactablePropInteractionCollectionName = "interactionCollection";
-
+        private const string interactablePropInteractionCollectionName = "interactionsCollection";
+        
         private void OnEnable()
         {
             interactable = (Interactable)target;
@@ -25,7 +25,10 @@ namespace wizardscode.interaction
             interactionLocationProperty = serializedObject.FindProperty(interactablePropInteractionLocationName);
             spriteProperty = serializedObject.FindProperty(interactablePropertySpritePropName);
 
-            CheckAndCreateSubEditors(interactable.interactionCollection);
+            if (interactable.interactionsCollection != null)
+            {
+                CheckAndCreateSubEditors(interactable.interactionsCollection.interactions);
+            }
         }
 
         private void OnDisable()
@@ -36,41 +39,31 @@ namespace wizardscode.interaction
         protected override void SubEditorSetup(InteractionEditor editor)
         {
             editor.collectionsProperty = interactionCollectionProperty;
-            editor.editorType = InteractionEditor.EditorType.InteractionCollection;
+            editor.editorType = InteractionEditor.EditorType.InteractionAsset;
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            CheckAndCreateSubEditors(interactable.interactionCollection);
 
             EditorGUILayout.PropertyField(interactionLocationProperty);
             EditorGUILayout.ObjectField(spriteProperty);
-
-            EditorGUILayout.BeginVertical(GUI.skin.box);
-            EditorGUILayout.LabelField("Interactions");
-            for (int i = 0; i < subEditors.Length; i++)
+            EditorGUILayout.PropertyField(interactionCollectionProperty);
+            
+            if (interactable.interactionsCollection != null)
             {
-                EditorGUILayout.BeginHorizontal();
-                subEditors[i].OnInspectorGUI();
-
-                if (GUILayout.Button("-", GUILayout.Width(collectionButtonWidth)))
+                CheckAndCreateSubEditors(interactable.interactionsCollection.interactions);
+                EditorGUILayout.BeginVertical(GUI.skin.box);
+                EditorGUILayout.LabelField("Interactions");
+                for (int i = 0; i < subEditors.Length; i++)
                 {
-                    interactionCollectionProperty.RemoveFromObjectArrayAt(i);
+                    EditorGUILayout.BeginHorizontal();
+                    subEditors[i].OnInspectorGUI();
+                    EditorGUILayout.EndHorizontal();
                 }
-                EditorGUILayout.EndHorizontal();
-            }
 
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button("+", GUILayout.Width(collectionButtonWidth)))
-            {
-                Interaction newInteraction = InteractionEditor.CreateInteraction("New Interaction");
-                interactionCollectionProperty.AddToObjectArray(newInteraction);
+                EditorGUILayout.EndVertical();
             }
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.EndVertical();
 
             EditorGUILayout.Space();
 

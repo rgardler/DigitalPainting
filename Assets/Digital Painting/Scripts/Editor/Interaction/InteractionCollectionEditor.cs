@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEngine;
 
 namespace wizardscode.interaction
 {
-    [CustomEditor(typeof(AllInteractions))]
-    public class AllInteractionsEditor : Editor
+    [CustomEditor(typeof(InteractionCollection))]
+    public class InteractionCollectionEditor : Editor
     {
-        public static string[] AllInteractionDescriptions
+        public string[] AllInteractionDescriptions
         {
             get
             {
@@ -22,26 +24,24 @@ namespace wizardscode.interaction
         private static string[] allInteractionDescriptions;
 
         private InteractionEditor[] interactionEditors;
-        private AllInteractions allInteractions;
+        private InteractionCollection collection;
         private string newInteractionDescription = "New Interaction";
 
-        private const string creationPath = "Assets/Resources/AllInteractions.asset";
+        private const string creationPath = "Assets/Resources/InteractionsCollection.asset";
         private const float buttonWidth = 30f;
-
 
         private void OnEnable()
         {
-            allInteractions = (AllInteractions)target;
+            collection = (InteractionCollection)target;
 
-            if (allInteractions.interactions == null)
-                allInteractions.interactions= new Interaction[0];
+            if (collection.interactions == null)
+                collection.interactions = new Interaction[0];
 
             if (interactionEditors == null)
             {
                 CreateEditors();
             }
         }
-
 
         private void OnDisable()
         {
@@ -53,8 +53,7 @@ namespace wizardscode.interaction
             interactionEditors = null;
         }
 
-
-        private static void SetAllInteractionDescriptions()
+        private void SetAllInteractionDescriptions()
         {
             AllInteractionDescriptions = new string[TryGetInteractionsLength()];
 
@@ -66,7 +65,7 @@ namespace wizardscode.interaction
 
         public override void OnInspectorGUI()
         {
-            if (interactionEditors.Length != TryGetInteractionsLength())
+            if (interactionEditors == null || interactionEditors.Length != TryGetInteractionsLength())
             {
                 for (int i = 0; i < interactionEditors.Length; i++)
                 {
@@ -75,6 +74,8 @@ namespace wizardscode.interaction
 
                 CreateEditors();
             }
+
+            EditorGUILayout.LabelField("Interaction Collection");
 
             for (int i = 0; i < interactionEditors.Length; i++)
             {
@@ -88,76 +89,66 @@ namespace wizardscode.interaction
             }
 
             EditorGUILayout.BeginHorizontal();
-                        
+
             newInteractionDescription = EditorGUILayout.TextField(GUIContent.none, newInteractionDescription);
 
             if (GUILayout.Button("+", GUILayout.Width(buttonWidth)))
             {
                 AddInteraction(newInteractionDescription);
-                newInteractionDescription = "New Interaction";
             }
             EditorGUILayout.EndHorizontal();
         }
 
-
         private void CreateEditors()
         {
-            interactionEditors = new InteractionEditor[allInteractions.interactions.Length];
+            interactionEditors = new InteractionEditor[collection.interactions.Length];
 
             for (int i = 0; i < interactionEditors.Length; i++)
             {
                 interactionEditors[i] = CreateEditor(TryGetInteractionAt(i)) as InteractionEditor;
                 interactionEditors[i].editorType = InteractionEditor.EditorType.AllInteractionsAsset;
+                interactionEditors[i].parentEditor = this;
             }
         }
-
 
         internal void AddInteraction(string description)
         {
-            if (!AllInteractions.Instance)
-            {
-                Debug.LogError("AllInteractions has not been created yet.");
-                return;
-            }
-
-            Interaction newInteraction = InteractionEditor.CreateInteraction(description);
+            Interaction newInteraction = CreateInstance<Interaction>();
+            newInteraction.Description = description;
             newInteraction.name = description;
 
+            AssetDatabase.Refresh();
             Undo.RecordObject(newInteraction, "Created new Interaction");
-            AssetDatabase.AddObjectToAsset(newInteraction, AllInteractions.Instance);
+            AssetDatabase.AddObjectToAsset(newInteraction, collection);
             AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(newInteraction));
-            ArrayUtility.Add(ref AllInteractions.Instance.interactions, newInteraction);
-            EditorUtility.SetDirty(AllInteractions.Instance);
+            ArrayUtility.Add(ref collection.interactions, newInteraction);
+            EditorUtility.SetDirty(collection);
+            AssetDatabase.SaveAssets();
 
             SetAllInteractionDescriptions();
         }
 
-
-        public static void RemoveInteraction(Interaction interaction)
+        public void RemoveInteraction(Interaction interaction)
         {
-            if (!AllInteractions.Instance)
-            {
-                Debug.LogError("AllInteractions has not been created yet.");
-                return;
-            }
-
-            Undo.RecordObject(AllInteractions.Instance, "Removing Interaction");
-            ArrayUtility.Remove(ref AllInteractions.Instance.interactions, interaction);
+            AssetDatabase.Refresh();
+            Undo.RecordObject(collection, "Removing Interaction");
+            ArrayUtility.Remove(ref collection.interactions, interaction);
             DestroyImmediate(interaction, true);
             AssetDatabase.SaveAssets();
-            EditorUtility.SetDirty(AllConditions.Instance);
+            EditorUtility.SetDirty(collection);
+
             SetAllInteractionDescriptions();
         }
 
-        public static int TryGetInteractionIndex(Interaction interaction)
+        public int TryGetInteractionIndex(Interaction interaction)
         {
+            if (interaction == null)
+            {
+                return -1;
+            }
             for (int i = 0; i < TryGetInteractionsLength(); i++)
             {
-                if (interaction == null)
-                {
-                    return -1;
-                }
-                else if (TryGetInteractionAt(i).Hash == interaction.Hash)
+                if (TryGetInteractionAt(i).Hash == interaction.Hash)
                 {
                     return i;
                 }
@@ -166,10 +157,9 @@ namespace wizardscode.interaction
             return -1;
         }
 
-
-        public static Interaction TryGetInteractionAt(int index)
+        public Interaction TryGetInteractionAt(int index)
         {
-            Interaction[] allInteractions = AllInteractions.Instance.interactions;
+            Interaction[] allInteractions = collection.interactions;
 
             if (allInteractions == null || allInteractions[0] == null)
                 return null;
@@ -180,12 +170,12 @@ namespace wizardscode.interaction
             return allInteractions[index];
         }
 
-
-        public static int TryGetInteractionsLength()
+        public int TryGetInteractionsLength()
         {
-            if (AllInteractions.Instance.interactions == null)
+            if (collection.interactions == null)
                 return 0;
-            return AllInteractions.Instance.interactions.Length;
+            return collection.interactions.Length;
         }
+
     }
 }

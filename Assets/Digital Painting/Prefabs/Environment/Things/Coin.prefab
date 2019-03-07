@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1687663993404134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.721, y: -4.41, z: -32.77}
+  m_LocalPosition: {x: 4, y: 0.04, z: -4}
   m_LocalScale: {x: 0.4, y: 0.04, z: 0.4}
   m_Children:
   - {fileID: 4326961624156938}
@@ -261,10 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionLocation: {fileID: 4326961624156938}
   sprite: {fileID: 21300000, guid: 1f5ad7f23c43a134fbe17f0bfcfa7ae7, type: 3}
-  defaultPlayableAsset: {fileID: 11400000, guid: 18d0d567a0c21b44486a5e374d66536f,
-    type: 2}
   isTrigger: 0
-  conditionCollections: []
+  interactionsCollection: {fileID: 11400000, guid: 3613ba83fc7c7744eb07a169c545726c,
+    type: 2}
 --- !u!114 &114511467736574412
 MonoBehaviour:
   m_ObjectHideFlags: 1

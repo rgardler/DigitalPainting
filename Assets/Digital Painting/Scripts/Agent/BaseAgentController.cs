@@ -172,7 +172,7 @@ namespace wizardscode.digitalpainting.agent
         public void DropItem(Interactable item)
         {
             item.enabled = true;
-            item.transform.parent = null;
+            item.transform.SetParent(null, true);
             Vector3 pos = transform.position;
             pos += Vector3.forward;
             item.transform.position = pos;

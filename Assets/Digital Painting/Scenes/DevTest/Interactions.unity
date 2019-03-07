@@ -141,144 +141,6 @@ Transform:
   m_Father: {fileID: 1286510027}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &341813405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: 2099377876
-  _satisfied: 0
---- !u!114 &484177363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: New Interaction
-  playableAsset: {fileID: 0}
-  requiredConditions:
-  - {fileID: 1792020208}
-  _hash: -49945837
---- !u!114 &508035809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: 
-  playableAsset: {fileID: 0}
-  requiredConditions:
-  - {fileID: 341813405}
-  _hash: -2147483648
---- !u!114 &509555191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: 2099377876
-  _satisfied: 0
---- !u!1001 &531427586
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 114314909522485880, guid: fb0dd53ab33a0554f9d6e36f97f26211,
-        type: 2}
-      propertyPath: interactionCollection.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878905295660642, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114314909522485880, guid: fb0dd53ab33a0554f9d6e36f97f26211,
-        type: 2}
-      propertyPath: interactionLocation
-      value: 
-      objectReference: {fileID: 531427587}
-    - target: {fileID: 114314909522485880, guid: fb0dd53ab33a0554f9d6e36f97f26211,
-        type: 2}
-      propertyPath: interactionCollection.Array.data[0]
-      value: 
-      objectReference: {fileID: 1005876340}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fb0dd53ab33a0554f9d6e36f97f26211, type: 2}
-  m_IsPrefabAsset: 0
---- !u!4 &531427587 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4586817610576660, guid: fb0dd53ab33a0554f9d6e36f97f26211,
-    type: 2}
-  m_PrefabInternal: {fileID: 531427586}
---- !u!114 &603170244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: New Interaction
-  playableAsset: {fileID: 0}
-  requiredConditions:
-  - {fileID: 509555191}
-  _hash: -49945837
 --- !u!1 &836146470
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,43 +206,6 @@ MonoBehaviour:
   showDayNightUI: 0
   showInterestingThingsUI: 0
   showDroneControlUI: 0
---- !u!114 &1005876340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: Store All Uneeded Items
-  playableAsset: {fileID: 0}
-  requiredConditions:
-  - {fileID: 1516413008}
-  _hash: -545192005
---- !u!4 &1157868557 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4326961624156938, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-    type: 2}
-  m_PrefabInternal: {fileID: 1812050179}
---- !u!114 &1195095299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: 
-  playableAsset: {fileID: 11400000, guid: 18d0d567a0c21b44486a5e374d66536f, type: 2}
-  requiredConditions:
-  - {fileID: 2095056191}
-  _hash: -2147483648
 --- !u!1 &1201952526
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,8 +308,8 @@ MonoBehaviour:
   interactionLocation: {fileID: 79177736}
   sprite: {fileID: 0}
   isTrigger: 0
-  interactionCollection:
-  - {fileID: 603170244}
+  interactionsCollection: {fileID: 11400000, guid: ed428050d2e6edf4c981d6f25429eac9,
+    type: 2}
 --- !u!114 &1286510023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,78 +496,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1516413008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: -2147483648
-  _satisfied: 0
---- !u!114 &1565058482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: -2147483648
-  _satisfied: 0
---- !u!114 &1618336379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: Pickup Item
-  playableAsset: {fileID: 11400000, guid: 18d0d567a0c21b44486a5e374d66536f, type: 2}
-  requiredConditions:
-  - {fileID: 1998935778}
-  _hash: 1014680203
---- !u!114 &1714515155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: -2147483648
-  _satisfied: 0
---- !u!114 &1792020208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: -2147483648
-  _satisfied: 0
 --- !u!1001 &1812050179
 Prefab:
   m_ObjectHideFlags: 0
@@ -750,16 +503,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: conditionCollections.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: interactionCollection.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4220647580778330, guid: 5b8e7c16fd8bac846ad567ff23b70e73, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -794,110 +537,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
         type: 2}
-      propertyPath: conditionCollections.Array.data[0]
+      propertyPath: interactionsCollection
       value: 
-      objectReference: {fileID: 1195095299}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
+      objectReference: {fileID: 11400000, guid: 3613ba83fc7c7744eb07a169c545726c,
         type: 2}
-      propertyPath: conditionCollections.Array.data[1]
-      value: 
-      objectReference: {fileID: 508035809}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: interactionCollection.Array.data[0]
-      value: 
-      objectReference: {fileID: 1618336379}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: interactionCollection.Array.data[1]
-      value: 
-      objectReference: {fileID: 2063257884}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: interactionCollection.Array.data[5]
-      value: 
-      objectReference: {fileID: 1969427922}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: interactionCollection.Array.data[6]
-      value: 
-      objectReference: {fileID: 484177363}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: interactionLocation
-      value: 
-      objectReference: {fileID: 1157868557}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 1f5ad7f23c43a134fbe17f0bfcfa7ae7,
-        type: 3}
-    - target: {fileID: 114493578080069994, guid: 5b8e7c16fd8bac846ad567ff23b70e73,
-        type: 2}
-      propertyPath: interactionCollection.Array.data[2]
-      value: 
-      objectReference: {fileID: 2063257884}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b8e7c16fd8bac846ad567ff23b70e73, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &1969427922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: New Interaction
-  playableAsset: {fileID: 0}
-  requiredConditions:
-  - {fileID: 1714515155}
-  _hash: -49945837
---- !u!114 &1998935778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: -2147483648
-  _satisfied: 0
---- !u!114 &2063257884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b375a69eab9584d869866a8d1514ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Description: New Interaction
-  playableAsset: {fileID: 0}
-  requiredConditions:
-  - {fileID: 1565058482}
-  _hash: -49945837
---- !u!114 &2095056191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e244f5b43433e4a865a4527230b632, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _description: Ability to pick up item
-  _hash: 2099377876
-  _satisfied: 0

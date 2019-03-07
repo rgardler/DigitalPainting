@@ -3,10 +3,10 @@ using UnityEditor;
 
 namespace wizardscode.interaction
 {
-    [CustomEditor(typeof(AllConditions))]
-    public class AllConditionsEditor : Editor
+    [CustomEditor(typeof(ConditionCollection))]
+    public class ConditionCollectionEditor : Editor
     {
-        public static string[] AllConditionDescriptions
+        public string[] AllConditionDescriptions
         {
             get
             {
@@ -23,10 +23,10 @@ namespace wizardscode.interaction
         private static string[] allConditionDescriptions;
 
         private ConditionEditor[] conditionEditors;
-        private AllConditions allConditions;
+        private ConditionCollection collection;
         private string newConditionDescription = "New Condition";
 
-        private const string creationPath = "Assets/Resources/AllConditions.asset";
+        private const string creationPath = "Assets/Resources/ConditionCollection.asset";
         private const float buttonWidth = 30f;
 
         int typeIndex = 0;
@@ -34,10 +34,10 @@ namespace wizardscode.interaction
 
         private void OnEnable()
         {
-            allConditions = (AllConditions)target;
+            collection = (ConditionCollection)target;
 
-            if (allConditions.conditions == null)
-                allConditions.conditions = new Condition[0];
+            if (collection.conditions == null)
+                collection.conditions = new Condition[0];
 
             if (conditionEditors == null)
             {
@@ -59,7 +59,7 @@ namespace wizardscode.interaction
         }
 
 
-        private static void SetAllConditionDescriptions()
+        private void SetAllConditionDescriptions()
         {
             AllConditionDescriptions = new string[TryGetConditionsLength()];
 
@@ -101,76 +101,70 @@ namespace wizardscode.interaction
             if (GUILayout.Button("+", GUILayout.Width(buttonWidth)))
             {
                 AddCondition(newConditionDescription);
-                newConditionDescription = "New Condition";
             }
             EditorGUILayout.EndHorizontal();
         }
 
         private void CreateEditors()
         {
-            conditionEditors = new ConditionEditor[allConditions.conditions.Length];
+            conditionEditors = new ConditionEditor[collection.conditions.Length];
 
             for (int i = 0; i < conditionEditors.Length; i++)
             {
                 conditionEditors[i] = CreateEditor(TryGetConditionAt(i)) as ConditionEditor;
                 conditionEditors[i].editorType = ConditionEditor.EditorType.AllConditionsAsset;
+                conditionEditors[i].parentEditor = this;
             }
         }
 
 
         private void AddCondition(string description)
         {
-            if (!AllConditions.Instance)
-            {
-                Debug.LogError("AllConditions has not been created yet.");
-                return;
-            }
-
             Condition newCondition = null;
             switch (typeIndex)
             {
                 case 0:
-                    newCondition = ConditionEditor.CreateCondition<Condition>(description);
+                    newCondition = CreateInstance<Condition>();
                     break;
                 case 1:
-                    newCondition = ConditionEditor.CreateCondition<AbilityCondition>(description);
+                    newCondition = CreateInstance<AbilityCondition>();
                     break;
                 default:
                     Debug.LogError("Attempt to create a condition of unknown type");
                     break;
             }
-
+            newCondition.Description = description;
             newCondition.name = description;
 
+            AssetDatabase.Refresh();
             Undo.RecordObject(newCondition, "Created new Condition");
-            AssetDatabase.AddObjectToAsset(newCondition, AllConditions.Instance);
+            AssetDatabase.AddObjectToAsset(newCondition, collection);
             AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(newCondition));
-            ArrayUtility.Add(ref AllConditions.Instance.conditions, newCondition);
-            EditorUtility.SetDirty(AllConditions.Instance);
+            ArrayUtility.Add(ref collection.conditions, newCondition);
+            EditorUtility.SetDirty(collection);
+            AssetDatabase.SaveAssets();
 
             SetAllConditionDescriptions();
         }
 
 
-        public static void RemoveCondition(Condition condition)
+        public void RemoveCondition(Condition condition)
         {
-            if (!AllConditions.Instance)
-            {
-                Debug.LogError("AllConditions has not been created yet.");
-                return;
-            }
-
-            Undo.RecordObject(AllConditions.Instance, "Removing condition");
-            ArrayUtility.Remove(ref AllConditions.Instance.conditions, condition);
+            AssetDatabase.Refresh();
+            Undo.RecordObject(collection, "Removing condition");
+            ArrayUtility.Remove(ref collection.conditions, condition);
             DestroyImmediate(condition, true);
             AssetDatabase.SaveAssets();
-            EditorUtility.SetDirty(AllConditions.Instance);
+            EditorUtility.SetDirty(collection);
             SetAllConditionDescriptions();
         }
-
-
-        public static int TryGetConditionIndex(Condition condition)
+        
+        public int TryGetConditionIndex(Condition condition)
         {
+            if (condition == null)
+            {
+                return -1;
+            }
             for (int i = 0; i < TryGetConditionsLength(); i++)
             {
                 if (TryGetConditionAt(i).Hash == condition.Hash)
@@ -181,9 +175,9 @@ namespace wizardscode.interaction
         }
 
 
-        public static Condition TryGetConditionAt(int index)
+        public Condition TryGetConditionAt(int index)
         {
-            Condition[] allConditions = AllConditions.Instance.conditions;
+            Condition[] allConditions = collection.conditions;
 
             if (allConditions == null || allConditions[0] == null)
                 return null;
@@ -195,11 +189,11 @@ namespace wizardscode.interaction
         }
 
 
-        public static int TryGetConditionsLength()
+        public int TryGetConditionsLength()
         {
-            if (AllConditions.Instance.conditions == null)
+            if (collection.conditions == null)
                 return 0;
-            return AllConditions.Instance.conditions.Length;
+            return collection.conditions.Length;
         }
     }
 }

@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 65117676941159308}
   - component: {fileID: 114060375996757588}
   - component: {fileID: 114314909522485880}
+  - component: {fileID: 114956019813971766}
   m_Layer: 0
   m_Name: Agent Home
   m_TagString: Untagged
@@ -173,8 +174,8 @@ MonoBehaviour:
   interactionLocation: {fileID: 4586817610576660}
   sprite: {fileID: 0}
   isTrigger: 0
-  interactionCollection:
-  - {fileID: 0}
+  interactionsCollection: {fileID: 11400000, guid: 5b7fb0f4cbf1b02458411e90fc61d0db,
+    type: 2}
 --- !u!114 &114339397923626030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,3 +187,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bca8f4f34f9a1a409806385ebfe0839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114956019813971766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751483035618894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a762b119d9835044086f0c570317007e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

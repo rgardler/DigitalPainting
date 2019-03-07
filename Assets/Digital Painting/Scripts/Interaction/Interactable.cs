@@ -13,14 +13,10 @@ namespace wizardscode.interaction
         [Tooltip("Automatically trigger when entering the trigger zone.")]
         public bool isTrigger = false;
 
-        public Interaction[] interactionCollection;
+        public InteractionCollection interactionsCollection;
 
         internal PlayableDirector playableDirector;
         private DigitalPaintingManager manager;
-
-        private void Awake()
-        {
-        }
 
         private void Start()
         {
@@ -53,11 +49,16 @@ namespace wizardscode.interaction
         /// <param name="ability">The ability to perform at the indicated spot within the ReactionsCollection.</param>
         public void Interact(BaseAgentController interactor = null)
         {    
-            for (int i = 0; i < interactionCollection.Length; i++)
+            if (interactionsCollection == null || interactionsCollection.interactions == null)
             {
-                if (interactionCollection[i].CheckValidInteraction(interactor, this))
+                Debug.LogWarning("Interactable does not have interactions defined");
+                return;
+            }
+            for (int i = 0; i < interactionsCollection.interactions.Length; i++)
+            {
+                if (interactionsCollection.interactions[i].CheckValidInteraction(interactor, this))
                 {
-                    manager.SetPlayableAsset(playableDirector, interactionCollection[i].playableAsset);
+                    manager.SetPlayableAsset(playableDirector, interactionsCollection.interactions[i].playableAsset);
                     playableDirector.Play();
                     return;
                 }

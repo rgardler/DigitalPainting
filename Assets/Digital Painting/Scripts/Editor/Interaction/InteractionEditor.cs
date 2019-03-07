@@ -17,7 +17,7 @@ namespace wizardscode.interaction
         
         private Interaction interaction;
         private SerializedProperty descriptionProperty;
-        private SerializedProperty conditionsProperty;
+        private SerializedProperty requiredConditionsProperty;
         private SerializedProperty playableAssetProperty;
         private SerializedProperty hashProperty;
 
@@ -38,11 +38,14 @@ namespace wizardscode.interaction
             }
 
             descriptionProperty = serializedObject.FindProperty(interactionCollectionPropDescriptionName);
-            conditionsProperty = serializedObject.FindProperty(interactionCollectionPropRequiredConditionsName);
+            requiredConditionsProperty = serializedObject.FindProperty(interactionCollectionPropRequiredConditionsName);
             playableAssetProperty = serializedObject.FindProperty(interactionCollectionPropPlayableAssetName);
             hashProperty = serializedObject.FindProperty(interactionPropHashName);
 
-            CheckAndCreateSubEditors(interaction.requiredConditions);
+            if (interaction.requiredConditions != null)
+            {
+                CheckAndCreateSubEditors(interaction.requiredConditions.conditions);
+            }
         }
 
         private void OnDisable()
@@ -53,7 +56,8 @@ namespace wizardscode.interaction
         protected override void SubEditorSetup(ConditionEditor editor)
         {
             editor.editorType = ConditionEditor.EditorType.ConditionCollection;
-            editor.conditionsProperty = conditionsProperty;
+            editor.conditionsProperty = requiredConditionsProperty;
+            editor.parentEditor = this;
         }
 
         public override void OnInspectorGUI()
@@ -74,7 +78,7 @@ namespace wizardscode.interaction
                 default:
                     throw new UnityException("Unknown InteractionEditor.EditorType.");
             }
-
+            
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -83,9 +87,12 @@ namespace wizardscode.interaction
             EditorGUILayout.BeginVertical(GUI.skin.box);
 
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(interaction.Description);
+            //EditorGUILayout.LabelField(interaction.Description);
+            InteractionAssetGUI();
             if (GUILayout.Button("-", GUILayout.Width(interactionButtonWidth)))
-                AllInteractionsEditor.RemoveInteraction(interaction);
+            {
+                ((InteractionCollectionEditor)parentEditor).RemoveInteraction(interaction);
+            }
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.EndVertical();
@@ -93,9 +100,7 @@ namespace wizardscode.interaction
 
         private void InteractionAssetGUI()
         {
-            CheckAndCreateSubEditors(interaction.requiredConditions);
-
-            EditorGUILayout.BeginVertical(GUI.skin.box);
+            EditorGUILayout.BeginVertical();
 
             EditorGUILayout.BeginHorizontal();
 
@@ -112,17 +117,19 @@ namespace wizardscode.interaction
 
         private void InteractionCollectionGUI()
         {
+            InteractionCollectionEditor parent = ((InteractionCollectionEditor)parentEditor);
+
             EditorGUILayout.BeginVertical();
 
             EditorGUILayout.BeginHorizontal();
-            int interactionIndex = AllInteractionsEditor.TryGetInteractionIndex(this.interaction);
+            int interactionIndex = parent.TryGetInteractionIndex(this.interaction);
             if (interactionIndex == -1)
             {
                 interactionIndex = 0;
             }
 
-            interactionIndex = EditorGUILayout.Popup(interactionIndex, AllInteractionsEditor.AllInteractionDescriptions);
-            interaction = AllInteractionsEditor.TryGetInteractionAt(interactionIndex);
+            interactionIndex = EditorGUILayout.Popup(interactionIndex, parent.AllInteractionDescriptions);
+            interaction = parent.TryGetInteractionAt(interactionIndex);
             descriptionProperty.stringValue = interaction != null ? interaction.Description : "No Interaction Set";
             hashProperty.intValue = Animator.StringToHash(descriptionProperty.stringValue);
             playableAssetProperty.objectReferenceValue = interaction != null ? interaction.playableAsset : null;
@@ -138,36 +145,33 @@ namespace wizardscode.interaction
 
             EditorGUILayout.PropertyField(descriptionProperty);
             EditorGUILayout.PropertyField(playableAssetProperty);
+            EditorGUILayout.PropertyField(requiredConditionsProperty);
             EditorGUILayout.Space();
 
-            EditorGUILayout.BeginVertical(GUI.skin.box);
-            EditorGUILayout.LabelField("Conditions");
-            for (int i = 0; i < subEditors.Length; i++)
+            if (interaction.requiredConditions != null)
             {
-                subEditors[i].OnInspectorGUI();
-            }
+                CheckAndCreateSubEditors(interaction.requiredConditions.conditions);
+                EditorGUILayout.BeginVertical(GUI.skin.box);
+                EditorGUILayout.LabelField("Conditions");
+                for (int i = 0; i < subEditors.Length; i++)
+                {
+                    subEditors[i].OnInspectorGUI();
+                }
 
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button("+", GUILayout.Width(interactionButtonWidth)))
-            {
-                Condition newCondition = ConditionEditor.CreateCondition<Condition>();
-                conditionsProperty.AddToObjectArray(newCondition);
+                EditorGUILayout.EndVertical();
             }
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.EndVertical();
         }
 
-
-        public static Interaction CreateInteraction(string description)
+        internal void AddCondition(string description)
         {
-            Interaction newConditionCollection = CreateInstance<Interaction>();
+            Condition newCondition = CreateInstance<Condition>();
+            newCondition.name = newCondition.Description= description;
 
-            newConditionCollection.Description = description;
-
-            newConditionCollection.requiredConditions = new Condition[1];
-            newConditionCollection.requiredConditions[0] = ConditionEditor.CreateCondition<Condition>();
-            return newConditionCollection;
+            Undo.RecordObject(newCondition, "Created new Condition");
+            AssetDatabase.AddObjectToAsset(newCondition, interaction);
+            AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(newCondition));
+            ArrayUtility.Add(ref interaction.requiredConditions.conditions, newCondition);
+            EditorUtility.SetDirty(interaction.requiredConditions);
         }
     }
 }
