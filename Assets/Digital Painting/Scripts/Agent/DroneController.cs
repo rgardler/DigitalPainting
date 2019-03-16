@@ -18,13 +18,13 @@ namespace wizardscode.digitalpainting.agent
         {
             get {
                 Transform target;
-                if (_interactWithPOI)
-                {
-                    target = Interactable.interactionLocation;
-                }
-                else if (PointOfInterest != null)
+                if (PointOfInterest != null)
                 {
                     target = PointOfInterest.AgentViewingTransform;
+                }
+                else if (_interactWithPOI)
+                {
+                    target = Interactable.interactionLocation;
                 }
                 else
                 {
@@ -58,7 +58,7 @@ namespace wizardscode.digitalpainting.agent
             base.Start();
         }
 
-        internal override void Update()
+        internal override void MoveUpdate()
         {
             if (isFlyByWire)
             {
@@ -68,19 +68,16 @@ namespace wizardscode.digitalpainting.agent
                 }
 
                 if (PointOfInterest != null)
-                {                    
-                    if(Vector3.Distance(transform.position, PointOfInterest.transform.position) <= PointOfInterest.distanceToTriggerViewingCamera)
+                {
+                    if (Vector3.Distance(transform.position, PointOfInterest.transform.position) <= PointOfInterest.distanceToTriggerViewingCamera)
                     {
-                        if (_interactWithPOI)
+                        if (!_interactWithPOI)
                         {
-                            PrepareToInteract();
-                        }
-                        else
-                        { 
                             ViewPOI();
                         }
                     }
-                } else
+                }
+                else
                 {
                     UpdatePointOfInterest();
                     if (PointOfInterest == null)

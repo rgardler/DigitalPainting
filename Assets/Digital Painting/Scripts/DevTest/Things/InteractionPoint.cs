@@ -34,7 +34,7 @@ namespace wizardscode.interaction
             }
             if (!hasTrigger)
             {
-                Debug.LogError(gameObject.name + " has the InteractionPoint component but elect `Createit does not have a collider that is set to trigger so it will not work correctly.");
+                Debug.LogError(gameObject.name + " has the InteractionPoint component but it does not have a collider that is set to trigger so it will not work correctly.");
             }
         }
 
@@ -43,7 +43,6 @@ namespace wizardscode.interaction
             BaseAgentController agent = other.gameObject.GetComponentInParent<BaseAgentController>();
             if (agent != null && interactable.playableDirector.state != PlayState.Playing)
             {
-                agent.Interactable = interactable;
                 interactable.Interact(agent);
             }
         }

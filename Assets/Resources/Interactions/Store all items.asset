@@ -26,5 +26,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: Store all items in inventory
   playableAsset: {fileID: 11400000, guid: dd6e58c65c781b84788dc1cfc6cd67f1, type: 2}
-  requiredConditions: {fileID: 11400000, guid: 929fb0e10c006624a8df6c5fb6655bd1, type: 2}
+  requiredConditions: {fileID: 11400000, guid: 9d8ed295fd7add544b5d454a91aa1d82, type: 2}
   _hash: -2147483648

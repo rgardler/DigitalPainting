@@ -146,13 +146,13 @@ namespace wizardscode.digitalpainting.agent
             }
         }
 
-        internal override void Update()
+        internal override void MoveUpdate()
         {
             Vector3 position = transform.position;
             Quaternion rotation = transform.rotation;
             if (!isFlyByWire)
             {
-                base.Update();
+                base.MoveUpdate();
             }
             else
             {

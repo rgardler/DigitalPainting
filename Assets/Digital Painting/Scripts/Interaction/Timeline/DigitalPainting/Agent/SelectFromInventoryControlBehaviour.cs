@@ -7,23 +7,16 @@ using wizardscode.digitalpainting.agent;
 
 namespace wizardscode.interaction.agent
 {
-    public class SelectFromInventoryControlBehaviour : PlayableBehaviour
+    public class SelectFromInventoryControlBehaviour : BaseAbilityPlayableBehaviour
     {
-        private bool isFirstFrame = true;
-        private DigitalPaintingManager manager;
-        private BaseAgentController agent;
-
-        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+        internal override void DigitalPaintingFrame(Playable playable, FrameData info, object playerData)
         {
-            if (isFirstFrame)
-            {
-                manager = playerData as DigitalPaintingManager;
-                agent = manager.AgentWithFocus;
-                isFirstFrame = false;
-            }
-
             if (agent.Using == null) {
                 agent.Using = agent.Inventory.GetItem(0);
+            }
+            else
+            {
+                Complete(playable, info, playerData);
             }
         }
     }

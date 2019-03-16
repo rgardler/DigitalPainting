@@ -6,55 +6,31 @@ using wizardscode.digitalpainting;
 using wizardscode.digitalpainting.agent;
 using wizardscode.inventory;
 
-namespace wizardscode.interaction
+namespace wizardscode.interaction.agent
 {
-    public class DropItemControlBehaviour : PlayableBehaviour
+    public class DropItemControlBehaviour : BaseSpellPlayableBehaviour<LevitateItemSpell>
     {
-        public Ability ability;
+        InventoryManager targetInventory;
 
-        private bool isFirstFrame = true;
-        private bool isComplete = false;
-        private DigitalPaintingManager manager;
-        private LevitateItemSpell spell;
-
-        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+        internal override void Initialize(Playable playable, FrameData info, object playerData)
         {
-            if (isFirstFrame)
-            {
-                manager = playerData as DigitalPaintingManager;
-                spell = ability as LevitateItemSpell;
+            base.Initialize(playable, info, playerData);
 
-                if (spell != null)
-                {
-                    spell.item = manager.AgentWithFocus.Using;
-                    spell.endTransform = manager.AgentWithFocus.Interactable.transform;
-                    spell.Start();
-                    isFirstFrame = false;
-                }
-                else { 
-                    if (ability == null)
-                    {
-                        throw new MisconfiguredAbilityException("No Ability is specified.");
-                    }
-                    throw new MisconfiguredAbilityException(ability.name + " is not recognized as an ability with which to drop items");
-                }
-            }
+            spell.item = agent.Using;
+            spell.endTransform = agent.Interactable.transform;
+            targetInventory = agent.Interactable.GetComponent<InventoryManager>();
+        }
 
-            if (spell.isActive)
-            {
-                spell.Update();
-            }
-            else if (!isComplete)
-            {
-                Interactable item = manager.AgentWithFocus.Using;
-                manager.AgentWithFocus.Unequip(false);
+        internal override void Complete(Playable playable, FrameData info, object playerData)
+        {
+            base.Complete(playable, info, playerData);
 
-                InventoryManager inventory = manager.AgentWithFocus.Interactable.GetComponent<InventoryManager>();
-                if (inventory != null)
-                {
-                    inventory.AddItem(item);
-                }
-                isComplete = true;
+            Interactable item = agent.Using;
+            agent.Unequip(false);
+
+            if (targetInventory != null)
+            {
+                targetInventory.AddItem(item);
             }
         }
     }

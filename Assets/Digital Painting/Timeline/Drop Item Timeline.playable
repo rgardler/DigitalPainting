@@ -14,7 +14,7 @@ MonoBehaviour:
   m_NextId: 0
   m_Tracks:
   - {fileID: 114452914268913032}
-  - {fileID: 114647683298285818}
+  - {fileID: 114638238130042952}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -133,7 +133,7 @@ MonoBehaviour:
     m_DisplayName: NarrationControlAsset
     m_Version: 1
   m_Version: 1
---- !u!114 &114647683298285818
+--- !u!114 &114638238130042952
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,8 +141,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4963bc165fb3fc045ba6e6a2e75672c6, type: 3}
-  m_Name: Digital Painting Manager Track
+  m_Script: {fileID: 11500000, guid: 9a07fd701772c0f4e9b23eb30a6e7d66, type: 3}
+  m_Name: Agent Control Track
   m_EditorClassIdentifier: 
   m_Locked: 0
   m_Muted: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Asset: {fileID: 114421986511904304}
     m_Duration: 3.0166666666666666
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 114647683298285818}
+    m_ParentTrack: {fileID: 114638238130042952}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1

@@ -47,33 +47,35 @@ namespace wizardscode.interaction
         /// </summary>
         /// <param name="interactor">The GameObject using the ability to interact.</param>
         /// <param name="ability">The ability to perform at the indicated spot within the ReactionsCollection.</param>
-        public void Interact(BaseAgentController interactor = null)
+        public void Interact(BaseAgentController interactor)
         {    
+            if (manager.AgentWithFocus.state == BaseAgentController.States.Acting)
+            {
+                return;
+            }
+
+            if (!GameObject.ReferenceEquals(gameObject, interactor.Interactable.gameObject))
+            {
+                return;
+            }
+
             if (interactionsCollection == null || interactionsCollection.interactions == null)
             {
                 Debug.LogWarning("Interactable does not have interactions defined");
                 return;
             }
+
             for (int i = 0; i < interactionsCollection.interactions.Length; i++)
             {
                 if (interactionsCollection.interactions[i].CheckValidInteraction(interactor, this))
                 {
+                    manager.AgentWithFocus.state = BaseAgentController.States.Acting;
                     manager.SetPlayableAsset(playableDirector, interactionsCollection.interactions[i].playableAsset);
                     playableDirector.Play();
                     return;
                 }
             }
             return;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            BaseAgentController agent = other.gameObject.GetComponentInParent<BaseAgentController>();
-            if (agent != null)
-            {
-                agent.Interactable = this;
-                Interact(agent);
-            }            
         }
     }
 }

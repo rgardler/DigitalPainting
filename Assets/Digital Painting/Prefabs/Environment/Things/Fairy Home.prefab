@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 65349745441456138}
   - component: {fileID: 114127892731240028}
   - component: {fileID: 114126717381031754}
+  - component: {fileID: 114217930412472804}
   m_Layer: 0
   m_Name: Fairy Home
   m_TagString: Untagged
@@ -55,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1132078488299188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.93, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4228880442148674}
@@ -142,10 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionLocation: {fileID: 4002344040668788}
   sprite: {fileID: 0}
-  defaultPlayableAsset: {fileID: 11400000, guid: 60d554b7d3323cc4f87c170cda2aee2f,
-    type: 2}
   isTrigger: 0
-  conditionCollections: []
+  interactionsCollection: {fileID: 11400000, guid: 5b7fb0f4cbf1b02458411e90fc61d0db,
+    type: 2}
 --- !u!114 &114127892731240028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,12 +158,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 1
-  yOffset: 0
+  yOffset: 0.5
   isPOI: 1
   _agentViewingTransform: {fileID: 0}
   distanceToTriggerViewingCamera: 10
   timeToLookAtObject: 15
   virtualCamera: {fileID: 0}
+--- !u!114 &114217930412472804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1483772710198724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a762b119d9835044086f0c570317007e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114748608632034454
 MonoBehaviour:
   m_ObjectHideFlags: 1

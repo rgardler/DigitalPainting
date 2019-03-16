@@ -2,7 +2,7 @@
 using UnityEngine.Playables;
 using wizardscode.ability;
 
-namespace wizardscode.interaction
+namespace wizardscode.interaction.agent
 {
     public class DropItemControlAsset : PlayableAsset
     {        

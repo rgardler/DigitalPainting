@@ -6,21 +6,16 @@ using wizardscode.digitalpainting;
 using wizardscode.digitalpainting.agent;
 using wizardscode.inventory;
 
-namespace wizardscode.interaction
+namespace wizardscode.interaction.agent
 {
-    public class InventoryAddItemControlBehaviour : PlayableBehaviour
+    public class InventoryAddItemControlBehaviour : BaseAbilityPlayableBehaviour
     {
-        bool isStored = false;
-
-        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+        internal override void DigitalPaintingFrame(Playable playable, FrameData info, object playerData)
         {
-            if (!isStored)
+            if (!isComplete)
             {
-                DigitalPaintingManager manager = playerData as DigitalPaintingManager;
-
-                BaseAgentController agent = manager.AgentWithFocus;
                 agent.Unequip();
-                isStored = true;
+                Complete(playable, info, playerData);
             }
         }
     }

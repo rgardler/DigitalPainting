@@ -8,11 +8,7 @@ using wizardscode.interaction.agent;
 namespace wizardscode.interaction
 {
     [TrackColor(0f, 0.0602479f, 1f)]
-    [TrackClipType(typeof(DropItemControlAsset))]
     [TrackClipType(typeof(InteractableControlAsset))]
-    [TrackClipType(typeof(InventoryAddItemControlAsset))]
-    [TrackClipType(typeof(PickupItemControlAsset))]
-    [TrackClipType(typeof(SelectFromInventoryControlAsset))]
     [TrackBindingType(typeof(DigitalPaintingManager))]
     public class DigitalPaintingControlTrack : TrackAsset
     {

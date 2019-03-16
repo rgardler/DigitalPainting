@@ -5,7 +5,7 @@ using wizardscode.ability;
 using wizardscode.digitalpainting;
 using wizardscode.digitalpainting.agent;
 
-namespace wizardscode.interaction
+namespace wizardscode.interaction.agent
 {
     public class PickupItemControlAsset : PlayableAsset
     {        

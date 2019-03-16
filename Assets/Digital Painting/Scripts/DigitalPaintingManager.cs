@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using wizardscode.digitalpainting.agent;
 using wizardscode.interaction;
+using wizardscode.interaction.agent;
 
 namespace wizardscode.digitalpainting
 {
@@ -183,6 +184,12 @@ namespace wizardscode.digitalpainting
                 if (binding.sourceObject.GetType() == typeof(DigitalPaintingControlTrack))
                 {
                     director.SetGenericBinding(binding.sourceObject, this);
+                    continue;
+                }
+
+                if (binding.sourceObject.GetType() == typeof(AgentControlTrack))
+                {
+                    director.SetGenericBinding(binding.sourceObject, this.AgentWithFocus);
                     continue;
                 }
             }

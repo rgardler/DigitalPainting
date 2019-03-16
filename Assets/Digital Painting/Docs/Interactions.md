@@ -51,6 +51,10 @@ public override bool Satisfied(BaseAgentController interactor, Interactable inte
 }
 ```
 
+Having created a condition we need to ensure that it appears in the UI when we want to add it to a collection. At the time of writing this needs to be hard coded in the `ConditionCollectionEditor`. First add a suitable condition type name to `typeNames` in the `OnEnable` method. Then add an case to the switch statement in `AddCondition` method.
+
+To make the new condition editable you will need to create an Editor for your condition in `ConditionEditor`
+
 ## Creating an Interaction Timeline
 
 In this section we will take a look at how to create a new Interaction timeline. In this example we will create a timeline to attach to a storage box that allows us to put an item into the box.
@@ -74,6 +78,8 @@ There is already a coin in this scene that has a pick-up interaction. Walking to
 In the Timeline editor for the `Place Item In Storage Timeline` click "Add" and select `wizardscode.interaction` -> `Digital Painting Manager Control Track`. Now add a `Drop Item Control Asset` to this track. In the inspector set the `Ability` to `Weak Levitate Item Spell`. When triggered this interaction will drop the item, using the Levitate spell, into the storage container, adding it to the inventory.
 
 ## Creating New PlayableAssets for use in Interaction Timelines
+
+TODO: Rewrite for the new Base Class Structure
 
 You may need to create new playable assets for use in your timelines. Lets take a look at how to do that. In the previous section we used existing playable assets to create a timeline for storing items in a storage container. Lets suppose we want to automatically take an item out of the players inventory to add to storage. To do this we will need a new playable asset.
 

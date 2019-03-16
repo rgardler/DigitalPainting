@@ -3,6 +3,7 @@ using UnityEditor;
 using wizardscode.extension;
 using wizardscode.ability;
 using System;
+using wizardscode.condition.inventory;
 
 namespace wizardscode.interaction
 {
@@ -95,6 +96,23 @@ namespace wizardscode.interaction
             {
                 EditorGUILayout.BeginHorizontal();
                 ((AbilityCondition)condition).ability = EditorGUILayout.ObjectField("Required Ability", ((AbilityCondition)condition).ability, typeof(Ability), false) as Ability;
+                EditorGUILayout.EndHorizontal();
+            }
+
+            if (condition is InventoryCapacityCondition)
+            {
+                InventoryCapacityCondition capCondition = (InventoryCapacityCondition)condition;
+
+                EditorGUILayout.BeginHorizontal();
+                capCondition.targetNeedingCapacity = (InventoryCapacityCondition.Targets)EditorGUILayout.EnumPopup("Target needing capacity", capCondition.targetNeedingCapacity);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                capCondition.requiredCapacity = EditorGUILayout.IntField("Required Capacity", capCondition.requiredCapacity);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginHorizontal();
+                capCondition.testType = (InventoryCapacityCondition.Tests)EditorGUILayout.EnumPopup("Capacity test type", capCondition.testType);
                 EditorGUILayout.EndHorizontal();
             }
 

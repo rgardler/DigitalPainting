@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using wizardscode.condition.inventory;
 
 namespace wizardscode.interaction
 {
@@ -44,7 +45,7 @@ namespace wizardscode.interaction
                 CreateEditors();
             }
 
-            typeNames = new string[] { "Boolean", "Ability" };
+            typeNames = new string[] { "Boolean", "Ability", "Storage Capacity" };
         }
 
 
@@ -128,6 +129,9 @@ namespace wizardscode.interaction
                     break;
                 case 1:
                     newCondition = CreateInstance<AbilityCondition>();
+                    break;
+                case 2:
+                    newCondition = CreateInstance<InventoryCapacityCondition>();
                     break;
                 default:
                     Debug.LogError("Attempt to create a condition of unknown type");

@@ -26,9 +26,12 @@ public class InventoryUI : MonoBehaviour {
 
         List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
         options.Add(new Dropdown.OptionData("Nothing"));
-        for (int i = 0; i < inventory.Count; i++)
+        for (int i = 0; i < inventory.items.Length; i++)
         {
-            options.Add(new Dropdown.OptionData(inventory.items[i].name));
+            if (inventory.items[i] != null)
+            {
+                options.Add(new Dropdown.OptionData(inventory.items[i].name));
+            }
         }
         equippedItemDropdown.AddOptions(options);
     }

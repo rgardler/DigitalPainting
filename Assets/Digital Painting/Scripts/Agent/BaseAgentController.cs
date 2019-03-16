@@ -57,6 +57,15 @@ namespace wizardscode.digitalpainting.agent
         [Tooltip("Mouse look sensitivity.")]
         public float mouseLookSensitivity = 100;
 
+        // Idle means not currently doing anything, can therefore perform any action
+        // Moving means currently moving, can perform some actions while moving
+        // Acting means currently performing an action, normally cannot perform another action
+        // Finishing means currently finishing an action, will take a few moments to complete then will switch to Idle
+        public enum States { Idle, Moving, Acting, Finishing }
+        internal States state = States.Idle;
+        internal float finishingTime = 0.1f; // the time it takes to move from Finishing state to Idle
+        internal float timeToIdle = float.NegativeInfinity;
+
         float rotationX = 0;
         float rotationY = 0;
 
@@ -116,7 +125,7 @@ namespace wizardscode.digitalpainting.agent
         /// <param name="item">The item to equip.</param>
         public Interactable Using
         {
-            get { return _equipped;  }
+            get { return _equipped; }
             set
             {
                 if (GameObject.ReferenceEquals(_equipped, value))
@@ -171,6 +180,7 @@ namespace wizardscode.digitalpainting.agent
 
         public void DropItem(Interactable item)
         {
+            _equipped = null;
             item.enabled = true;
             item.transform.SetParent(null, true);
             Vector3 pos = transform.position;
@@ -219,10 +229,42 @@ namespace wizardscode.digitalpainting.agent
             _inventory = GetComponent<InventoryManager>();
         }
 
+        /// <summary>
+        /// Checks to see if any state transitions are necessary
+        /// </summary>
+        internal void CheckState()
+        {
+            if (state == States.Finishing)
+            {
+                if (float.IsNegativeInfinity(timeToIdle))
+                {
+                    timeToIdle = finishingTime;
+                } else
+                {
+                    timeToIdle -= Time.deltaTime;
+
+
+                    if (timeToIdle < 0)
+                    {
+                        state = States.Idle;
+                        timeToIdle = float.NegativeInfinity;
+                    }
+                }
+            }
+
+        }
+
         internal virtual void Update()
         {
+            CheckState();
+            MoveUpdate();
+        }
+
+        internal virtual void MoveUpdate()
+        {
             // Mouse Look
-            switch (mouseLookMode) {
+            switch (mouseLookMode)
+            {
                 case MouseLookModeType.Always:
                     MouseLook();
                     break;
@@ -274,19 +316,6 @@ namespace wizardscode.digitalpainting.agent
                     heightOffset -= climbSpeed * Time.deltaTime;
                 }
             }
-        }
-
-        /// <summary>
-        /// PrepareToInteract ensures the agent is ready to perform an interaction
-        /// on an object that it has approached and is close to.
-        /// 
-        /// Agent controllers may override this method, by default it moves the agents
-        /// interaction point nearer to the Thing with which to interact.
-        /// 
-        /// </summary>
-        internal void PrepareToInteract()
-        {
-            Debug.LogWarning("TODO: implement prepare interaction");
         }
 
         private void MouseLook()

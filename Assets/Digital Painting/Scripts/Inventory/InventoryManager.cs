@@ -51,5 +51,10 @@ namespace wizardscode.inventory
         {
             get { return storedItemCount; }
         }
+
+        public int AvailableCapacity
+        {
+            get { return numItemSlots - Count; }
+        }
     }
 }
