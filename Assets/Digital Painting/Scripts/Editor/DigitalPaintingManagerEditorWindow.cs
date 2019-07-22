@@ -13,7 +13,7 @@ using WizardsCode.Extension;
 using WizardsCode.Plugin;
 using WizardsCode.Validation;
 
-namespace WizardsCode.editor
+namespace WizardsCode.Editor
 {
     public class DigitalPaintingManagerEditorWindow : EditorWindow
     {
