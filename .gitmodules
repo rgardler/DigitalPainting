@@ -10,3 +10,6 @@
 [submodule "Assets/Plugin_Agent_UMA"]
 	path = Assets/Plugin_Agent_UMA
 	url = git@github.com:DigitalPainting/Plugin_Agent_UMA.git
+[submodule "Assets/Plugin_Weather_WeatherMaker"]
+	path = Assets/Plugin_Weather_WeatherMaker
+	url = git@github.com:DigitalPainting/Plugin_Weather_WeatherMaker.git
