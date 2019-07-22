@@ -4,3 +4,6 @@
 [submodule "Assets/UnityDocGen"]
 	path = Assets/UnityDocGen
 	url = git@github.com:DigitalPainting/UnityDocGen.git
+[submodule "Assets/Plugin_Terrain_ProceduralGeneration"]
+	path = Assets/Plugin_Terrain_ProceduralGeneration
+	url = git@github.com:DigitalPainting/Plugin_Terrain_ProceduralGeneration.git
