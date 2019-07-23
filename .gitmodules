@@ -16,3 +16,6 @@
 [submodule "Assets/Plugin_Agent_HerdSim"]
 	path = Assets/Plugin_Agent_HerdSim
 	url = git@github.com:DigitalPainting/Plugin_Agent_HerdSim.git
+[submodule "Assets/unium"]
+	path = Assets/unium
+	url = git@github.com:DigitalPainting/unium.git
