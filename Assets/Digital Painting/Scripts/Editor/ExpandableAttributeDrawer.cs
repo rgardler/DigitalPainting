@@ -123,13 +123,12 @@ namespace WizardsCode.Editor
 
             property.isExpanded = EditorGUI.Foldout(fieldRect, property.isExpanded, GUIContent.none, true);
 
-            if (!property.isExpanded)
+            if (!property.isExpanded || property.objectReferenceValue == null)
             {
                 return;
-            }
+            }   
 
             SerializedObject target = new SerializedObject(property.objectReferenceValue);
-
             if (target.targetObject == null)
             {
                 return;
@@ -145,6 +144,7 @@ namespace WizardsCode.Editor
                 + OUTER_SPACING;
 
             SerializedProperty field = target.GetIterator();
+
             field.NextVisible(true);
 
             marchingRect.y += INNER_SPACING + OUTER_SPACING;

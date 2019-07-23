@@ -601,7 +601,7 @@ namespace WizardsCode.Editor
                     return false;
                 }
             }
-            catch (KeyNotFoundException e)
+            catch
             {
                 return false;
             }
@@ -651,7 +651,7 @@ namespace WizardsCode.Editor
                     return false;
                 }
             }
-            catch (KeyNotFoundException e)
+            catch
             {
                 return false;
             }
@@ -696,7 +696,7 @@ namespace WizardsCode.Editor
                     return false;
                 }
             }
-            catch (KeyNotFoundException e)
+            catch
             {
                 return false;
             }
@@ -763,7 +763,7 @@ namespace WizardsCode.Editor
             try
             {
                 cache[defn.GetCategory()].Add(defn);
-            } catch (KeyNotFoundException e)
+            } catch
             {
                 List<AbstractPluginDefinition> list = new List<AbstractPluginDefinition>();
                 list.Add(defn);

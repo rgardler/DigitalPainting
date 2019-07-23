@@ -11,14 +11,17 @@ using UnityEngine;
 using WizardsCode.Editor;
 using WizardsCode.Extension;
 using WizardsCode.Plugin;
+using WizardsCode.Tools.DocGen;
 using WizardsCode.Utility;
 
 namespace WizardsCode.Validation
 {
+    [DocGen("A prefab described as a Scriptable Object. This description is used when configuring plugins and features in the Digital Painting.")]
     [CreateAssetMenu(fileName = "DESCRIPTIVENAME_PrefabSettingSO", menuName = "Wizards Code/Validation/Prefab")]
     public class PrefabSettingSO : AbstractSettingSO<UnityEngine.Object>
     {
         [Tooltip("If the suggested value is a prefab should a copy of the object be added to the scene.")]
+        [DocGen("If this is set to true and a GameObject created by this PrefabSetting does not yet exist in the scene then an error will be reported. This can automatically be resolved by the Digital Painting if so desired.")]
         public bool AddToScene = true;
         [Tooltip("The spawn location for the prefab.")]
         public Vector3 spawnPosition;

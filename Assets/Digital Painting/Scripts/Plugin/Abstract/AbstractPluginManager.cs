@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using WizardsCode.Editor;
 using WizardsCode.Extension;
+using WizardsCode.Tools.DocGen;
 
 namespace WizardsCode.Plugin
 {
@@ -11,6 +12,7 @@ namespace WizardsCode.Plugin
     /// A Plugin Manager is a component that is added into the scene to manage interactions between the 
     /// Digital Painting and the plugin implementation.
     /// </summary>
+    [DocGen("A Plugin Manager is a component that is added into the scene to manage the configuration of a plugin and any interactions between the Digital Painting and the plugin implementation.")]
     public abstract class AbstractPluginManager : MonoBehaviour 
     {
         [Tooltip("The plugin profile you want to use. The profile defines the plugin implementation to use and contains the configuration.")]
